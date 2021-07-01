@@ -1,15 +1,13 @@
-; ½Å±¾ÓÉ Inno Setup ½Å±¾Ïòµ¼ Éú³É£¡
-; ÓĞ¹Ø´´½¨ Inno Setup ½Å±¾ÎÄ¼şµÄÏêÏ¸×ÊÁÏÇë²éÔÄ°ïÖúÎÄµµ£¡
 
-#define MyAppName "Í¼Æ¬Ñ¹Ëõ"
+#define MyAppName "å›¾ç‰‡å‹ç¼©"
 #define MyAppVerName "1.5"
 #define MyAppPublisher "Yong++"
 #define MyAppExeName "tinypng.exe"
 
 [Setup]
-; ×¢: AppIdµÄÖµÎªµ¥¶À±êÊ¶¸ÃÓ¦ÓÃ³ÌĞò¡£
-; ²»ÒªÎªÆäËû°²×°³ÌĞòÊ¹ÓÃÏàÍ¬µÄAppIdÖµ¡£
-; (Éú³ÉĞÂµÄGUID£¬µã»÷ ¹¤¾ß|ÔÚIDEÖĞÉú³ÉGUID¡£)
+; æ³¨: AppIdçš„å€¼ä¸ºå•ç‹¬æ ‡è¯†è¯¥åº”ç”¨ç¨‹åºã€‚
+; ä¸è¦ä¸ºå…¶ä»–å®‰è£…ç¨‹åºä½¿ç”¨ç›¸åŒçš„AppIdå€¼ã€‚
+; (ç”Ÿæˆæ–°çš„GUIDï¼Œç‚¹å‡» å·¥å…·|åœ¨IDEä¸­ç”ŸæˆGUIDã€‚)
 AppId={{3EB7DACF-EA48-429F-B4E6-76826000E6E4}
 AppName={#MyAppName}
 AppVerName={#MyAppVerName}
@@ -17,7 +15,7 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\tinypng
 DefaultGroupName={#MyAppName}
 OutputDir=D:\workspace\qt\tinypng\x64\
-OutputBaseFilename=Í¼Æ¬Ñ¹Ëõ°²×°³ÌĞò
+OutputBaseFilename=å›¾ç‰‡å‹ç¼©å®‰è£…ç¨‹åº
 SetupIconFile=D:\workspace\qt\tinypng\tinypng\icon.ico
 Compression=lzma
 SolidCompression=yes
@@ -31,7 +29,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "D:\workspace\qt\tinypng\x64\Release\tinypng.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\workspace\qt\tinypng\x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; ×¢Òâ: ²»ÒªÔÚÈÎºÎ¹²ÏíÏµÍ³ÎÄ¼şÉÏÊ¹ÓÃ¡°Flags: ignoreversion¡±
+; æ³¨æ„: ä¸è¦åœ¨ä»»ä½•å…±äº«ç³»ç»Ÿæ–‡ä»¶ä¸Šä½¿ç”¨â€œFlags: ignoreversionâ€
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
