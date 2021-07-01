@@ -9,6 +9,7 @@
 
 
 [go语言版本](https://github.com/yongplus/tinypng/blob/master/doc/Golang)
+
 [软件安装程序](https://github.com/yongplus/tinypng/blob/master/x64/installer.exe)
 
 总得来说，日常开发小工具Go Qt可以快速入门(看对象名就基本可以猜到用途)，开发效率高、容错率高，是个不错选择。
