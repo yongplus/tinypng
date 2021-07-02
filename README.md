@@ -6,7 +6,10 @@
 
 
 - 软件截图：
-![截图](https://github.com/yongplus/tinypng/blob/master/doc/demo.png?raw=true)
+![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot2.png?raw=true)
+
+![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot1.png?raw=true)
+
 
 
 [go语言版本](https://github.com/yongplus/tinypng/blob/master/doc/Golang)
