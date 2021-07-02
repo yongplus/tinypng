@@ -1,13 +1,13 @@
 
-#define MyAppName "å›¾ç‰‡å‹ç¼©"
+#define MyAppName "Í¼Æ¬Ñ¹Ëõ"
 #define MyAppVerName "1.5"
 #define MyAppPublisher "Yong++"
 #define MyAppExeName "tinypng.exe"
 
 [Setup]
-; æ³¨: AppIdçš„å€¼ä¸ºå•ç‹¬æ ‡è¯†è¯¥åº”ç”¨ç¨‹åºã€‚
-; ä¸è¦ä¸ºå…¶ä»–å®‰è£…ç¨‹åºä½¿ç”¨ç›¸åŒçš„AppIdå€¼ã€‚
-; (ç”Ÿæˆæ–°çš„GUIDï¼Œç‚¹å‡» å·¥å…·|åœ¨IDEä¸­ç”ŸæˆGUIDã€‚)
+; ×¢: AppIdµÄÖµÎªµ¥¶À±êÊ¶¸ÃÓ¦ÓÃ³ÌĞò¡£
+; ²»ÒªÎªÆäËû°²×°³ÌĞòÊ¹ÓÃÏàÍ¬µÄAppIdÖµ¡£
+; (Éú³ÉĞÂµÄGUID£¬µã»÷ ¹¤¾ß|ÔÚIDEÖĞÉú³ÉGUID¡£)
 AppId={{3EB7DACF-EA48-429F-B4E6-76826000E6E4}
 AppName={#MyAppName}
 AppVerName={#MyAppVerName}
@@ -17,8 +17,9 @@ DefaultGroupName={#MyAppName}
 OutputDir=D:\workspace\qt\tinypng\x64\
 OutputBaseFilename=installer
 SetupIconFile=D:\workspace\qt\tinypng\tinypng\icon.ico
-Compression=lzma
+Compression=lzma2/max
 SolidCompression=yes
+SignTool=sha1 timestamp
 
 [Languages]
 Name: "chinesesimp"; MessagesFile: "compiler:Default.isl"
@@ -27,9 +28,9 @@ Name: "chinesesimp"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\workspace\qt\tinypng\x64\Release\tinypng.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\workspace\qt\tinypng\x64\Release\tinypng.exe"; DestDir: "{app}"; Flags: ignoreversion signonce
 Source: "D:\workspace\qt\tinypng\x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; æ³¨æ„: ä¸è¦åœ¨ä»»ä½•å…±äº«ç³»ç»Ÿæ–‡ä»¶ä¸Šä½¿ç”¨â€œFlags: ignoreversionâ€
+; ×¢Òâ: ²»ÒªÔÚÈÎºÎ¹²ÏíÏµÍ³ÎÄ¼şÉÏÊ¹ÓÃ¡°Flags: ignoreversion¡±
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -44,6 +45,7 @@ begin
 if CurUninstallStep = usUninstall then
   RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'Software\lane')
 end;
+
 
 
 
