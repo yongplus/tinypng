@@ -113,7 +113,9 @@ void MyTableView::onDoubleClickRow(const QModelIndex& index) {
 }
 
 void MyTableView::customContextMenuResposne(const QPoint& pos) {
-
+	if (this->selectionModel()->selectedRows().length() == 0) {
+		return;
+	}
 
 	QMenu* menu = new QMenu(this);
 	QAction* action = new QAction("删 除", menu);
@@ -124,7 +126,6 @@ void MyTableView::customContextMenuResposne(const QPoint& pos) {
 }
 
 void MyTableView::clickDelete() {
-	qDebug() << "点击了";
 	QModelIndexList selectedRows = this->selectionModel()->selectedRows();
 	if (selectedRows.length() == 0) {
 		return;
