@@ -6,12 +6,12 @@
 
 
 **软件截图：**  
-![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot2.png?raw=true)  
-![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot1.png?raw=true)
+![截图](http://0f3.com/tinypng/Screenshot1.png)  
+![截图](http://0f3.com/tinypng/Screenshot2.png)
 
 
 
 [go语言版本](https://github.com/yongplus/tinypng/blob/master/doc/Golang)  
-[软件安装程序](https://github.com/yongplus/tinypng/blob/master/x64/installer.exe?raw=true)
+[软件安装程序](http://0f3.com/tinypng/installer.exe)
 
 总得来说，日常开发小工具Go Qt可以快速入门(看对象名就基本可以猜到含义)，开发效率高、容错率高，是个不错选择。
