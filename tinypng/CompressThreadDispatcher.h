@@ -25,6 +25,7 @@ public:
 	int runThreadNum;
 	int finishNum;
 	int failedNum;
+	int totalRowNum;
 	float totalsize; //原大小
 	float totalLessSize; //压缩总大小
 	QElapsedTimer* elapsedTimer;
@@ -39,6 +40,8 @@ public:
 	void nextTask(CompressThread* thread);
 	~CompressThreadDispatcher();
 	void quit();
+private:
+	int getUnhandleNum();
 
 
 

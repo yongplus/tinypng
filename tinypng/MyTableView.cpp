@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QMenu>
 #include <QDesktopServices>
+#include "config.h"
 
 MyTableView::MyTableView(QWidget* parent)
 
@@ -76,7 +77,8 @@ void MyTableView::dropEvent(QDropEvent* event) {
 
 void MyTableView::readDir(const QString& path) {
 	listFileThread->stop();
-	listFileThread->start(path);
+	int minsize = Config(this).get().minsize;
+	listFileThread->start(path, minsize);
 }
 
 bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {

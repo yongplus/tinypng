@@ -9,10 +9,11 @@ ListFile::ListFile(QObject* parent) :
 
 }
 
-void ListFile::start(const QString p) {
+void ListFile::start(const QString p, int ms) {
 	QThread::msleep(50);
 	this->path = p;
 	this->stopped = false;
+	this->minsize = ms;
 	qDebug() << "开始线程" << p << this->path;
 	QThread::start();
 }
@@ -44,6 +45,9 @@ void ListFile::run() {
 
 		filepath = filepath.right(filepath.length() - this->path.length());
 		qDebug() << filepath;
+		if (it.fileInfo().size() < this->minsize) {
+			continue;
+		}
 		/*
 		QList<QStandardItem*> items;
 

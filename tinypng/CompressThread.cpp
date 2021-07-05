@@ -16,23 +16,10 @@ CompressThread::CompressThread(QThread* td, const configItem& cfg, QString ort)
 	thread = td;
 	config = cfg;
 	outputRoot = ort;
-}
+	state = 0;
+	eventloop = new QEventLoop(this);
 
-void CompressThread::addTask(const int r, const QString& rt, QString& ph) {
-	row = r;
-	root = rt;
-	path = ph;
-	state = 1;
-}
-
-void CompressThread::quit() {
-	state = -1;
-	this->thread->quit();
-}
-
-void CompressThread::run() {
-
-	QNetworkAccessManager* mgr = new QNetworkAccessManager();
+	mgr = new QNetworkAccessManager(this);
 	if (config.proxy.length() > 0) {
 
 		QUrl url(config.proxy);
@@ -44,13 +31,35 @@ void CompressThread::run() {
 		mgr->setProxy(proxy);
 	}
 
+}
+
+void CompressThread::addTask(const int r, const QString& rt, QString& ph) {
+	row = r;
+	root = rt;
+	path = ph;
+	state = 1;
+	this->eventloop->quit();
+}
+
+void CompressThread::quit() {
+	state = -1;
+	this->eventloop->quit();
+	this->thread->quit();
+}
+
+void CompressThread::run() {
+
 
 	while (true) {
 
 		if (state == 0) {
-			QEventLoop eventloop;
-			QTimer::singleShot(50, &eventloop, SLOT(quit()));
-			eventloop.exec();
+
+			//qDebug() << "休眠中";
+
+			//QTimer::singleShot(50, eventloop, SLOT(quit()));
+			eventloop->exec();
+			//QTimer::singleShot(10, eventloop, SLOT(quit()));
+			//eventloop->exec();
 			continue;
 		}
 
@@ -116,7 +125,6 @@ void CompressThread::run() {
 			this->emitError(QString("请求压缩接口超时"));
 		}
 	}
-	mgr->deleteLater();
 
 
 }
@@ -137,11 +145,10 @@ void CompressThread::download(const QByteArray& bytes) {
 	timer.setSingleShot(true);
 
 	QEventLoop loop;
-	QNetworkAccessManager mgr;
 
 
 	QNetworkRequest req(url);
-	QNetworkReply* reply = mgr.get(req);
+	QNetworkReply* reply = mgr->get(req);
 
 	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 	connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
@@ -203,7 +210,6 @@ void CompressThread::download(const QByteArray& bytes) {
 		reply->abort();
 		this->emitError("下载压缩图片超时");
 	}
-	qDebug() << reply->readAll();
 }
 
 void CompressThread::setAuthentication(QNetworkReply* reply, QAuthenticator* authenticator) {
@@ -226,5 +232,7 @@ void CompressThread::emitError(const QString& msg, const int& errcode) {
 
 CompressThread::~CompressThread()
 {
+	delete eventloop;
+	delete mgr;
 	qDebug() << "子线程析构函数执行";
 }

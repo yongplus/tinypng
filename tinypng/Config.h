@@ -13,6 +13,7 @@ struct configItem {
 	QString key;
 	QString proxy;
 	OutputMode outputMode;
+	int minsize;
 };
 
 

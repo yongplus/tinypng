@@ -11,9 +11,10 @@ class ListFile : public QThread
 public:
 	TableModel* model;
 	QString path;
+	int minsize;
 	explicit  ListFile(QObject* parent);
 	~ListFile();
-	void start(const QString path);
+	void start(const QString path, int minsize);
 	void stop();
 	void setModel(QStandardItemModel*);
 

@@ -32,7 +32,7 @@ void Console::textChangedSlot() {
 void Console::append(const QString& text, const QColor& color) {
 	setTextColor(color);
 	atBottom = false;
-	if (verticalScrollBar()->maximum() - verticalScrollBar()->value() < 10) {
+	if (verticalScrollBar()->maximum() - verticalScrollBar()->value() < 30) {
 		atBottom = true;
 	}
 	//qDebug() << verticalScrollBar()->maximum() << verticalScrollBar()->value() + verticalScrollBar()->pageStep();
