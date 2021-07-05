@@ -1,2 +1,10 @@
-﻿  tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Release\tinypng.exe
+﻿  moc CompressThread.h
+  CompressThread.cpp
+  CompressThreadDispatcher.cpp
+  MainWindow.cpp
+  main.cpp
+  moc_CompressThread.cpp
+  moc_CompressThreadDispatcher.cpp
+  moc_MainWindow.cpp
+  tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Release\tinypng.exe
   ---------------------------

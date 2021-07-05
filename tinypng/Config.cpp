@@ -21,6 +21,7 @@ void Config::set(configItem item) {
 	qset->setValue("key", item.key);
 	qset->setValue("proxy", item.proxy);
 	qset->setValue("outputMode", int(item.outputMode));
+	qset->setValue("minsize", item.minsize);
 	qset->endGroup();
 }
 
@@ -30,6 +31,7 @@ configItem Config::get() {
 	item.mail = qset->value("mail").toString();
 	item.key = qset->value("key").toString();
 	item.proxy = qset->value("proxy").toString();
+	item.minsize = qset->value("minsize").toInt();
 	if (qset->value("outputMode").toInt() != 1) {
 		item.outputMode = OutputMode::NewDir;
 	}

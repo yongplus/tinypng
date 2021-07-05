@@ -38,6 +38,9 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_3;
     QLineEdit *proxyInput;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_6;
+    QLineEdit *sizeInput;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_4;
     QHBoxLayout *horizontalLayout;
@@ -52,7 +55,7 @@ public:
         if (SettingWindow->objectName().isEmpty())
             SettingWindow->setObjectName(QString::fromUtf8("SettingWindow"));
         SettingWindow->setWindowModality(Qt::ApplicationModal);
-        SettingWindow->resize(395, 304);
+        SettingWindow->resize(395, 339);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -141,10 +144,34 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        horizontalLayout_6->setContentsMargins(-1, -1, 10, -1);
+        label_6 = new QLabel(SettingWindow);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setMinimumSize(QSize(80, 0));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("\345\256\213\344\275\223"));
+        label_6->setFont(font2);
+        label_6->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(label_6);
+
+        sizeInput = new QLineEdit(SettingWindow);
+        sizeInput->setObjectName(QString::fromUtf8("sizeInput"));
+        sizeInput->setMinimumSize(QSize(0, 30));
+        sizeInput->setFont(font2);
+
+        horizontalLayout_6->addWidget(sizeInput);
+
+
+        verticalLayout->addLayout(horizontalLayout_6);
+
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        horizontalLayout_5->setContentsMargins(-1, -1, -1, 20);
+        horizontalLayout_5->setContentsMargins(-1, 10, -1, 10);
         label_4 = new QLabel(SettingWindow);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         sizePolicy.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
@@ -185,12 +212,13 @@ public:
         sizePolicy.setHeightForWidth(savebtn->sizePolicy().hasHeightForWidth());
         savebtn->setSizePolicy(sizePolicy);
         savebtn->setMinimumSize(QSize(150, 40));
-        QFont font2;
-        font2.setFamily(QString::fromUtf8("\345\256\213\344\275\223"));
         savebtn->setFont(font2);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/res/icons/save.png"), QSize(), QIcon::Normal, QIcon::Off);
         savebtn->setIcon(icon);
+#if QT_CONFIG(shortcut)
+        savebtn->setShortcut(QString::fromUtf8(""));
+#endif // QT_CONFIG(shortcut)
 
         verticalLayout->addWidget(savebtn, 0, Qt::AlignHCenter);
 
@@ -217,6 +245,7 @@ public:
         label->setText(QCoreApplication::translate("SettingWindow", "Mail:", nullptr));
         label_2->setText(QCoreApplication::translate("SettingWindow", "Key:", nullptr));
         label_3->setText(QCoreApplication::translate("SettingWindow", "\344\273\243\347\220\206:", nullptr));
+        label_6->setText(QCoreApplication::translate("SettingWindow", "\346\234\200\344\275\216\345\244\247\345\260\217(KB):", nullptr));
         label_4->setText(QCoreApplication::translate("SettingWindow", "\350\276\223\345\207\272\346\250\241\345\274\217\357\274\232", nullptr));
         newdirCheckBox->setText(QCoreApplication::translate("SettingWindow", "\346\226\260\347\233\256\345\275\225", nullptr));
         replaceCheckBox->setText(QCoreApplication::translate("SettingWindow", "\350\246\206\347\233\226", nullptr));

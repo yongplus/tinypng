@@ -13,6 +13,7 @@ int TableModel::rowCount(const QModelIndex& parent) const {
 	return this->_data.count();
 }
 
+
 int TableModel::columnCount(const QModelIndex& parent) const {
 	return 4;
 }

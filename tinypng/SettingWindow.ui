@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>395</width>
-    <height>304</height>
+    <height>339</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -190,9 +190,55 @@
       </layout>
      </item>
      <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>最低大小(KB):</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="sizeInput">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+          </font>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <property name="topMargin">
+        <number>10</number>
+       </property>
        <property name="bottomMargin">
-        <number>20</number>
+        <number>10</number>
        </property>
        <item>
         <widget class="QLabel" name="label_4">
@@ -285,6 +331,9 @@
        <property name="icon">
         <iconset resource="Resource.qrc">
          <normaloff>:/res/icons/save.png</normaloff>:/res/icons/save.png</iconset>
+       </property>
+       <property name="shortcut">
+        <string notr="true"/>
        </property>
       </widget>
      </item>

@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <QWidget>
+#include <QKeyEvent>
 #include "ui_SettingWindow.h"
 #include "Config.h"
 
@@ -12,6 +13,7 @@ public:
 	SettingWindow(QWidget* parent = Q_NULLPTR);
 	~SettingWindow();
 	void setValues();
+	void keyPressEvent(QKeyEvent* event);
 
 public slots:
 	void onClickSaveBtn();

@@ -6,6 +6,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVariantMap>
+#include <QEventLoop>
 #include "Config.h"
 
 struct CompressThreadResult {
@@ -31,6 +32,8 @@ public:
 	configItem config;
 	QThread* thread;
 	int state; // 0 新任务待处理 -1 退出 
+	QEventLoop* eventloop;
+	QNetworkAccessManager* mgr;
 	CompressThread(QThread* thread, const configItem& config, QString);
 	~CompressThread();
 
