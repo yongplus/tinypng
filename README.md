@@ -7,7 +7,10 @@
 
 **软件截图：**  
 ![截图](http://0f3.com/tinypng/Screenshot1.png)  
-![截图](http://0f3.com/tinypng/Screenshot2.png)
+![截图](http://0f3.com/tinypng/Screenshot2.png)  
+
+以下是对电商项目的压缩测试数据，无论是页面大小还是访问速度的提升都很显著  
+![截图](http://0f3.com/tinypng/compared.png)  
 
 
 
