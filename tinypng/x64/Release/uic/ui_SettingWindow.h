@@ -245,8 +245,16 @@ public:
         label->setText(QCoreApplication::translate("SettingWindow", "Mail:", nullptr));
         label_2->setText(QCoreApplication::translate("SettingWindow", "Key:", nullptr));
         label_3->setText(QCoreApplication::translate("SettingWindow", "\344\273\243\347\220\206:", nullptr));
+#if QT_CONFIG(tooltip)
+        label_6->setToolTip(QString());
+#endif // QT_CONFIG(tooltip)
         label_6->setText(QCoreApplication::translate("SettingWindow", "\346\234\200\344\275\216\345\244\247\345\260\217(KB):", nullptr));
-        label_4->setText(QCoreApplication::translate("SettingWindow", "\350\276\223\345\207\272\346\250\241\345\274\217\357\274\232", nullptr));
+        sizeInput->setInputMask(QString());
+        sizeInput->setPlaceholderText(QCoreApplication::translate("SettingWindow", "\345\260\217\344\272\216\350\256\276\345\256\232\345\244\247\345\260\217\345\233\276\347\211\207\345\260\206\344\270\215\344\274\232\350\242\253\345\216\213\347\274\251", nullptr));
+#if QT_CONFIG(tooltip)
+        label_4->setToolTip(QString());
+#endif // QT_CONFIG(tooltip)
+        label_4->setText(QCoreApplication::translate("SettingWindow", "\350\276\223\345\207\272\346\250\241\345\274\217:", nullptr));
         newdirCheckBox->setText(QCoreApplication::translate("SettingWindow", "\346\226\260\347\233\256\345\275\225", nullptr));
         replaceCheckBox->setText(QCoreApplication::translate("SettingWindow", "\350\246\206\347\233\226", nullptr));
         savebtn->setText(QCoreApplication::translate("SettingWindow", "\344\277\235 \345\255\230", nullptr));

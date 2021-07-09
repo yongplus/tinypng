@@ -207,6 +207,9 @@
            <family>宋体</family>
           </font>
          </property>
+         <property name="toolTip">
+          <string/>
+         </property>
          <property name="text">
           <string>最低大小(KB):</string>
          </property>
@@ -227,6 +230,12 @@
           <font>
            <family>宋体</family>
           </font>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>小于设定大小图片将不会被压缩</string>
          </property>
         </widget>
        </item>
@@ -260,8 +269,11 @@
            <pointsize>9</pointsize>
           </font>
          </property>
+         <property name="toolTip">
+          <string/>
+         </property>
          <property name="text">
-          <string>输出模式：</string>
+          <string>输出模式:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
