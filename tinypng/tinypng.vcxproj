@@ -105,6 +105,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <QtMoc Include="SingleApplication.h" />
     <QtMoc Include="SettingWindow.h" />
     <QtMoc Include="TableModel.h" />
     <QtMoc Include="MainWindow.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="MyOverlay.cpp" />
     <ClCompile Include="MyTableView.cpp" />
     <ClCompile Include="SettingWindow.cpp" />
+    <ClCompile Include="SingleApplication.cpp" />
     <ClCompile Include="TableModel.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -37,6 +37,7 @@ public:
 private:
 	CompressThreadDispatcher* dispatcher;
 	Ui::MainWindow* ui;
+
 	void _buildTopBtns();
 	void _buildBody();
 	QStandardItemModel* newModel();
