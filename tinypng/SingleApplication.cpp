@@ -88,10 +88,6 @@ void SingleApplication::newLocalConnection()
 		//如果窗口不为空,则前端显示
 		//核心代码
 		if (m_widget) {
-
-
-			QSize size = m_widget->size();
-
 			this->setActiveWindow(m_widget);
 			m_widget->raise();
 			if (m_widget->windowState().testFlag(Qt::WindowMaximized) == true) {
@@ -102,9 +98,6 @@ void SingleApplication::newLocalConnection()
 			}
 
 			m_widget->activateWindow();
-
-
-
 		}
 	}
 }
