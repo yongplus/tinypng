@@ -41,6 +41,7 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_6;
     QLineEdit *sizeInput;
+    QPushButton *askbtn;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_4;
     QHBoxLayout *horizontalLayout;
@@ -165,6 +166,17 @@ public:
 
         horizontalLayout_6->addWidget(sizeInput);
 
+        askbtn = new QPushButton(SettingWindow);
+        askbtn->setObjectName(QString::fromUtf8("askbtn"));
+        sizePolicy.setHeightForWidth(askbtn->sizePolicy().hasHeightForWidth());
+        askbtn->setSizePolicy(sizePolicy);
+        askbtn->setMaximumSize(QSize(15, 15));
+        askbtn->setStyleSheet(QString::fromUtf8("image: url(:/res/icons/ask.png);\n"
+"background:none;\n"
+"border:none;"));
+
+        horizontalLayout_6->addWidget(askbtn);
+
 
         verticalLayout->addLayout(horizontalLayout_6);
 
@@ -250,7 +262,8 @@ public:
 #endif // QT_CONFIG(tooltip)
         label_6->setText(QCoreApplication::translate("SettingWindow", "\346\234\200\344\275\216\345\244\247\345\260\217(KB):", nullptr));
         sizeInput->setInputMask(QString());
-        sizeInput->setPlaceholderText(QCoreApplication::translate("SettingWindow", "\345\260\217\344\272\216\350\256\276\345\256\232\345\244\247\345\260\217\345\233\276\347\211\207\345\260\206\344\270\215\344\274\232\350\242\253\345\216\213\347\274\251", nullptr));
+        sizeInput->setPlaceholderText(QString());
+        askbtn->setText(QString());
 #if QT_CONFIG(tooltip)
         label_4->setToolTip(QString());
 #endif // QT_CONFIG(tooltip)

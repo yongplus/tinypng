@@ -1,4 +1,41 @@
-﻿  Console.cpp
+﻿  Reading Qt configuration (D:/Qt/Qt5.14.2/5.14.2/msvc2017_64/bin/qmake)
+  uic Console.ui
+  uic SettingWindow.ui
+  rcc Resource.qrc
+  moc SingleApplication.h
+  moc SettingWindow.h
+  moc TableModel.h
+  moc MainWindow.h
+  moc MyTableView.h
+  moc ListFile.h
+  moc MyOverlay.h
+  moc Console.h
+  moc CompressThread.h
+  moc Config.h
+  moc CompressThreadDispatcher.h
+  CompressThread.cpp
+  CompressThreadDispatcher.cpp
+  Config.cpp
+  Console.cpp
+  ListFile.cpp
+  main.cpp
+  MainWindow.cpp
+  MyOverlay.cpp
+  MyTableView.cpp
+  SettingWindow.cpp
   SingleApplication.cpp
+  TableModel.cpp
+  qrc_Resource.cpp
+  moc_SingleApplication.cpp
+  moc_SettingWindow.cpp
+  moc_TableModel.cpp
+  moc_MainWindow.cpp
+  moc_MyTableView.cpp
+  moc_ListFile.cpp
+  moc_MyOverlay.cpp
+  moc_Console.cpp
+  moc_CompressThread.cpp
+  moc_Config.cpp
+  moc_CompressThreadDispatcher.cpp
   tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Release\tinypng.exe
   ---------------------------

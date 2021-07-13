@@ -11,6 +11,7 @@ SettingWindow::SettingWindow(QWidget* parent)
 	this->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 	this->setFixedSize(this->width(), this->height());
 	connect(ui.savebtn, SIGNAL(clicked()), this, SLOT(onClickSaveBtn()));
+	connect(ui.askbtn, SIGNAL(clicked()), this, SLOT(onShowSizeExplain()));
 	ui.sizeInput->setValidator(new QIntValidator(0, 999999999, this));
 	this->setValues();
 
@@ -50,6 +51,11 @@ void SettingWindow::onClickSaveBtn() {
 	Config(this).set(item);
 	QMessageBox::information(this, "提  示", "保存成功", QMessageBox::Ok);
 	this->close();
+}
+
+void SettingWindow::onShowSizeExplain() {
+	QPoint pos = ui.askbtn->mapToGlobal(QPoint(0, 0));
+	QToolTip::showText(pos, "小于设定大小的图片将不会被压缩");
 }
 
 

@@ -235,7 +235,31 @@
           <string/>
          </property>
          <property name="placeholderText">
-          <string>小于设定大小图片将不会被压缩</string>
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="askbtn">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>15</width>
+           <height>15</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">image: url(:/res/icons/ask.png);
+background:none;
+border:none;</string>
+         </property>
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>

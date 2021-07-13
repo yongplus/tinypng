@@ -2,6 +2,7 @@
 
 #include <QWidget>
 #include <QKeyEvent>
+#include <QToolTip>
 #include "ui_SettingWindow.h"
 #include "Config.h"
 
@@ -17,7 +18,9 @@ public:
 
 public slots:
 	void onClickSaveBtn();
+	void onShowSizeExplain();
 
 private:
 	Ui::SettingWindow ui;
+	QToolTip* tooltip;
 };
