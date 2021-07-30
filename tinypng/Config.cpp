@@ -10,6 +10,7 @@ Config::Config(QObject* parent)
 		configItem one = this->randDefault();
 		qset->setValue("mail", QVariant(one.mail));
 		qset->setValue("key", QVariant(one.key));
+		qset->setValue("outputMode", int(OutputMode::Replace));
 	}
 	qset->endGroup();
 

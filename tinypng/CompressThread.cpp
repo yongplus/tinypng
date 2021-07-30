@@ -177,8 +177,8 @@ void CompressThread::download(const QByteArray& bytes) {
 
 			reply->deleteLater();
 
-			if (file.open(QIODevice::ReadWrite)) {
-				file.write(binary);
+			if (file.open(QIODevice::WriteOnly)) {
+				qDebug() << "wrote:" << file.write(binary);
 				file.close();
 			}
 			else {

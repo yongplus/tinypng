@@ -1,13 +1,2 @@
-﻿  moc ListFile.h
-  CompressThreadDispatcher.cpp
-  ListFile.cpp
-  MainWindow.cpp
-  MyTableView.cpp
-  SettingWindow.cpp
-  main.cpp
-  moc_CompressThreadDispatcher.cpp
-  moc_ListFile.cpp
-  moc_MainWindow.cpp
-  moc_MyTableView.cpp
-  moc_SettingWindow.cpp
+﻿  CompressThread.cpp
   tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Debug\tinypng.exe
