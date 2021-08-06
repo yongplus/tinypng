@@ -157,9 +157,8 @@ void CompressThreadDispatcher::finished() {
 
 	if (finishNum > 0) {
 		QString spentime = QString().sprintf("%.3f", float(this->elapsedTimer->elapsed()) / 1000);
-		qDebug() << this->totalLessSize << this->totalsize;
 		QString lessrate = failedNum == finishNum ? "0" : QString().sprintf("%.2f", this->totalLessSize / this->totalsize * 100);
-		QString text = QString("压缩完成,共压缩%1个图片,失败%2个,耗时：%3ms，压缩率: %4%").arg(finishNum).arg(failedNum).arg(spentime).arg(lessrate);
+		QString text = QString("压缩完成,共压缩%1个图片,失败%2个,耗时：%3s，压缩率: %4%").arg(finishNum).arg(failedNum).arg(spentime).arg(lessrate);
 		this->console->infoSignal(text);
 
 	}

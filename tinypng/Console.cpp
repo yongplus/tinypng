@@ -14,7 +14,7 @@ color:#FFFFFF; \
 }");
 	append("The image compression software is available for png/jpg/jpeg that is developed basing on the apis offering by tinypng.png.\n \
 Usage:\n \
-  To compress your images, Click the button to choose directory or drag directly the folder to the widget of table area. \
+  To compress your images, Click the button to choose directory or drag directly the object (folder or file) to the widget of table area. \
 		");
 	this->atBottom = true;
 	connect(this, SIGNAL(textChanged()), this, SLOT(textChangedSlot()));
