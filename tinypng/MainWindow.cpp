@@ -110,11 +110,25 @@ void MainWindow::onClickEditBtn() {
 
 	QFileDialog dlg(this, Qt::Dialog);
 	dlg.setWindowTitle("选择压缩目录");
-	dlg.setFileMode(QFileDialog::DirectoryOnly);
+	dlg.setOptions(QFileDialog::DontUseNativeDialog | QFileDialog::ReadOnly);
+
+	dlg.setNameFilter("Image (*.jpg *.png *.jpeg)");
+	dlg.setFileMode(QFileDialog::Directory);
+
+	connect(&dlg, &QFileDialog::currentChanged, this, [&](const QString& str)
+		{
+			QFileInfo info(str);
+			if (info.isFile())
+				dlg.setFileMode(QFileDialog::ExistingFile);
+			else if (info.isDir())
+				dlg.setFileMode(QFileDialog::Directory);
+		});
+
 
 	if (dlg.exec() == 1) {
 		this->table->readDir(dlg.selectedFiles()[0]);
 	}
+	disconnect(&dlg);
 }
 
 void MainWindow::onOpenSettingWindow() {

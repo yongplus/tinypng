@@ -81,6 +81,12 @@ void MyTableView::readDir(const QString& path) {
 	listFileThread->start(path, minsize);
 }
 
+void MyTableView::keyPressEvent(QKeyEvent* event) {
+	if (event->key() == Qt::Key_Delete) {
+		this->clickDelete();
+	}
+}
+
 bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {
 
 	if (mimedata->hasUrls() == false) {
@@ -92,7 +98,8 @@ bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {
 	}
 
 	QString path = mimedata->urls().at(0).toLocalFile();
-	if (QDir(path).exists() == false) {
+
+	if (QDir(path).exists() == false && !this->listFileThread->isCompressible(path)) {
 		return false;
 	}
 

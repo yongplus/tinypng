@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -38,6 +39,9 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_3;
     QLineEdit *proxyInput;
+    QGroupBox *groupBox;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_6;
     QLineEdit *sizeInput;
@@ -56,7 +60,7 @@ public:
         if (SettingWindow->objectName().isEmpty())
             SettingWindow->setObjectName(QString::fromUtf8("SettingWindow"));
         SettingWindow->setWindowModality(Qt::ApplicationModal);
-        SettingWindow->resize(395, 339);
+        SettingWindow->resize(414, 363);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -80,7 +84,7 @@ public:
         horizontalLayout_2->setContentsMargins(-1, -1, 10, -1);
         label = new QLabel(SettingWindow);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setMinimumSize(QSize(80, 0));
+        label->setMinimumSize(QSize(90, 0));
         QFont font1;
         font1.setFamily(QString::fromUtf8("\345\256\213\344\275\223"));
         font1.setPointSize(9);
@@ -106,7 +110,7 @@ public:
         horizontalLayout_3->setContentsMargins(-1, -1, 10, -1);
         label_2 = new QLabel(SettingWindow);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setMinimumSize(QSize(80, 0));
+        label_2->setMinimumSize(QSize(90, 0));
         label_2->setFont(font1);
         label_2->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
@@ -128,7 +132,7 @@ public:
         horizontalLayout_4->setContentsMargins(-1, -1, 10, -1);
         label_3 = new QLabel(SettingWindow);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setMinimumSize(QSize(80, 0));
+        label_3->setMinimumSize(QSize(90, 0));
         label_3->setFont(font1);
         label_3->setLayoutDirection(Qt::LeftToRight);
         label_3->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
@@ -145,13 +149,29 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
+        groupBox = new QGroupBox(SettingWindow);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy1);
+        groupBox->setMaximumSize(QSize(16777215, 300));
+        widget = new QWidget(groupBox);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(0, 20, 371, 78));
+        verticalLayout_2 = new QVBoxLayout(widget);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         horizontalLayout_6->setContentsMargins(-1, -1, 10, -1);
-        label_6 = new QLabel(SettingWindow);
+        label_6 = new QLabel(widget);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setMinimumSize(QSize(80, 0));
+        label_6->setMinimumSize(QSize(90, 0));
         QFont font2;
         font2.setFamily(QString::fromUtf8("\345\256\213\344\275\223"));
         label_6->setFont(font2);
@@ -159,14 +179,14 @@ public:
 
         horizontalLayout_6->addWidget(label_6);
 
-        sizeInput = new QLineEdit(SettingWindow);
+        sizeInput = new QLineEdit(widget);
         sizeInput->setObjectName(QString::fromUtf8("sizeInput"));
         sizeInput->setMinimumSize(QSize(0, 30));
         sizeInput->setFont(font2);
 
         horizontalLayout_6->addWidget(sizeInput);
 
-        askbtn = new QPushButton(SettingWindow);
+        askbtn = new QPushButton(widget);
         askbtn->setObjectName(QString::fromUtf8("askbtn"));
         sizePolicy.setHeightForWidth(askbtn->sizePolicy().hasHeightForWidth());
         askbtn->setSizePolicy(sizePolicy);
@@ -178,17 +198,17 @@ public:
         horizontalLayout_6->addWidget(askbtn);
 
 
-        verticalLayout->addLayout(horizontalLayout_6);
+        verticalLayout_2->addLayout(horizontalLayout_6);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(-1, 10, -1, 10);
-        label_4 = new QLabel(SettingWindow);
+        label_4 = new QLabel(widget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         sizePolicy.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
         label_4->setSizePolicy(sizePolicy);
-        label_4->setMinimumSize(QSize(80, 0));
+        label_4->setMinimumSize(QSize(90, 0));
         label_4->setFont(font1);
         label_4->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
@@ -197,7 +217,7 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        newdirCheckBox = new QCheckBox(SettingWindow);
+        newdirCheckBox = new QCheckBox(widget);
         buttonGroup = new QButtonGroup(SettingWindow);
         buttonGroup->setObjectName(QString::fromUtf8("buttonGroup"));
         buttonGroup->addButton(newdirCheckBox);
@@ -206,7 +226,7 @@ public:
 
         horizontalLayout->addWidget(newdirCheckBox);
 
-        replaceCheckBox = new QCheckBox(SettingWindow);
+        replaceCheckBox = new QCheckBox(widget);
         buttonGroup->addButton(replaceCheckBox);
         replaceCheckBox->setObjectName(QString::fromUtf8("replaceCheckBox"));
         replaceCheckBox->setFont(font1);
@@ -217,7 +237,10 @@ public:
         horizontalLayout_5->addLayout(horizontalLayout);
 
 
-        verticalLayout->addLayout(horizontalLayout_5);
+        verticalLayout_2->addLayout(horizontalLayout_5);
+
+
+        verticalLayout->addWidget(groupBox);
 
         savebtn = new QPushButton(SettingWindow);
         savebtn->setObjectName(QString::fromUtf8("savebtn"));
@@ -257,6 +280,8 @@ public:
         label->setText(QCoreApplication::translate("SettingWindow", "Mail:", nullptr));
         label_2->setText(QCoreApplication::translate("SettingWindow", "Key:", nullptr));
         label_3->setText(QCoreApplication::translate("SettingWindow", "\344\273\243\347\220\206:", nullptr));
+        proxyInput->setPlaceholderText(QCoreApplication::translate("SettingWindow", "http://ip:port", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("SettingWindow", "\344\273\245\344\270\213\351\205\215\347\275\256\344\273\205\345\257\271\347\233\256\345\275\225\346\234\211\346\225\210", nullptr));
 #if QT_CONFIG(tooltip)
         label_6->setToolTip(QString());
 #endif // QT_CONFIG(tooltip)

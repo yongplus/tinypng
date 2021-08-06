@@ -15,7 +15,7 @@ MyOverlay::MyOverlay(QWidget* parent)
 
 	label->setStyleSheet("#overlaylabel{color:#FFFFFF;background-color:rgba(0,0,0,0);letter-spacing:10px;}");
 	label->setAttribute(Qt::WA_TransparentForMouseEvents, true);
-	label->setText("松开读取目录资源");
+	label->setText("松开读取资源");
 
 	QImage* img = new QImage();
 	img->load(":/res/read.png");

@@ -4,17 +4,27 @@
 #include <QFileInfo>
 
 ListFile::ListFile(QObject* parent) :
-	QThread(parent)
+	QThread(parent),
+	minsize(0),
+	model(nullptr)
 {
-
+	suffiexs = QStringList();
+	suffiexs << "*.jpg";
+	suffiexs << "*.png";
+	suffiexs << "*.jpeg";
 }
 
 void ListFile::start(const QString p, int ms) {
-	QThread::msleep(50);
+	//QThread::msleep(50);
+	QFileInfo fileinfo(p);
+	if (fileinfo.isFile()) {
+		qDebug() << "the src is a file~!";
+		this->add(p);
+		return;
+	}
 	this->path = p;
 	this->stopped = false;
 	this->minsize = ms;
-	qDebug() << "开始线程" << p << this->path;
 	QThread::start();
 }
 
@@ -26,12 +36,18 @@ void ListFile::setModel(QStandardItemModel* m) {
 	this->model = (TableModel*)m;
 }
 
+bool ListFile::isCompressible(const QString& name) {
+	QString suffix = name.split(".").last().toLower();
+	if (this->suffiexs.indexOf("*." + suffix) != -1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 void ListFile::run() {
-	qDebug() << "xxxxx";
-	QStringList suffiexs = QStringList();
-	suffiexs << "*.jpg";
-	suffiexs << "*.png";
-	suffiexs << "*.jpeg";
+
 
 	model->removeAll();
 
@@ -48,28 +64,32 @@ void ListFile::run() {
 		if (it.fileInfo().size() < this->minsize) {
 			continue;
 		}
-		/*
-		QList<QStandardItem*> items;
+		this->add(path, filepath, it.fileInfo().size());
 
 
-		items << new QStandardItem(this->path)
-			<< new QStandardItem(filepath)
-			<< new QStandardItem("xx")
-			<< new QStandardItem("待压缩");
-		*/
-		//row->appendColumn(items);
-		_TableModelRow item;
-
-		item.root = path;
-		item.path = filepath;
-		item.size = it.fileInfo().size();
-		item.status = 0;
-		item.thin_size = 0;
-		model->addRow(item);
 
 	}
+}
 
+void ListFile::add(const QString& root, const QString& filepath, int size) {
+	_TableModelRow item;
 
+	item.root = root;
+	item.path = filepath;
+	item.size = size;
+	item.status = 0;
+	item.thin_size = 0;
+	model->addRow(item);
+}
+
+void ListFile::add(const QString& filepath) {
+	QFileInfo fileinfo(filepath);
+	if (!fileinfo.exists()) {
+		return;
+	}
+	_TableModelRow item;
+	model->removeAll();
+	this->add("", filepath, fileinfo.size());
 }
 
 QString ListFile::size_human(float num)

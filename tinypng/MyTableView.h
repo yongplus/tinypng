@@ -21,6 +21,7 @@ public:
 	virtual void dropEvent(QDropEvent*) override;
 	virtual void resizeEvent(QResizeEvent*) override;
 	void readDir(const QString&);
+	void keyPressEvent(QKeyEvent*);
 
 private:
 	MyOverlay* overlay;
@@ -31,4 +32,5 @@ public slots:
 	void clickDelete();
 	void onDoubleClickRow(const QModelIndex& index);
 	void customContextMenuResposne(const QPoint& pos);
+
 };

@@ -40,7 +40,7 @@ void CompressThreadDispatcher::run() {
 
 	this->console->tipSignal("\n开始压缩");
 	QString outputRoot = this->model->getRow(0).root;
-	if (config.outputMode == OutputMode::NewDir) {
+	if (config.outputMode == OutputMode::NewDir && this->model->getRow(0).root != "") {
 		outputRoot.append("_tiny");
 		this->console->tipSignal("输出目录:" + outputRoot);
 	}
