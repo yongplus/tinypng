@@ -143,7 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="C:\Users\yongp\Desktop\avatar.png" />
-    <Image Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource.qrc" />

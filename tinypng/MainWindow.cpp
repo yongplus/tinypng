@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget* parent) :
 	setCentralWidget(this->widget);
 	widget->setLayout(this->layout);
 	resize(850, 550);
-	QIcon icon(":/icon.ico");
+	QIcon icon(":/logo.ico");
 	QGuiApplication::setWindowIcon(icon);
 	setWindowTitle("图片压缩");
 

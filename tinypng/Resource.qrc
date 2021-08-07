@@ -1,12 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>res/icons/ask.png</file>
-        <file>icon.ico</file>
         <file>res/icons/folder.png</file>
         <file>res/icons/compress.png</file>
         <file>res/icons/setting.png</file>
         <file>res/icons/save.png</file>
         <file>res/icons/pause.png</file>
         <file>res/read.png</file>
+        <file>logo.ico</file>
     </qresource>
 </RCC>

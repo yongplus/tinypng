@@ -112,9 +112,6 @@
     <Image Include="C:\Users\yongp\Desktop\avatar.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="icon.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource.qrc">
