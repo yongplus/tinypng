@@ -12,10 +12,10 @@ color:#FFFFFF; \
 	font-size:15px;\
 	font-family:\"verdana,Arial,Helvetica,sans-serif\", \
 }");
-	append("The image compression software is available for png/jpg/jpeg that is developed basing on the apis offering by tinypng.png.\n \
-Usage:\n \
-  To compress your images, Click the button to choose directory or drag directly the object (folder or file) to the widget of table area. \
-		");
+	append("The image compression software is available for png/jpg/jpeg that is developed basing on the apis offering by tinypng.png.");
+	append("Usage:");
+	append("  To compress your images, Click the button to choose or drag directly the object — an file or folder — into the area of table widget.");
+	append("Developer: yongplus@foxmail.com ");
 	this->atBottom = true;
 	connect(this, SIGNAL(textChanged()), this, SLOT(textChangedSlot()));
 	connect(this, SIGNAL(infoSignal(QString)), this, SLOT(info(QString)));

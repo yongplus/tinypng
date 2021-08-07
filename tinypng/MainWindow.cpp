@@ -47,23 +47,26 @@ void MainWindow::show() {
 }
 
 void MainWindow::_buildTopBtns() {
-	QPushButton* add = new QPushButton(QString("添加路径"), this);
-	add->setFixedSize(90, 45);
+	QPushButton* add = new QPushButton(QString("添加路径(O)"), this);
+	add->setFixedSize(100, 45);
 	add->setIcon(QIcon(":/res/icons/folder.png"));
+	add->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
 
-	startbtn = new QPushButton(QString("开始压缩"), this);
-	startbtn->setFixedSize(90, 45);
+	startbtn = new QPushButton(QString("开始压缩(S)"), this);
+	startbtn->setFixedSize(100, 45);
 	startbtn->setIcon(QIcon(":/res/icons/compress.png"));
+	startbtn->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
 
-
-	pausebtn = new QPushButton(QString("暂停压缩"), this);
-	pausebtn->setFixedSize(90, 45);
+	pausebtn = new QPushButton(QString("暂停压缩(P)"), this);
+	pausebtn->setFixedSize(100, 45);
 	pausebtn->setIcon(QIcon(":/res/icons/pause.png"));
+	pausebtn->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_P));
 	pausebtn->hide();
 
 
-	QPushButton* config = new QPushButton(QString("配置KEY"), this);
-	config->setFixedSize(90, 45);
+	QPushButton* config = new QPushButton(QString("配置KEY(C)"), this);
+	config->setFixedSize(100, 45);
+	config->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_C));
 	config->setIcon(QIcon(":/res/icons/setting.png"));
 
 
@@ -77,7 +80,10 @@ void MainWindow::_buildTopBtns() {
 	topLayout->addWidget(startbtn);
 	topLayout->addWidget(pausebtn);
 	topLayout->addWidget(config);
+	topLayout->setSpacing(10);
 	topLayout->addStretch(1);
+
+
 	this->layout->addLayout(topLayout);
 
 
