@@ -14,15 +14,18 @@ ListFile::ListFile(QObject* parent) :
 	suffiexs << "*.jpeg";
 }
 
-void ListFile::start(const QString p, int ms) {
-	//QThread::msleep(50);
-	QFileInfo fileinfo(p);
-	if (fileinfo.isFile()) {
-		qDebug() << "the src is a file~!";
-		this->add(p);
+void ListFile::start(const QStringList& files, int ms) {
+	if (files.count() == 0) {
 		return;
 	}
-	this->path = p;
+	//QThread::msleep(50);
+	QFileInfo fileinfo(files[0]);
+	if (fileinfo.isFile()) {
+		qDebug() << "the src are files~!";
+		this->batch(files);
+		return;
+	}
+	this->path = files[0];
 	this->stopped = false;
 	this->minsize = ms;
 	QThread::start();
@@ -82,14 +85,19 @@ void ListFile::add(const QString& root, const QString& filepath, int size) {
 	model->addRow(item);
 }
 
-void ListFile::add(const QString& filepath) {
-	QFileInfo fileinfo(filepath);
-	if (!fileinfo.exists()) {
+void ListFile::batch(const QStringList& files) {
+	if (files.count() == 0) {
 		return;
 	}
-	_TableModelRow item;
 	model->removeAll();
-	this->add("", filepath, fileinfo.size());
+
+	for (int i = 0; i < files.count(); i++) {
+		QFileInfo fileinfo(files[i]);
+		if (!fileinfo.exists()) {
+			return;
+		}
+		this->add("", files[i], fileinfo.size());
+	}
 }
 
 QString ListFile::size_human(float num)

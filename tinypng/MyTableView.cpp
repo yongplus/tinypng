@@ -70,15 +70,27 @@ void MyTableView::dropEvent(QDropEvent* event) {
 		return;
 	}
 	QList<QUrl> urls = mimedata->urls();
-	QString path = urls.at(0).toLocalFile();
+	QStringList files = QStringList();
+	for (int i = 0; i < urls.count(); i++) {
+		QString path = urls.at(i).toLocalFile();
+		QFileInfo file(path);
+		if (file.isFile() && !this->listFileThread->isCompressible(path)) {
+			continue;
+		}
+		files << path;
+	}
+
 	overlay->hide();
-	this->readDir(path);
+	this->readDir(files);
 }
 
-void MyTableView::readDir(const QString& path) {
+void MyTableView::readDir(const QStringList& files) {
+	if (files.count() == 0) {
+		return;
+	}
 	listFileThread->stop();
 	int minsize = Config(this).get().minsize;
-	listFileThread->start(path, minsize);
+	listFileThread->start(files, minsize);
 }
 
 void MyTableView::keyPressEvent(QKeyEvent* event) {
@@ -93,16 +105,24 @@ bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {
 		return false;
 	}
 
-	if (mimedata->urls().length() > 1) {
+	if (mimedata->urls().length() == 0) {
 		return false;
 	}
+	int dirNum = 0;
+	int fileNum = 0;
+	for (int i = 0; i < mimedata->urls().length(); i++) {
+		QString path = mimedata->urls().at(i).toLocalFile();
 
-	QString path = mimedata->urls().at(0).toLocalFile();
-
-	if (QDir(path).exists() == false && !this->listFileThread->isCompressible(path)) {
+		if (QDir(path).exists()) {
+			dirNum += 1;
+		}
+		else if (this->listFileThread->isCompressible(path)) {
+			fileNum += 1;
+		}
+	}
+	if ((dirNum > 0 && fileNum > 0) || (fileNum + dirNum) == 0) {
 		return false;
 	}
-
 	return true;
 }
 void MyTableView::resizeEvent(QResizeEvent* event) {

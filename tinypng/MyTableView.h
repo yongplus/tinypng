@@ -20,7 +20,7 @@ public:
 	virtual void dragLeaveEvent(QDragLeaveEvent*) override;
 	virtual void dropEvent(QDropEvent*) override;
 	virtual void resizeEvent(QResizeEvent*) override;
-	void readDir(const QString&);
+	void readDir(const QStringList&);
 	void keyPressEvent(QKeyEvent*);
 
 private:

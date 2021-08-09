@@ -15,12 +15,12 @@ public:
 	int minsize;
 	explicit  ListFile(QObject* parent);
 	~ListFile();
-	void start(const QString path, int minsize);
+	void start(const QStringList&, int);
 	void stop();
 	void setModel(QStandardItemModel*);
 	bool isCompressible(const QString&); //根据文件名检查是否可压缩
-	void add(const QString& root, const QString& filepath, int size);
-	void add(const QString&);
+	void add(const QString&, const QString&, int);
+	void batch(const QStringList&);
 
 protected:
 	void run();
