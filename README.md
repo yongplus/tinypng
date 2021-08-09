@@ -10,7 +10,7 @@
  2.Recommended way,For more convenient and efficient, The software support the object can be dragged directy the object move into the area of table in the window.   
  3.You can push the button by a shortcut key releated to the button, Such as :press Ctrl+O to add object, Ctrl+S to start task.   
  4.Double-Clicking the any row in the table, the row releated to the image will preview in system image previewer.  
- 5.Right-Clicking on the any row or pressing key Del on selecting row delete the row.
+ 5.Right-Clicking on the any row or selecting row and pressing key Del delete the row.  
  Remark: If the object you gave is a folder,the sofeware will list automatically all the image files in that folder.
 
 
