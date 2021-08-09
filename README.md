@@ -4,8 +4,17 @@
 
 项目图片过多时，通过官方网站压缩效率低、繁琐，于是最初用go基于tinypng的API写了个CLI程序，后嫌麻烦，用Golang Qt写了个GUI程序，因Qt主要是C++写的，Go Qt无论是调试还是编译都极其慢和不方便，凭借对Qt的热爱和本着学习心态决定用C++把Go写的这套重写一遍。
 
+### Usage:
+ There are two ways to add the files you wanna compress:  
+ 1.Clicking the button on the top-left choose one or more files or a folder.   
+ 2.recommended way,For more convenient and efficient, The software support the object can be dragged directy the object move into the area of table in the window.   
+ 3.You can push the button by a shortcut key releated to the button, Such as :press Ctrl+O to add object, Ctrl+S to start task.   
+ 4.Double-Clicking the any row in the table, the row releated to the image will preview in system image previewer.  
+ 5.Right-Clicking on the any row or pressing key Del on selecting row delete the row.
+ Remark: If the object you gave is a folder,the sofeware will list automatically all the image files in that folder.
 
-**软件截图：**  
+
+### Screenshots： 
 ![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot1.png?raw=true)  
 ![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot2.png?raw=true)  
 
@@ -17,4 +26,3 @@
 [go语言版本](https://github.com/yongplus/tinypng/blob/master/doc/Golang)  
 [软件安装程序](http://0f3.com/tinypng/installer.exe)
 
-总得来说，日常开发小工具Go Qt可以快速入门(看对象名就基本可以猜到含义)，开发效率高、容错率高，是个不错选择。
