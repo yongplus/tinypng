@@ -150,11 +150,15 @@ void MainWindow::onClickStartBtn() {
 		this->console->error("没有可压缩的文件");
 		return;
 	}
-
+	this->startbtn->setDisabled(true);
 	//int count = this->table->model()->rowCount();
 	//this->table->model()->removeRows(0, count);
+	if (dispatcher->thread->isRunning()) {
+		return;
+	}
 	dispatcher->thread->start();
 	this->startbtn->hide();
+	this->pausebtn->setDisabled(false);
 	this->pausebtn->show();
 }
 
@@ -165,11 +169,14 @@ void MainWindow::onClickPauseBtn() {
 		dispatcher->thread->wait();
 		qDebug() << "退出";
 	}
+	this->pausebtn->setDisabled(true);
+	emit this->console->infoSignal("暂停压缩");
 	this->showStartBtn();
 }
 
 void MainWindow::showStartBtn() {
 
+	this->startbtn->setEnabled(true);
 	this->startbtn->show();
 	this->pausebtn->hide();
 }

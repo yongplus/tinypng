@@ -12,7 +12,7 @@ color:#FFFFFF; \
 	font-size:15px;\
 	font-family:\"verdana,Arial,Helvetica,sans-serif\", \
 }");
-	append("The image compression software is available for png/jpg/jpeg that is developed basing on the apis offering by tinypng.png.");
+	append("The image compression software is available for png/jpg/jpeg that is developed based on the apis offering by tinypng.png.");
 	append("Usage:");
 	append("  To compress your images, Click the button to choose or drag directly the object — some files or a folder — into the area of table widget.");
 	append("Developer: yongplus@foxmail.com ");
