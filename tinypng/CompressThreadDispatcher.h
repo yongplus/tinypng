@@ -44,6 +44,8 @@ private:
 	int getUnhandleNum();
 
 
+signals:
+	void started();
 
 public slots:
 	void run();

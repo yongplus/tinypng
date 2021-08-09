@@ -11,7 +11,11 @@
 #include <QNetworkProxy>
 
 CompressThread::CompressThread(QThread* td, const configItem& cfg, QString ort)
-	: QObject(NULL)
+	: QObject(NULL),
+	row(0),
+	root(""),
+	path(""),
+	state(0)
 {
 	thread = td;
 	config = cfg;

@@ -7,7 +7,7 @@ CompressThreadDispatcher::CompressThreadDispatcher(QThread* td, Console* c, MyTa
 	console = c;
 	tableview = t;
 	model = (TableModel*)t->selectionModel()->model();
-	loop = NULL;
+	loop = nullptr;
 	finishNum = 0;
 	offsetRow = 0;
 	runThreadNum = 0;
@@ -59,15 +59,20 @@ void CompressThreadDispatcher::run() {
 		workers << worker;
 	}
 
-
-	if (loop == NULL) {
+	emit started();
+	if (loop == nullptr) {
 		loop = new QEventLoop();
 	}
 	loop->exec();
+
 }
 
 void CompressThreadDispatcher::nextTask(CompressThread* worker) {
 
+	if (this->loop != nullptr && !this->loop->isRunning()) {
+		qDebug() << "-------------------------->the progress was paused~！";
+		return;
+	}
 	qDebug() << "nextTask" << offsetRow << model->rowCount() << runThreadNum;
 	if (offsetRow >= model->rowCount()) {
 		runThreadNum--;
@@ -156,6 +161,8 @@ void CompressThreadDispatcher::quit() {
 			this->tableview->update(this->model->index(i, 3));
 		}
 	}
+	loop->deleteLater();
+	loop = nullptr;
 	qDebug() << "exit2";
 
 	workers.clear();

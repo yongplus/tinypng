@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget* parent) :
 	QThread* dispatcherThread = new QThread();
 
 	dispatcher = new CompressThreadDispatcher(dispatcherThread, this->console, this->table);
+	connect(dispatcher, SIGNAL(started()), this, SLOT(showPauseBtn()));
 	connect(dispatcherThread, SIGNAL(started()), dispatcher, SLOT(run()));
 	connect(dispatcherThread, SIGNAL(finished()), dispatcher, SLOT(finished()));
 	connect(dispatcherThread, SIGNAL(finished()), this, SLOT(showStartBtn()));
@@ -157,9 +158,6 @@ void MainWindow::onClickStartBtn() {
 		return;
 	}
 	dispatcher->thread->start();
-	this->startbtn->hide();
-	this->pausebtn->setDisabled(false);
-	this->pausebtn->show();
 }
 
 void MainWindow::onClickPauseBtn() {
@@ -169,9 +167,7 @@ void MainWindow::onClickPauseBtn() {
 		dispatcher->thread->wait();
 		qDebug() << "退出";
 	}
-	this->pausebtn->setDisabled(true);
 	emit this->console->infoSignal("暂停压缩");
-	this->showStartBtn();
 }
 
 void MainWindow::showStartBtn() {
@@ -179,6 +175,14 @@ void MainWindow::showStartBtn() {
 	this->startbtn->setEnabled(true);
 	this->startbtn->show();
 	this->pausebtn->hide();
+}
+
+void MainWindow::showPauseBtn() {
+
+	this->startbtn->hide();
+	this->pausebtn->setEnabled(true);
+	this->pausebtn->show();
+
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {

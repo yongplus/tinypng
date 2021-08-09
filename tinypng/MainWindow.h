@@ -40,7 +40,6 @@ private:
 
 	void _buildTopBtns();
 	void _buildBody();
-	QStandardItemModel* newModel();
 	virtual void resizeEvent(QResizeEvent* event) override;
 public slots:
 	void onClickEditBtn();
@@ -49,4 +48,5 @@ public slots:
 	void onOpenSettingWindow();
 	void scanDirStateChange();
 	void showStartBtn();
+	void showPauseBtn();
 };
