@@ -7,7 +7,7 @@
 ### Usage:
  There are two ways to add the files you wanna compress:  
  1.Clicking the button on the top-left choose one or more files or a folder.   
- 2.Recommended way,For more convenient and efficient, The software support the object can be dragged directy the object move into the area of table in the window.   
+ 2.Recommended way,For more convenient and efficient, The software support the object can be dragged directy into the area of table in the window.   
  3.You can push the button by a shortcut key releated to the button, For example :press Ctrl+O to add object, Ctrl+S to start task.   
  4.Double-Clicking the any row in the table, the row releated to the image will preview in system image previewer.  
  5.Right-Clicking on the any row or selecting row and pressing key Del delete the row.  
