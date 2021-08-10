@@ -11,9 +11,7 @@
  3.You can push the button by a shortcut key releated to the button, For example :press Ctrl+O to add object, Ctrl+S to start task.   
  4.Double-Clicking the any row in the table, the row releated to the image will preview in system image previewer.  
  5.Either right-Clicking on the any rows or selecting rows and pressing key Del delete the rows.  
- 
- 
- 任何行右击或者
+
  Remark: If the object you gave is a folder,the sofeware will list automatically all the image files in that folder.
 
 
