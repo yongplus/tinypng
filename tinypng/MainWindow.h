@@ -41,6 +41,10 @@ private:
 	void _buildTopBtns();
 	void _buildBody();
 	virtual void resizeEvent(QResizeEvent* event) override;
+
+protected:
+	virtual void closeEvent(QCloseEvent* event) override;
+
 public slots:
 	void onClickEditBtn();
 	void onClickPauseBtn();
@@ -49,4 +53,5 @@ public slots:
 	void scanDirStateChange();
 	void showStartBtn();
 	void showPauseBtn();
+
 };

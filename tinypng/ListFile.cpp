@@ -12,27 +12,25 @@ ListFile::ListFile(QObject* parent) :
 	suffiexs << "*.jpg";
 	suffiexs << "*.png";
 	suffiexs << "*.jpeg";
+	stopped = false;
 }
 
 void ListFile::start(const QStringList& files, int ms) {
 	if (files.count() == 0) {
 		return;
 	}
-	//QThread::msleep(50);
-	QFileInfo fileinfo(files[0]);
-	if (fileinfo.isFile()) {
-		qDebug() << "the src are files~!";
-		this->batch(files);
-		return;
-	}
-	this->path = files[0];
+	this->stop();
 	this->stopped = false;
+	this->files = files;
 	this->minsize = ms;
 	QThread::start();
 }
 
 void ListFile::stop() {
-	this->stopped = true;
+	if (this->isRunning()) {
+		this->stopped = true;
+		this->wait();
+	}
 }
 
 void ListFile::setModel(QStandardItemModel* m) {
@@ -50,27 +48,30 @@ bool ListFile::isCompressible(const QString& name) {
 }
 
 void ListFile::run() {
-
-
 	model->removeAll();
+	QFileInfo fileinfo(files[0]);
+	if (fileinfo.isFile()) {
+		qDebug() << "the src are files~!";
+		this->batch(files);
+		return;
+	}
+	QString path = files[0];
 
 	QDirIterator it(path, suffiexs, QDir::Files, QDirIterator::Subdirectories);
 	QList<TableModelRow> list;
 	while (it.hasNext()) {
 		if (this->stopped) {
+			this->exit();
 			break;
 		}
 		QString filepath = it.next();
 
-		filepath = filepath.right(filepath.length() - this->path.length());
+		filepath = filepath.right(filepath.length() - path.length());
 		qDebug() << filepath;
 		if (it.fileInfo().size() < this->minsize) {
 			continue;
 		}
 		this->add(path, filepath, it.fileInfo().size());
-
-
-
 	}
 }
 
@@ -89,9 +90,12 @@ void ListFile::batch(const QStringList& files) {
 	if (files.count() == 0) {
 		return;
 	}
-	model->removeAll();
 
 	for (int i = 0; i < files.count(); i++) {
+		if (this->stopped) {
+			this->exit();
+			break;
+		}
 		QFileInfo fileinfo(files[i]);
 		if (!fileinfo.exists()) {
 			return;
@@ -100,22 +104,6 @@ void ListFile::batch(const QStringList& files) {
 	}
 }
 
-QString ListFile::size_human(float num)
-{
-
-	QStringList list;
-	list << "KB" << "MB" << "GB" << "TB";
-
-	QStringListIterator i(list);
-	QString unit("bytes");
-
-	while (num >= 1024.0 && i.hasNext())
-	{
-		unit = i.next();
-		num /= 1024.0;
-	}
-	return QString().setNum(num, 'f', 2) + " " + unit;
-}
 
 
 ListFile::~ListFile()

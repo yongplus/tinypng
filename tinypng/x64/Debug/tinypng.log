@@ -1,7 +1,3 @@
-﻿  moc CompressThreadDispatcher.h
-  CompressThreadDispatcher.cpp
-  main.cpp
-  MainWindow.cpp
-  moc_CompressThreadDispatcher.cpp
-  moc_MainWindow.cpp
+﻿  MainWindow.cpp
+  MyTableView.cpp
   tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Debug\tinypng.exe

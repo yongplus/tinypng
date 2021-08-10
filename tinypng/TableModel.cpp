@@ -6,7 +6,7 @@
 TableModel::TableModel(QObject* parent)
 	: QAbstractTableModel(parent)
 {
-
+	connect(this, SIGNAL(addRowSignal(TableModelRow)), this, SLOT(addRowx(TableModelRow)));
 }
 
 int TableModel::rowCount(const QModelIndex& parent) const {
@@ -115,7 +115,7 @@ void TableModel::removeAll() {
 	if (this->_data.length() == 0) {
 		return;
 	}
-	this->beginRemoveRows(QModelIndex(), 0, this->_data.length() - 1);
+	this->beginRemoveRows(QModelIndex(), 0, this->_data.count() - 1);
 	this->_data.clear();
 	this->endRemoveRows();
 }

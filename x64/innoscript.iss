@@ -43,9 +43,6 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#MyAppName}}
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
 if CurUninstallStep = usUninstall then
-  RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'Software\lane')
+        RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'Software\lane')
 end;
-
-
-
 

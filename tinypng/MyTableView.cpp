@@ -88,7 +88,7 @@ void MyTableView::readDir(const QStringList& files) {
 	if (files.count() == 0) {
 		return;
 	}
-	listFileThread->stop();
+
 	int minsize = Config(this).get().minsize;
 	listFileThread->start(files, minsize);
 }
@@ -171,6 +171,8 @@ void MyTableView::clickDelete() {
 	}
 
 }
+
+
 
 MyTableView::~MyTableView()
 {

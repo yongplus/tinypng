@@ -2,6 +2,7 @@
 
 #include <QThread>
 #include <QStandardItemModel>
+#include <QEventLoop>
 #include "TableModel.h"
 
 class ListFile : public QThread
@@ -11,7 +12,7 @@ class ListFile : public QThread
 public:
 
 	TableModel* model;
-	QString path;
+
 	int minsize;
 	explicit  ListFile(QObject* parent);
 	~ListFile();
@@ -25,8 +26,8 @@ public:
 protected:
 	void run();
 private:
-	bool stopped = false;
-	QString size_human(float);
+	QStringList files;
+	bool stopped;
 	QStringList suffiexs;
 
 };

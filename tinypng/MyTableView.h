@@ -23,6 +23,7 @@ public:
 	void readDir(const QStringList&);
 	void keyPressEvent(QKeyEvent*);
 
+
 private:
 	MyOverlay* overlay;
 	bool checkMimeIsDir(const QMimeData* minedata);

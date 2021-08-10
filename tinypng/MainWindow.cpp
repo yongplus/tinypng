@@ -110,6 +110,12 @@ void MainWindow::_buildBody() {
 }
 
 
+void MainWindow::closeEvent(QCloseEvent* event) {
+	this->table->listFileThread->stop();
+	this->onClickPauseBtn();
+	event->accept();
+}
+
 void MainWindow::onClickEditBtn() {
 
 	QPushButton* btn = (QPushButton*)sender();
@@ -211,4 +217,5 @@ void MainWindow::scanDirStateChange() {
 }
 
 MainWindow::~MainWindow() {
+
 }
