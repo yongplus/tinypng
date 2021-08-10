@@ -1,10 +1,4 @@
-﻿  moc MainWindow.h
-  moc CompressThreadDispatcher.h
-  CompressThread.cpp
-  CompressThreadDispatcher.cpp
-  MainWindow.cpp
-  main.cpp
-  moc_CompressThreadDispatcher.cpp
-  moc_MainWindow.cpp
+﻿  CompressThreadDispatcher.cpp
+  TableModel.cpp
   tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Release\tinypng.exe
   ---------------------------

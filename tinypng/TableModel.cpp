@@ -37,7 +37,7 @@ QVariant TableModel::data(const QModelIndex& index, int role = Qt::DisplayRole) 
 		return QVariant(item.path);
 	}
 	else if (label == "大小") {
-		QString size = QLocale().formattedDataSize(item.size);
+		QString size = QLocale().formattedDataSize(item.size, 2, QLocale::DataSizeTraditionalFormat);
 		return QVariant(size);
 	}
 	else if (label == "状态") {
