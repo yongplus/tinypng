@@ -1,8 +1,5 @@
 # 图片压缩软件
-
-日常开发经常会用到[tinypng.org](https://tinypng.org/)图片批量压缩，tinypng平均压缩率能达到60%，肉眼能观察到的画质损失微乎其微，对页面加载提速及体验、节省用户流量、缩小程序包有很大帮助。
-
-项目图片过多时，通过官方网站压缩效率低、繁琐，于是最初用go基于tinypng的API写了个CLI程序，后嫌麻烦，用Golang Qt写了个GUI程序，因Qt主要是C++写的，Go Qt无论是调试还是编译都极其慢和不方便，凭借对Qt的热爱和本着学习心态决定用C++把Go写的这套重写一遍。
+基于QT开发的tinypng压缩软件，window可安装直接运行，无需依然任何第三方库。
 
 ### Usage:
  There are two ways to add the files you wanna compress:  
