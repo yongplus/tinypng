@@ -76,15 +76,24 @@ void CompressThread::run() {
 		state = 0;
 
 
-		QUrl url("https://api.tinify.com/shrink");
+		QString ip;
+		QNetworkRequest req;
+		if (config.tinyReqMode == TinyReqMode::Web) {
+			QUrl url("https://tinify.com/web/shrink");
+			req = QNetworkRequest(url);
+			req.setHeader(QNetworkRequest::UserAgentHeader, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36");
+			req.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
+			ip = this->generateIp();
+			req.setRawHeader("x-forwarded-for", ip.toUtf8());
+		}
+		else {
+			QUrl url("https://api.tinify.com/shrink");
+			req = QNetworkRequest(url);
+			req.setRawHeader("Authorization", "Basic " + QString("%1:%2").arg(config.mail, config.key).toLocal8Bit().toBase64());
+		}
 
-
-		QNetworkRequest req(url);
-		req.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
-
-		req.setRawHeader("Authorization", "Basic " + QString("%1:%2").arg(config.mail, config.key).toLocal8Bit().toBase64());
 		QFile file(this->root + this->path);
-		if (!file.open(QIODevice::ReadWrite)) {
+		if (!file.open(QIODevice::ReadOnly)) {
 			this->emitError("打开文件出错");
 			continue;
 		}
@@ -100,7 +109,7 @@ void CompressThread::run() {
 
 		connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 		connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-		timer.start(15000);
+		timer.start(20000);
 		loop.exec();
 
 		if (timer.isActive()) {
@@ -119,21 +128,25 @@ void CompressThread::run() {
 				// 根据状态码做进一步数据处理
 				QByteArray bytes = reply->readAll();
 				qDebug() << bytes << nStatusCode;
-				this->download(bytes);
+
+				this->download(bytes, ip);
+
 			}
-			reply->close();
 		}
 		else {
 			disconnect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
 			reply->abort();
 			this->emitError(QString("请求压缩接口超时"));
 		}
+		reply->close();
+		delete reply;
+		//reply->deleteLater();
 	}
 
 
 }
 
-void CompressThread::download(const QByteArray& bytes) {
+void CompressThread::download(const QByteArray& bytes, const QString& ip) {
 
 	QJsonDocument doc = QJsonDocument::fromJson(bytes);
 	QJsonObject jsonobj = doc.object();
@@ -152,6 +165,9 @@ void CompressThread::download(const QByteArray& bytes) {
 
 
 	QNetworkRequest req(url);
+	if (!ip.isEmpty()) {
+		req.setRawHeader("x-forwarded-for", ip.toUtf8());
+	}
 	QNetworkReply* reply = mgr->get(req);
 
 	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
@@ -161,15 +177,15 @@ void CompressThread::download(const QByteArray& bytes) {
 	loop.exec();
 
 
-
 	if (timer.isActive()) {
 		timer.stop();
 		int code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
+
 		if (code == 200) {
+
 			QByteArray binary = reply->readAll();
 			QString outputPath;
-
 			outputPath = this->outputRoot + this->path;
 
 			QDir dir = QFileInfo(outputPath).absoluteDir();
@@ -179,34 +195,28 @@ void CompressThread::download(const QByteArray& bytes) {
 			}
 			QFile file(outputPath);
 
-			reply->deleteLater();
-
-			if (file.open(QIODevice::WriteOnly)) {
+			if (file.open(QIODevice::WriteOnly | QFile::Truncate)) {
 				qDebug() << "wrote:" << file.write(binary);
 				file.close();
+
+				CompressThreadResult result;
+				result.errcode = 0;
+				result.size = binary.length();
+				result.path = outputPath;
+				result.row = row;
+				QVariant variant;
+				variant.setValue(result);
+				emit finished(variant);
 			}
 			else {
-
 				this->emitError(QString("创建文件失败:" + file.errorString()));
-				return;
 			}
-
-			CompressThreadResult result;
-			result.errcode = 0;
-			result.size = binary.length();
-			result.path = outputPath;
-			result.row = row;
-			QVariant variant;
-			variant.setValue(result);
-			emit finished(variant);
-
 		}
 		else {
+
 			QByteArray binary = reply->readAll();
 			this->emitError(QString("下载图片返回CODE：%1,Body:%2").arg(code).arg(QString(binary)));
 		}
-		reply->close();
-
 	}
 	else {
 		// timeout
@@ -214,6 +224,8 @@ void CompressThread::download(const QByteArray& bytes) {
 		reply->abort();
 		this->emitError("下载压缩图片超时");
 	}
+	reply->close();
+	delete reply;
 }
 
 void CompressThread::setAuthentication(QNetworkReply* reply, QAuthenticator* authenticator) {
@@ -233,6 +245,17 @@ void CompressThread::emitError(const QString& msg, const int& errcode) {
 	}
 }
 
+
+QString CompressThread::generateIp() {
+	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+	QStringList  seg = QStringList();
+	for (int i = 0; i < 4; i++)
+	{
+		int num = 1 + qrand() % 255;
+		seg.append(QString::number(num));
+	}
+	return seg.join(".");
+}
 
 CompressThread::~CompressThread()
 {

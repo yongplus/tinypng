@@ -112,7 +112,7 @@ void MainWindow::_buildBody() {
 
 void MainWindow::closeEvent(QCloseEvent* event) {
 	this->table->listFileThread->stop();
-	this->onClickPauseBtn();
+	//this->onClickPauseBtn();
 	event->accept();
 }
 

@@ -9,7 +9,7 @@ SettingWindow::SettingWindow(QWidget* parent)
 	ui.setupUi(this);
 	this->setWindowFlags(Qt::Dialog);
 	this->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-	this->setFixedSize(this->width(), this->height());
+	this->setFixedSize(this->width(), this->height() - ui.widget->height());
 	connect(ui.savebtn, SIGNAL(clicked()), this, SLOT(onClickSaveBtn()));
 	connect(ui.askbtn, SIGNAL(clicked()), this, SLOT(onShowSizeExplain()));
 	ui.sizeInput->setValidator(new QIntValidator(0, 999999999, this));
@@ -19,6 +19,14 @@ SettingWindow::SettingWindow(QWidget* parent)
 
 void SettingWindow::setValues() {
 	configItem item = Config(this).get();
+	if (item.tinyReqMode == TinyReqMode::Web) {
+		ui.radioButtonWeb->setChecked(true);
+		ui.widget->hide();
+	}
+	else {
+		ui.radioButtonKey->setChecked(true);
+		ui.label_8->hide();
+	}
 	ui.mailInput->setText(item.mail);
 	ui.keyInput->setText(item.key);
 	ui.proxyInput->setText(item.proxy);
@@ -51,6 +59,7 @@ void SettingWindow::onClickSaveBtn() {
 	item.proxy = ui.proxyInput->text();
 	item.minsize = ui.sizeInput->text().toInt() * 1024;
 	item.outputMode = ui.newdirCheckBox->isChecked() ? OutputMode::NewDir : OutputMode::Replace;
+	item.tinyReqMode = ui.radioButtonWeb->isChecked() ? TinyReqMode::Web : TinyReqMode::Key;
 	Config(this).set(item);
 	QMessageBox::information(this, "提  示", "保存成功", QMessageBox::Ok);
 	this->close();

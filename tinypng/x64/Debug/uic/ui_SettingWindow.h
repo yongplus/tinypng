@@ -20,6 +20,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -30,17 +31,26 @@ class Ui_SettingWindow
 public:
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_2;
-    QLabel *label;
-    QLineEdit *mailInput;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *label_7;
+    QHBoxLayout *horizontalLayout_8;
+    QRadioButton *radioButtonWeb;
+    QRadioButton *radioButtonKey;
+    QLabel *label_8;
+    QWidget *widget;
+    QWidget *widget1;
+    QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_2;
     QLineEdit *keyInput;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label;
+    QLineEdit *mailInput;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_3;
     QLineEdit *proxyInput;
     QGroupBox *groupBox;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_6;
@@ -54,13 +64,14 @@ public:
     QPushButton *savebtn;
     QLabel *label_5;
     QButtonGroup *buttonGroup;
+    QButtonGroup *buttonGroup_2;
 
     void setupUi(QWidget *SettingWindow)
     {
         if (SettingWindow->objectName().isEmpty())
             SettingWindow->setObjectName(QString::fromUtf8("SettingWindow"));
         SettingWindow->setWindowModality(Qt::ApplicationModal);
-        SettingWindow->resize(414, 363);
+        SettingWindow->resize(414, 468);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -74,41 +85,84 @@ public:
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(10);
+        verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
-        verticalLayout->setContentsMargins(10, 30, 10, 10);
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(-1, -1, 10, -1);
-        label = new QLabel(SettingWindow);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setMinimumSize(QSize(90, 0));
+        verticalLayout->setContentsMargins(10, 20, 10, 10);
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        horizontalLayout_7->setContentsMargins(-1, 0, -1, 10);
+        label_7 = new QLabel(SettingWindow);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+        sizePolicy.setHeightForWidth(label_7->sizePolicy().hasHeightForWidth());
+        label_7->setSizePolicy(sizePolicy);
+        label_7->setMinimumSize(QSize(90, 0));
         QFont font1;
         font1.setFamily(QString::fromUtf8("\345\256\213\344\275\223"));
         font1.setPointSize(9);
-        label->setFont(font1);
-        label->setLineWidth(1);
-        label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        label_7->setFont(font1);
+        label_7->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        horizontalLayout_2->addWidget(label);
+        horizontalLayout_7->addWidget(label_7);
 
-        mailInput = new QLineEdit(SettingWindow);
-        mailInput->setObjectName(QString::fromUtf8("mailInput"));
-        mailInput->setMinimumSize(QSize(0, 30));
-        mailInput->setFont(font1);
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        radioButtonWeb = new QRadioButton(SettingWindow);
+        buttonGroup_2 = new QButtonGroup(SettingWindow);
+        buttonGroup_2->setObjectName(QString::fromUtf8("buttonGroup_2"));
+        buttonGroup_2->addButton(radioButtonWeb);
+        radioButtonWeb->setObjectName(QString::fromUtf8("radioButtonWeb"));
 
-        horizontalLayout_2->addWidget(mailInput);
+        horizontalLayout_8->addWidget(radioButtonWeb);
+
+        radioButtonKey = new QRadioButton(SettingWindow);
+        buttonGroup_2->addButton(radioButtonKey);
+        radioButtonKey->setObjectName(QString::fromUtf8("radioButtonKey"));
+
+        horizontalLayout_8->addWidget(radioButtonKey);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        horizontalLayout_7->addLayout(horizontalLayout_8);
 
+
+        verticalLayout->addLayout(horizontalLayout_7);
+
+        label_8 = new QLabel(SettingWindow);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(label_8->sizePolicy().hasHeightForWidth());
+        label_8->setSizePolicy(sizePolicy1);
+        label_8->setMinimumSize(QSize(0, 80));
+        label_8->setAlignment(Qt::AlignCenter);
+        label_8->setWordWrap(true);
+
+        verticalLayout->addWidget(label_8);
+
+        widget = new QWidget(SettingWindow);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
+        widget->setSizePolicy(sizePolicy2);
+        widget->setMinimumSize(QSize(0, 80));
+        widget1 = new QWidget(widget);
+        widget1->setObjectName(QString::fromUtf8("widget1"));
+        widget1->setGeometry(QRect(0, -1, 371, 81));
+        verticalLayout_3 = new QVBoxLayout(widget1);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        horizontalLayout_3->setContentsMargins(-1, -1, 10, -1);
-        label_2 = new QLabel(SettingWindow);
+        horizontalLayout_3->setContentsMargins(-1, -1, 0, -1);
+        label_2 = new QLabel(widget1);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setMinimumSize(QSize(90, 0));
         label_2->setFont(font1);
@@ -116,7 +170,7 @@ public:
 
         horizontalLayout_3->addWidget(label_2);
 
-        keyInput = new QLineEdit(SettingWindow);
+        keyInput = new QLineEdit(widget1);
         keyInput->setObjectName(QString::fromUtf8("keyInput"));
         keyInput->setMinimumSize(QSize(0, 30));
         keyInput->setFont(font1);
@@ -124,12 +178,38 @@ public:
         horizontalLayout_3->addWidget(keyInput);
 
 
-        verticalLayout->addLayout(horizontalLayout_3);
+        verticalLayout_3->addLayout(horizontalLayout_3);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(-1, -1, 0, -1);
+        label = new QLabel(widget1);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setMinimumSize(QSize(90, 0));
+        label->setFont(font1);
+        label->setLineWidth(1);
+        label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_2->addWidget(label);
+
+        mailInput = new QLineEdit(widget1);
+        mailInput->setObjectName(QString::fromUtf8("mailInput"));
+        mailInput->setMinimumSize(QSize(0, 30));
+        mailInput->setFont(font1);
+
+        horizontalLayout_2->addWidget(mailInput);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_2);
+
+
+        verticalLayout->addWidget(widget);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        horizontalLayout_4->setContentsMargins(-1, -1, 10, -1);
+        horizontalLayout_4->setContentsMargins(-1, -1, 0, 10);
         label_3 = new QLabel(SettingWindow);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setMinimumSize(QSize(90, 0));
@@ -151,16 +231,14 @@ public:
 
         groupBox = new QGroupBox(SettingWindow);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
-        groupBox->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy2);
+        groupBox->setMinimumSize(QSize(0, 100));
         groupBox->setMaximumSize(QSize(16777215, 300));
-        widget = new QWidget(groupBox);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 20, 371, 78));
-        verticalLayout_2 = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(groupBox);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 20, 371, 78));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -169,7 +247,7 @@ public:
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         horizontalLayout_6->setContentsMargins(-1, -1, 10, -1);
-        label_6 = new QLabel(widget);
+        label_6 = new QLabel(layoutWidget);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         label_6->setMinimumSize(QSize(90, 0));
         QFont font2;
@@ -179,14 +257,14 @@ public:
 
         horizontalLayout_6->addWidget(label_6);
 
-        sizeInput = new QLineEdit(widget);
+        sizeInput = new QLineEdit(layoutWidget);
         sizeInput->setObjectName(QString::fromUtf8("sizeInput"));
         sizeInput->setMinimumSize(QSize(0, 30));
         sizeInput->setFont(font2);
 
         horizontalLayout_6->addWidget(sizeInput);
 
-        askbtn = new QPushButton(widget);
+        askbtn = new QPushButton(layoutWidget);
         askbtn->setObjectName(QString::fromUtf8("askbtn"));
         sizePolicy.setHeightForWidth(askbtn->sizePolicy().hasHeightForWidth());
         askbtn->setSizePolicy(sizePolicy);
@@ -204,7 +282,7 @@ public:
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(-1, 10, -1, 10);
-        label_4 = new QLabel(widget);
+        label_4 = new QLabel(layoutWidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         sizePolicy.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
         label_4->setSizePolicy(sizePolicy);
@@ -217,7 +295,7 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        newdirCheckBox = new QCheckBox(widget);
+        newdirCheckBox = new QCheckBox(layoutWidget);
         buttonGroup = new QButtonGroup(SettingWindow);
         buttonGroup->setObjectName(QString::fromUtf8("buttonGroup"));
         buttonGroup->addButton(newdirCheckBox);
@@ -226,7 +304,7 @@ public:
 
         horizontalLayout->addWidget(newdirCheckBox);
 
-        replaceCheckBox = new QCheckBox(widget);
+        replaceCheckBox = new QCheckBox(layoutWidget);
         buttonGroup->addButton(replaceCheckBox);
         replaceCheckBox->setObjectName(QString::fromUtf8("replaceCheckBox"));
         replaceCheckBox->setFont(font1);
@@ -270,6 +348,8 @@ public:
 
 
         retranslateUi(SettingWindow);
+        QObject::connect(radioButtonWeb, SIGNAL(toggled(bool)), label_8, SLOT(setVisible(bool)));
+        QObject::connect(radioButtonKey, SIGNAL(toggled(bool)), widget, SLOT(setVisible(bool)));
 
         QMetaObject::connectSlotsByName(SettingWindow);
     } // setupUi
@@ -277,8 +357,15 @@ public:
     void retranslateUi(QWidget *SettingWindow)
     {
         SettingWindow->setWindowTitle(QCoreApplication::translate("SettingWindow", "\350\256\276\347\275\256", nullptr));
-        label->setText(QCoreApplication::translate("SettingWindow", "Mail:", nullptr));
+#if QT_CONFIG(tooltip)
+        label_7->setToolTip(QString());
+#endif // QT_CONFIG(tooltip)
+        label_7->setText(QCoreApplication::translate("SettingWindow", "\350\272\253\344\273\275\346\250\241\345\274\217:", nullptr));
+        radioButtonWeb->setText(QCoreApplication::translate("SettingWindow", "\345\205\215key", nullptr));
+        radioButtonKey->setText(QCoreApplication::translate("SettingWindow", "ApiKey", nullptr));
+        label_8->setText(QCoreApplication::translate("SettingWindow", "<html><head/><body><p>\345\205\215Key\346\250\241\345\274\217\357\274\214\350\275\257\344\273\266\346\250\241\346\213\237\347\224\250\346\210\267\346\223\215\344\275\234Tinypng\347\275\221\347\253\231\357\274\214\346\227\240\351\234\200\347\224\263\350\257\267Api Key</p></body></html>", nullptr));
         label_2->setText(QCoreApplication::translate("SettingWindow", "Key:", nullptr));
+        label->setText(QCoreApplication::translate("SettingWindow", "Mail:", nullptr));
         label_3->setText(QCoreApplication::translate("SettingWindow", "\344\273\243\347\220\206:", nullptr));
         proxyInput->setPlaceholderText(QCoreApplication::translate("SettingWindow", "http://ip:port", nullptr));
         groupBox->setTitle(QCoreApplication::translate("SettingWindow", "\344\273\245\344\270\213\351\205\215\347\275\256\344\273\205\345\257\271\347\233\256\345\275\225\346\234\211\346\225\210", nullptr));

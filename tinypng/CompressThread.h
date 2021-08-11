@@ -41,11 +41,14 @@ public:
 	void quit();
 
 private:
-	void download(const QByteArray&);
+	void download(const QByteArray&, const QString&);
 	void emitError(const QString& msg, const int& errcode = 1);
+	QString generateIp();
+
 public slots:
 	void run();
 	void setAuthentication(QNetworkReply*, QAuthenticator*);
+
 
 signals:
 

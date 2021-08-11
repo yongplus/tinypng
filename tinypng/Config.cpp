@@ -23,6 +23,7 @@ void Config::set(configItem item) {
 	qset->setValue("proxy", item.proxy);
 	qset->setValue("outputMode", int(item.outputMode));
 	qset->setValue("minsize", item.minsize);
+	qset->setValue("tinyReqMode", int(item.tinyReqMode));
 	qset->endGroup();
 }
 
@@ -38,6 +39,12 @@ configItem Config::get() {
 	}
 	else {
 		item.outputMode = OutputMode::Replace;
+	}
+	if (qset->value("tinyReqMode").toInt() == 1) {
+		item.tinyReqMode = TinyReqMode::Key;
+	}
+	else {
+		item.tinyReqMode = TinyReqMode::Web;
 	}
 	qset->endGroup();
 	return item;

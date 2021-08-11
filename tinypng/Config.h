@@ -8,11 +8,20 @@ enum OutputMode {
 	Replace
 };
 
+enum TinyReqMode {
+	Web,  //模拟用户操作web
+	Key   //使用api key 
+};
+
+
+
+
 struct configItem {
 	QString mail;
 	QString key;
 	QString proxy;
 	OutputMode outputMode;
+	TinyReqMode tinyReqMode;
 	int minsize;
 };
 
