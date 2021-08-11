@@ -5,10 +5,14 @@
 
 项目图片过多时，通过官方网站压缩效率低、繁琐，于是最初用go基于tinypng API写了个CLI程序，操作不是太方便，后用Golang Qt写了个GUI程序，因Qt主要是C++写的，Go Qt无论是调试还是编译都极其慢和不方便，凭借对Qt的热爱和本着学习心态决定用C++把Go写的这套重写一遍。
 
+### Screenshots： 
+![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot1.png?raw=true)  
+![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot2.png?raw=true)  
+
 ### 配置
 Tinypng Key是免费的，为了安装后可以直接用，软件源码中已有2个Key，安装后会随机配置一个作为使用。每个Key每月免费压缩为500次，若不够可以自己多申请几个（申请很简单，填写邮箱和昵称，便会收到邮件，根据邮件中的链接进入创建key即可）；   
 新增免key模式，现在可以无需申请key；   
-由于Tinypng服务器在国外，国内访问较慢，如果你有国外代理可配置为其加速（没代理？不要说你连Google都不用的？）。  
+由于Tinypng服务器在国外，国内访问较慢，如果你有国外代理可配置为其加速。  
 
 ### Usage:
  There are two ways to add the files:  
@@ -21,10 +25,8 @@ Tinypng Key是免费的，为了安装后可以直接用，软件源码中已有
  Remark: If the object you gave is a folder,the sofeware will list automatically all the image files in that folder.
 
 
-### Screenshots： 
-![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot1.png?raw=true)  
-![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot2.png?raw=true)  
 
+### Comparisons:
 以下是对电商项目的商品详情页图片压缩测试数据，无论是页面大小还是访问速度的提升都很显著  
 ![截图](http://0f3.com/tinypng/compared.png?v2)  
 
