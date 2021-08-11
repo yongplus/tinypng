@@ -51,15 +51,16 @@ void SettingWindow::onClickSaveBtn() {
 	configItem item;
 	item.mail = ui.mailinput->text();
 	item.key = ui.keyInput->text();
+	item.tinyReqMode = ui.radioButtonWeb->isChecked() ? TinyReqMode::Web : TinyReqMode::Key;
 
-	if (item.mail.length() == 0 || item.key.length() == 0) {
+	if ((item.mail.length() == 0 || item.key.length() == 0) && item.tinyReqMode == TinyReqMode::Key) {
 		QMessageBox::warning(this, "提  示", "Mail和Key不能为空", QMessageBox::Ok);
 		return;
 	}
 	item.proxy = ui.proxyInput->text();
 	item.minsize = ui.sizeInput->text().toInt() * 1024;
 	item.outputMode = ui.newdirCheckBox->isChecked() ? OutputMode::NewDir : OutputMode::Replace;
-	item.tinyReqMode = ui.radioButtonWeb->isChecked() ? TinyReqMode::Web : TinyReqMode::Key;
+
 	Config(this).set(item);
 	QMessageBox::information(this, "提  示", "保存成功", QMessageBox::Ok);
 	this->close();
