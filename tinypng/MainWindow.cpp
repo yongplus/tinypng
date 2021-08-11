@@ -127,6 +127,7 @@ void MainWindow::onClickEditBtn() {
 	dlg.setOptions(QFileDialog::DontUseNativeDialog | QFileDialog::ReadOnly);
 
 	dlg.setNameFilter("Image (*.jpg *.png *.jpeg)");
+	dlg.setLabelText(QFileDialog::Reject, "取 消");
 	dlg.setFileMode(QFileDialog::Directory);
 	dlg.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 	connect(&dlg, &QFileDialog::currentChanged, this, [&](const QString& str)

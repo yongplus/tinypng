@@ -8,5 +8,6 @@
         <file>res/icons/pause.png</file>
         <file>res/read.png</file>
         <file>logo.ico</file>
+        <file>res/qt_zh_CN.qm</file>
     </qresource>
 </RCC>
