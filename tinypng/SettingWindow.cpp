@@ -27,7 +27,7 @@ void SettingWindow::setValues() {
 		ui.radioButtonKey->setChecked(true);
 		ui.label_8->hide();
 	}
-	ui.mailInput->setText(item.mail);
+	ui.mailinput->setText(item.mail);
 	ui.keyInput->setText(item.key);
 	ui.proxyInput->setText(item.proxy);
 	ui.sizeInput->setText(QString("%1").arg(item.minsize / 1024));
@@ -49,7 +49,7 @@ void SettingWindow::keyPressEvent(QKeyEvent* event) {
 
 void SettingWindow::onClickSaveBtn() {
 	configItem item;
-	item.mail = ui.mailInput->text();
+	item.mail = ui.mailinput->text();
 	item.key = ui.keyInput->text();
 
 	if (item.mail.length() == 0 || item.key.length() == 0) {

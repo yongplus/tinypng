@@ -152,7 +152,7 @@
          <height>80</height>
         </size>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -185,7 +185,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Key:</string>
+              <string>Mail:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -193,7 +193,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="keyInput">
+            <widget class="QLineEdit" name="mailinput">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -233,7 +233,7 @@
               <number>1</number>
              </property>
              <property name="text">
-              <string>Mail:</string>
+              <string>Key:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -241,7 +241,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="mailInput">
+            <widget class="QLineEdit" name="keyInput">
              <property name="minimumSize">
               <size>
                <width>0</width>
