@@ -112,7 +112,7 @@ void MainWindow::_buildBody() {
 
 void MainWindow::closeEvent(QCloseEvent* event) {
 	this->table->listFileThread->stop();
-	//this->onClickPauseBtn();
+	this->onClickPauseBtn();
 	event->accept();
 }
 
@@ -203,7 +203,7 @@ void MainWindow::scanDirStateChange() {
 		if (dispatcher->thread->isRunning()) {
 			dispatcher->quit();
 			dispatcher->thread->quit();
-
+			dispatcher->thread->wait();
 		}
 
 		this->startbtn->setEnabled(false);

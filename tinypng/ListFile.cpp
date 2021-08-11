@@ -67,8 +67,8 @@ void ListFile::run() {
 		QString filepath = it.next();
 
 		filepath = filepath.right(filepath.length() - path.length());
-		qDebug() << filepath;
-		if (it.fileInfo().size() < this->minsize) {
+		int filesize = it.fileInfo().size();
+		if (filesize < this->minsize || filesize>(1024 * 1024 * 5)) {
 			continue;
 		}
 		this->add(path, filepath, it.fileInfo().size());

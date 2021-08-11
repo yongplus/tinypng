@@ -109,8 +109,10 @@ void CompressThread::run() {
 
 		connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 		connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-		timer.start(20000);
+		double timeout = 10 + double(binary.length()) * double(16) / double(1048576); //超时时间：起始时间10s + 文件大小 * (预设每byte耗时)
+		timer.start(timeout * 1000);
 		loop.exec();
+
 
 		if (timer.isActive()) {
 			timer.stop();
@@ -157,6 +159,8 @@ void CompressThread::download(const QByteArray& bytes, const QString& ip) {
 	}
 	qDebug() << mainMap["output"].toMap()["url"].toString();
 	QString url = mainMap["output"].toMap()["url"].toString();
+	int size = mainMap["output"].toMap()["size"].toInt();
+	float timeout = 8 + size * double(8) / double(1048576); //超时时间：起始时间7s + 文件大小 * (预设每byte耗时)
 
 	QTimer timer;
 	timer.setSingleShot(true);
@@ -173,7 +177,7 @@ void CompressThread::download(const QByteArray& bytes, const QString& ip) {
 	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 	connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
 
-	timer.start(15000);
+	timer.start(timeout * 1000);
 	loop.exec();
 
 
