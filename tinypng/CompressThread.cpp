@@ -9,6 +9,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QNetworkProxy>
+#include <QRandomGenerator>
 
 CompressThread::CompressThread(QThread* td, const configItem& cfg, QString ort)
 	: QObject(NULL),
@@ -255,7 +256,8 @@ QString CompressThread::generateIp() {
 	QStringList  seg = QStringList();
 	for (int i = 0; i < 4; i++)
 	{
-		int num = 1 + qrand() % 255;
+		//int num = 1 + qrand() % 255;
+		int num = QRandomGenerator::global()->bounded(1, 255);
 		seg.append(QString::number(num));
 	}
 	return seg.join(".");
