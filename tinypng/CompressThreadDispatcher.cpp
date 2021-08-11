@@ -42,7 +42,7 @@ void CompressThreadDispatcher::run() {
 	QString outputRoot = this->model->getRow(0).root;
 	if (config.outputMode == OutputMode::NewDir && this->model->getRow(0).root != "") {
 		outputRoot.append("_tiny");
-		this->console->tipSignal("输出目录:" + outputRoot);
+		this->console->tipSignal(QString("<a href=\"file:///%1\" style=\"color:#FFFFFF\">输出目录:%2</a>").arg(outputRoot).arg(outputRoot));
 	}
 	for (int i = 0; i < runThreadNum; i++) {
 

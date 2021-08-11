@@ -1,6 +1,8 @@
 ﻿#include "Console.h"
 #include <QScrollBar>
 #include <qDebug>
+#include <QDesktopServices>
+
 Console::Console(QWidget* parent)
 	: QTextBrowser(parent)
 {
@@ -16,11 +18,13 @@ color:#FFFFFF; \
 	append("Usage:");
 	append("  To compress your images, Click the button to choose or drag directly the object — some files or a folder — into the area of table widget.");
 	append("Developer: yongplus@foxmail.com ");
+	this->setOpenLinks(false);
 	this->atBottom = true;
 	connect(this, SIGNAL(textChanged()), this, SLOT(textChangedSlot()));
 	connect(this, SIGNAL(infoSignal(QString)), this, SLOT(info(QString)));
 	connect(this, SIGNAL(tipSignal(QString)), this, SLOT(tip(QString)));
 	connect(this, SIGNAL(errorSignal(QString)), this, SLOT(error(QString)));
+	connect(this, SIGNAL(anchorClicked(QUrl)), this, SLOT(clickLink(QUrl)));
 
 }
 void Console::textChangedSlot() {
@@ -56,6 +60,10 @@ void Console::error(QString text) {
 	//QTextBrowser::append(text);
 }
 
+void Console::clickLink(const QUrl& link) {
+	qDebug() << "点击链接" << link.toString();
+	QDesktopServices::openUrl(link);
+}
 Console::~Console()
 {
 }

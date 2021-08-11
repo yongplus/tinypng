@@ -18,6 +18,7 @@ public slots:
 	void error(QString);
 	void info(const QString& text);
 	void tip(const QString& text);
+	void clickLink(const QUrl&);
 signals:
 	void errorSignal(QString);
 	void tipSignal(QString);
