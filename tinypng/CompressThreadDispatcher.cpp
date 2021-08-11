@@ -120,7 +120,7 @@ void CompressThreadDispatcher::doneTask(QVariant variant) {
 		qDebug() << row.size << row.thin_size << rate;
 		QString size = QLocale().formattedDataSize(row.thin_size, 2, QLocale::DataSizeTraditionalFormat);
 		QString text = QString("%1/%2压缩成功:%3(%4),%5%").arg(finishNum).arg(totalRowNum).arg(row.path).arg(size).arg(rate);
-		this->console->info(text);
+		emit this->console->infoSignal(text);
 		this->model->setData(this->model->index(result.row, 3), QVariant(brush), 9);
 	}
 	else {

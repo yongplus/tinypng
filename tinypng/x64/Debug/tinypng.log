@@ -1,5 +1,2 @@
-﻿  CompressThread.cpp
-  SettingWindow.cpp
-  moc_MainWindow.cpp
-  moc_SettingWindow.cpp
+﻿  CompressThreadDispatcher.cpp
   tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Debug\tinypng.exe
