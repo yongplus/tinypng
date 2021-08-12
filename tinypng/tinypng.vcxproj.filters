@@ -34,7 +34,7 @@
     <ClCompile Include="MyTableView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ListFile.cpp">
+    <ClCompile Include="Scanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TableModel.cpp">
@@ -72,7 +72,7 @@
     <QtMoc Include="MyTableView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ListFile.h">
+    <QtMoc Include="Scanner.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="TableModel.h">

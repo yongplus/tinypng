@@ -2,7 +2,7 @@
 
 #include <QTableView>
 #include <QResizeEvent>
-#include "ListFile.h"
+#include "Scanner.h"
 #include "MyOverlay.h"
 
 class MyTableView : public QTableView
@@ -10,7 +10,7 @@ class MyTableView : public QTableView
 	Q_OBJECT
 
 public:
-	ListFile* listFileThread;
+	Scanner* scanner;
 	MyTableView(QWidget* parent = Q_NULLPTR);
 	~MyTableView();
 	void init();

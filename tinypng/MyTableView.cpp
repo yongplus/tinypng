@@ -31,13 +31,13 @@ color: black \
 	setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(customContextMenuResposne(const QPoint&)));
 	connect(this, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onDoubleClickRow(QModelIndex)));
-	listFileThread = new ListFile(this);
+	scanner = new Scanner(this);
 	overlay = new MyOverlay(this);
 }
 
 void MyTableView::setModel(QAbstractItemModel* m) {
 	QTableView::setModel(m);
-	this->listFileThread->setModel((QStandardItemModel*)m);
+	this->scanner->setModel((QStandardItemModel*)m);
 }
 
 
@@ -76,7 +76,7 @@ void MyTableView::dropEvent(QDropEvent* event) {
 	for (int i = 0; i < urls.count(); i++) {
 		QString path = urls.at(i).toLocalFile();
 		QFileInfo file(path);
-		if (file.isFile() && !this->listFileThread->isCompressible(path)) {
+		if (file.isFile() && !this->scanner->isCompressible(path)) {
 			continue;
 		}
 		files << path;
@@ -92,7 +92,7 @@ void MyTableView::readDir(const QStringList& files) {
 	}
 
 	int minsize = Config(this).get().minsize;
-	listFileThread->start(files, minsize);
+	scanner->start(files, minsize);
 }
 
 void MyTableView::keyPressEvent(QKeyEvent* event) {
@@ -133,11 +133,12 @@ bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {
 		if (QDir(path).exists()) {
 			dirNum += 1;
 		}
-		else if (this->listFileThread->isCompressible(path)) {
+		else if (this->scanner->isCompressible(path)) {
 			fileNum += 1;
 		}
 	}
-	if ((dirNum > 0 && fileNum > 0) || (fileNum + dirNum) == 0) {
+	//不能是多个文件夹 不能文件夹和文件混合  
+	if (dirNum > 1 || (dirNum > 0 && fileNum > 0) || (fileNum + dirNum) == 0) {
 		return false;
 	}
 	return true;

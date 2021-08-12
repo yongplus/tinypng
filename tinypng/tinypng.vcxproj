@@ -110,7 +110,7 @@
     <QtMoc Include="TableModel.h" />
     <QtMoc Include="MainWindow.h" />
     <QtMoc Include="MyTableView.h" />
-    <QtMoc Include="ListFile.h" />
+    <QtMoc Include="Scanner.h" />
     <QtMoc Include="MyOverlay.h" />
     <QtMoc Include="Console.h" />
     <QtMoc Include="CompressThread.h" />
@@ -123,7 +123,7 @@
     <ClCompile Include="CompressThreadDispatcher.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Console.cpp" />
-    <ClCompile Include="ListFile.cpp" />
+    <ClCompile Include="Scanner.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>

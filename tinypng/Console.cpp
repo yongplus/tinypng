@@ -77,9 +77,7 @@ void Console::clickLink(const QUrl& link) {
 	QDesktopServices::openUrl(link);
 }
 
-void Console::clear() {
-	QTextBrowser::clear();
-}
+
 Console::~Console()
 {
 }

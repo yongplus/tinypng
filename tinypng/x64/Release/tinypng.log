@@ -1,3 +1,16 @@
-﻿  Console.cpp
+﻿  moc MyTableView.h
+  moc Scanner.h
+  moc Console.h
+  CompressThreadDispatcher.cpp
+  Console.cpp
+  Scanner.cpp
+  main.cpp
+  MainWindow.cpp
+  MyTableView.cpp
+  moc_MainWindow.cpp
+  moc_CompressThreadDispatcher.cpp
+  moc_MyTableView.cpp
+  moc_Scanner.cpp
+  moc_Console.cpp
   tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Release\tinypng.exe
   ---------------------------

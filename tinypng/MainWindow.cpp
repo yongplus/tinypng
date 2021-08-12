@@ -43,8 +43,8 @@ MainWindow::MainWindow(QWidget* parent) :
 
 void MainWindow::show() {
 	QMainWindow::show();
-	connect(table->listFileThread, SIGNAL(started()), this, SLOT(scanDirStateChange()));
-	connect(table->listFileThread, SIGNAL(finished()), this, SLOT(scanDirStateChange()));
+	connect(table->scanner, SIGNAL(started()), this, SLOT(scanDirStateChange()));
+	connect(table->scanner, SIGNAL(finished()), this, SLOT(scanDirStateChange()));
 }
 
 void MainWindow::_buildTopBtns() {
@@ -111,7 +111,7 @@ void MainWindow::_buildBody() {
 
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-	this->table->listFileThread->stop();
+	this->table->scanner->stop();
 	this->onClickPauseBtn();
 	event->accept();
 }
@@ -199,7 +199,7 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
 
 void MainWindow::scanDirStateChange() {
 	bool state = true;
-	if (table->listFileThread->isRunning()) {
+	if (table->scanner->isRunning()) {
 
 		if (dispatcher->thread->isRunning()) {
 			dispatcher->quit();
