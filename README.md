@@ -32,6 +32,5 @@ Tinypng Key是免费的，为了安装后可以直接用，软件源码中已有
 
 
 
-[go语言版本](https://github.com/yongplus/tinypng/blob/master/doc/Golang)  
 [软件安装程序](http://0f3.com/tinypng/installer.exe)
 
