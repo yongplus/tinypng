@@ -26,6 +26,7 @@ color:#FFFFFF; \
 	connect(this, SIGNAL(errorSignal(QString)), this, SLOT(error(QString)));
 	connect(this, SIGNAL(anchorClicked(QUrl)), this, SLOT(clickLink(QUrl)));
 
+
 }
 void Console::textChangedSlot() {
 	if (atBottom) {
@@ -33,8 +34,8 @@ void Console::textChangedSlot() {
 	}
 
 }
-void Console::append(const QString& text, const QColor& color) {
-	setTextColor(color);
+void Console::append(const QString& text) {
+	//setTextColor(color);
 	atBottom = false;
 	if (verticalScrollBar()->maximum() - verticalScrollBar()->value() < 30) {
 		atBottom = true;
@@ -44,20 +45,18 @@ void Console::append(const QString& text, const QColor& color) {
 	QTextBrowser::append(text);
 
 
-
 }
 void Console::info(const QString& text) {
 
-	append(text, QColor(23, 168, 26));
+	append(QString("<span style=\"color:#17a81a\">%1</a>").arg(text));
 }
 
 void Console::tip(const QString& text) {
-	append(text, Qt::white);
+	append(QString("<span style=\"color:#ffffff\">%1</a>").arg(text));
 }
 
 void Console::error(QString text) {
-	append(text, Qt::red);
-	//QTextBrowser::append(text);
+	append(QString("<span style=\"color:#ff0000\">%1</a>").arg(text));
 }
 
 void Console::clickLink(const QUrl& link) {

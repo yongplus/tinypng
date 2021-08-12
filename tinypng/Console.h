@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <QTextBrowser>
+#include <QMutex>
 
 
 class Console : public QTextBrowser
@@ -10,7 +11,7 @@ class Console : public QTextBrowser
 public:
 	Console(QWidget* parent = Q_NULLPTR);
 	~Console();
-	void append(const QString& text, const QColor& color = Qt::white);
+	void append(const QString&);
 private:
 	bool atBottom;
 public slots:
