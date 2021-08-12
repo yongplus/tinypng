@@ -5,6 +5,8 @@
 #include <QDir>
 #include <QMenu>
 #include <QDesktopServices>
+#include <QApplication>
+#include <QPainter>
 #include "config.h"
 
 MyTableView::MyTableView(QWidget* parent)
@@ -97,6 +99,21 @@ void MyTableView::keyPressEvent(QKeyEvent* event) {
 	if (event->key() == Qt::Key_Delete) {
 		this->clickDelete();
 	}
+	else if (event->key() == Qt::Key_A && QApplication::keyboardModifiers() && Qt::ControlModifier) {
+		this->selectAll();
+	}
+}
+
+void MyTableView::paintEvent(QPaintEvent* event) {
+	QTableView::paintEvent(event); // draw original content
+
+
+	if (this->model()->rowCount() == 0 && this->overlay->isHidden()) {
+		QPainter painter(this->viewport());
+		painter.setPen(QColor("#aaaaaa"));
+		painter.drawText(this->viewport()->rect(), Qt::AlignCenter, "拖拽要压缩的目录或图片到此区域");
+	}
+
 }
 
 bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {

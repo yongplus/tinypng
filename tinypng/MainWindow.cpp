@@ -48,7 +48,7 @@ void MainWindow::show() {
 }
 
 void MainWindow::_buildTopBtns() {
-	QPushButton* add = new QPushButton(QString("添加路径(O)"), this);
+	QPushButton* add = new QPushButton(QString("添加资源(O)"), this);
 	add->setFixedSize(100, 45);
 	add->setIcon(QIcon(":/res/icons/folder.png"));
 	add->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
