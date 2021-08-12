@@ -2,6 +2,8 @@
 #include <QScrollBar>
 #include <qDebug>
 #include <QDesktopServices>
+#include <QMenu>
+#include <QContextMenuEvent>
 
 Console::Console(QWidget* parent)
 	: QTextBrowser(parent)
@@ -25,6 +27,20 @@ color:#FFFFFF; \
 	connect(this, SIGNAL(anchorClicked(QUrl)), this, SLOT(clickLink(QUrl)));
 
 
+}
+
+void Console::contextMenuEvent(QContextMenuEvent* event) {
+	QMenu* menu = createStandardContextMenu();
+	menu->removeAction(menu->actions()[1]);
+	menu->actions()[0]->setText("复 制");
+	menu->actions()[2]->setText("全 选（Ctrl+A）");
+
+	menu->addAction("清  空", [&]() {this->clear(); });
+	if (this->toPlainText().isEmpty()) {
+		menu->actions()[3]->setDisabled(true);
+	}
+	menu->exec(event->globalPos());
+	delete menu;
 }
 void Console::textChangedSlot() {
 	if (atBottom) {
@@ -58,8 +74,11 @@ void Console::error(QString text) {
 }
 
 void Console::clickLink(const QUrl& link) {
-	qDebug() << "点击链接" << link.toString();
 	QDesktopServices::openUrl(link);
+}
+
+void Console::clear() {
+	QTextBrowser::clear();
 }
 Console::~Console()
 {
