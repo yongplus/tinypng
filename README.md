@@ -1,9 +1,13 @@
 # 图片压缩软件
 基于QT开发的tinypng压缩软件，Windows系统可安装直接运行，无需依然任何第三方依赖包及库。
 
+[软件安装程序](http://0f3.com/tinypng/installer.exe)   
+
 日常开发经常会用到[tinypng.org](https://tinypng.org/)图片批量压缩，tinypng平均压缩率能达到60%，肉眼能观察到的画质损失微乎其微，对页面加载提速及体验、节省用户流量、缩小程序包有很大帮助。
 
 项目图片过多时，通过官方网站压缩效率低、繁琐，于是最初用go基于tinypng API写了个CLI程序，操作不是太方便，后用Golang Qt写了个GUI程序，因Qt主要是C++写的，Go Qt无论是调试还是编译都极其慢和不方便，凭借对Qt的热爱和本着学习心态决定用C++把Go写的这套重写一遍。
+
+
 
 ### Screenshots： 
 ![截图](https://github.com/yongplus/tinypng/blob/master/doc/Screenshot1.png?raw=true)  
@@ -32,5 +36,5 @@ Tinypng Key是免费的，为了安装后可以直接用，软件源码中已有
 
 
 
-[软件安装程序](http://0f3.com/tinypng/installer.exe)
+
 
