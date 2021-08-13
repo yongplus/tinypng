@@ -22,7 +22,7 @@ Tinypng Key是免费的，为了安装后可以直接用，软件源码中已有
 ### Usage:
  There are two ways to add the files:  
  1.Clicking the button on the top-left choose one or more files or a folder.   
- 2.Recommended way,For more convenient and efficient, The software support the object can be dragged directly into the area of table in the window.   
+ 2.Recommended way,For more convenient and efficient, The software supports the object can be dragged directly into the area of table in the window.   
  3.You can push the button by a shortcut key associated with the button, For example :press Ctrl+O to add object, Ctrl+S to start task.   
  4.Double-Clicking the any row in the table the picture associated with row will preview in system image previewer.  
  5.Either right-Clicking on the any rows or selecting rows and pressing key Del delete the rows.  
