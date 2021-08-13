@@ -9,10 +9,10 @@
 #include <QPainter>
 #include "config.h"
 
-MyTableView::MyTableView(QWidget* parent)
-
+MyTableView::MyTableView(QWidget* parent, QAbstractItemModel* model)
 {
 	init();
+	this->setModel(model);
 }
 
 void MyTableView::init() {
@@ -33,6 +33,7 @@ color: black \
 	connect(this, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onDoubleClickRow(QModelIndex)));
 	scanner = new Scanner(this);
 	overlay = new MyOverlay(this);
+
 }
 
 void MyTableView::setModel(QAbstractItemModel* m) {
@@ -100,6 +101,7 @@ void MyTableView::keyPressEvent(QKeyEvent* event) {
 		this->clickDelete();
 	}
 	else if (event->key() == Qt::Key_A && QApplication::keyboardModifiers() && Qt::ControlModifier) {
+		TableModel* model = (TableModel*)this->model();
 		this->selectAll();
 	}
 }
@@ -107,8 +109,8 @@ void MyTableView::keyPressEvent(QKeyEvent* event) {
 void MyTableView::paintEvent(QPaintEvent* event) {
 	QTableView::paintEvent(event); // draw original content
 
-
-	if (this->model()->rowCount() == 0 && this->overlay->isHidden()) {
+	TableModel* model = (TableModel*)this->selectionModel()->model();
+	if (model->rowCount() == 0 && this->overlay->isHidden()) {
 		QPainter painter(this->viewport());
 		painter.setPen(QColor("#aaaaaa"));
 		painter.drawText(this->viewport()->rect(), Qt::AlignCenter, "拖拽要压缩的目录或图片到此区域");
@@ -177,16 +179,28 @@ void MyTableView::clickDelete() {
 	if (selectedRows.length() == 0) {
 		return;
 	}
-	QList<QPersistentModelIndex> indexs;
-	for (int i = 0; i < selectedRows.length(); i++) {
-		indexs << QPersistentModelIndex(selectedRows.at(i));
+	TableModel* model = (TableModel*)this->model();
+
+	if (selectedRows.length() == this->model()->rowCount()) {
+		model->removeAll();
+		return;
 	}
-	QListIterator<QPersistentModelIndex> i(indexs);
-	TableModel* model = (TableModel*)this->selectionModel()->model();
-	while (i.hasNext()) {
-		QPersistentModelIndex item = i.next();
-		model->removeRow(item.row());
+	else if (selectedRows.first().row() + selectedRows.length() == (selectedRows.last().row() + 1)) {
+		model->removeRange(selectedRows.first().row(), selectedRows.last().row());
 	}
+	else {
+		QList<QPersistentModelIndex> indexs;
+		for (int i = 0; i < selectedRows.length(); i++) {
+			indexs << QPersistentModelIndex(selectedRows.at(i));
+		}
+		QListIterator<QPersistentModelIndex> i(indexs);
+		while (i.hasNext()) {
+			QPersistentModelIndex item = i.next();
+			model->removeRow(item.row());
+		}
+		indexs.clear();
+	}
+
 
 }
 

@@ -11,7 +11,7 @@ class MyTableView : public QTableView
 
 public:
 	Scanner* scanner;
-	MyTableView(QWidget* parent = Q_NULLPTR);
+	MyTableView(QWidget* parent, QAbstractItemModel*);
 	~MyTableView();
 	void init();
 	void setModel(QAbstractItemModel*) override;
@@ -28,7 +28,6 @@ protected:
 private:
 	MyOverlay* overlay;
 	bool checkMimeIsDir(const QMimeData* minedata);
-
 
 public slots:
 	void clickDelete();

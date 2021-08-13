@@ -92,10 +92,8 @@ void MainWindow::_buildTopBtns() {
 
 void MainWindow::_buildBody() {
 
-	table = new MyTableView(this);
 	TableModel* model = new TableModel(this);
-	table->setModel(model);
-
+	this->table = new MyTableView(this, model);
 	this->console = new Console(this);
 
 	QSplitter* splitter = new QSplitter(Qt::Vertical);

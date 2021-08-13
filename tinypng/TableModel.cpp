@@ -4,13 +4,17 @@
 #include <QDebug>
 
 TableModel::TableModel(QObject* parent)
-	: QAbstractTableModel(parent)
+	: QAbstractTableModel(parent),
+	_data(nullptr)
 {
+	this->mutex = new QMutex();
+	this->_data = new QList<TableModelRow>();
 	connect(this, SIGNAL(addRowSignal(TableModelRow)), this, SLOT(addRowx(TableModelRow)));
 }
 
 int TableModel::rowCount(const QModelIndex& parent) const {
-	return this->_data.count();
+	int num = this->_data->count();
+	return num;
 }
 
 
@@ -22,7 +26,7 @@ int TableModel::columnCount(const QModelIndex& parent) const {
 QVariant TableModel::data(const QModelIndex& index, int role = Qt::DisplayRole) const {
 	if (role != Qt::DisplayRole) {
 		if (index.column() == 3) {
-			TableModelRow item = this->_data.at(index.row());
+			TableModelRow item = this->_data->at(index.row());
 			if (role == Qt::ForegroundRole && item.status == 2) {
 				QBrush brush(QColor(23, 168, 26, 255));
 				return QVariant(brush);
@@ -32,7 +36,7 @@ QVariant TableModel::data(const QModelIndex& index, int role = Qt::DisplayRole) 
 		return QVariant();
 	}
 	QString label = this->headerData(index.column(), Qt::Orientation::Horizontal, Qt::DisplayRole).toString();
-	TableModelRow item = this->_data.at(index.row());
+	TableModelRow item = this->_data->at(index.row());
 	if (label == "路径") {
 		return QVariant(item.path);
 	}
@@ -96,57 +100,77 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
 
 
 void TableModel::addRow(QList<TableModelRow> items) {
+	this->mutex->lock();
 	int count = this->rowCount();
-	if (count > 0) {
-		count -= 1;
-	}
 	this->beginInsertRows(QModelIndex(), count, count + items.length() - 1);
-	this->_data.append(items);
+	this->_data->append(items);
 	this->endInsertRows();
+	this->mutex->unlock();
 }
 void TableModel::addRow(TableModelRow item) {
+
 	QList<TableModelRow> list;
 	list << item;
 	this->addRow(list);
+
 }
 
 void TableModel::removeAll() {
-
-	if (this->_data.length() == 0) {
+	if (this->_data->length() == 0) {
 		return;
 	}
-	this->beginRemoveRows(QModelIndex(), 0, this->_data.count() - 1);
-	this->_data.clear();
+	this->mutex->lock();
+	this->beginRemoveRows(QModelIndex(), 0, this->_data->count() - 1);
+	this->_data->clear();
 	this->endRemoveRows();
+	this->mutex->unlock();
 }
 
 
 void TableModel::removeRow(int row, const QModelIndex& index) {
 
-
-	if (row < 0 || (row + 1) > this->_data.length()) {
+	if (row < 0 || (row + 1) > this->_data->length()) {
 		return;
 	}
+	this->mutex->lock();
 	this->beginRemoveRows(index, row, row);
-	this->_data.removeAt(row);
+	this->_data->removeAt(row);
 	this->endRemoveRows();
+	this->mutex->unlock();
 }
+
+void TableModel::removeRange(int first, int last, const QModelIndex& index) {
+
+	if (first < 0 || (last + 1) >= this->_data->length()) {
+		return;
+	}
+	this->mutex->lock();
+	this->beginRemoveRows(index, first, last);
+	for (int i = first; i <= last; i++) {
+		this->_data->removeAt(first);
+	}
+	this->endRemoveRows();
+	this->mutex->unlock();
+}
+
 
 
 
 TableModelRow TableModel::getRow(int row) {
 
-	return this->_data.at(row);
+	return this->_data->at(row);
 }
 
 void TableModel::replaceRow(int row, TableModelRow item) {
-	this->_data.replace(row, item);
+	this->mutex->lock();
+	this->_data->replace(row, item);
+	this->mutex->unlock();
 }
 
 void TableModel::updateStatus(int row, int status) {
-	TableModelRow rowData = this->_data.at(row);
+	TableModelRow rowData = this->_data->at(row);
 	rowData.status = status;
-	this->_data.replace(row, rowData);
+	this->_data->replace(row, rowData);
 }
 
 

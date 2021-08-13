@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <QAbstractTableModel>
+#include <QMutex>
 
 
 typedef struct TableModelRow {
@@ -23,12 +24,15 @@ public:
 	virtual QVariant data(const QModelIndex& index, int role) const override;
 	QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 	void removeRow(int row, const QModelIndex& index = QModelIndex());
+	void removeRange(int first, int last, const QModelIndex& index = QModelIndex());
 	void removeAll();
 	TableModelRow getRow(int row);
 	void replaceRow(int row, TableModelRow item);
 	void updateStatus(int row, int status);
+	QMutex* mutex;
 private:
-	QList<TableModelRow> _data = QList<TableModelRow>();
+
+	QList<TableModelRow>* _data;
 
 public slots:
 	void addRow(QList<TableModelRow>);

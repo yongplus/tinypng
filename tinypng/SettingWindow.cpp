@@ -75,4 +75,5 @@ void SettingWindow::onShowSizeExplain() {
 
 SettingWindow::~SettingWindow()
 {
+
 }
