@@ -12,7 +12,7 @@ TableModel::TableModel(QObject* parent)
 	this->mutex = new QMutex();
 	this->_data = new QList<TableModelRow>();
 
-	labels << "路径" << "原大小" << "压缩后大小" << "压缩率" << "状态";
+	labels << "路径" << "原大小" << "压后大小" << "压缩率" << "状态";
 
 }
 
