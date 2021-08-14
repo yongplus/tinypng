@@ -1,7 +1,7 @@
 # 图片压缩软件
 基于Tinypng Api压缩软件，Windows系统可安装直接运行，无需依然任何第三方依赖包及库。
 
-[软件安装程序](./doc/installer.exe)   
+[软件安装程序](./x64/installer.exe)   
 
 
 日常开发经常会用到[tinypng.org](https://tinypng.org/)图片批量压缩，tinypng平均压缩率能达到60%，肉眼能观察到的画质损失微乎其微，对页面加载提速及体验、节省用户流量、缩小程序包有很大帮助。
