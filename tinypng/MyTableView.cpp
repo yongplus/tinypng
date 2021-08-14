@@ -23,8 +23,11 @@ color: black \
 
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+	setColumnWidth(5, 100);
+	setColumnWidth(4, 100);
 	setColumnWidth(3, 100);
 	setColumnWidth(2, 100);
+
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	setColumnHidden(0, true);
 	setAcceptDrops(true);
@@ -106,6 +109,7 @@ void MyTableView::keyPressEvent(QKeyEvent* event) {
 	}
 }
 
+
 void MyTableView::paintEvent(QPaintEvent* event) {
 	QTableView::paintEvent(event); // draw original content
 
@@ -147,7 +151,7 @@ bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {
 }
 void MyTableView::resizeEvent(QResizeEvent* event) {
 	QTableView::resizeEvent(event);
-	this->setColumnWidth(1, event->size().width() - 200);
+	this->setColumnWidth(1, event->size().width() - 400);
 	this->setColumnHidden(0, true);
 
 	QPoint pos = this->mapTo(this, QPoint(0, 0));

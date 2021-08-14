@@ -142,11 +142,13 @@ void MainWindow::onClickEditBtn() {
 		this->table->readDir(dlg.selectedFiles());
 	}
 	disconnect(&dlg);
+	dlg.deleteLater();
 }
 
 void MainWindow::onOpenSettingWindow() {
 	SettingWindow* win = new SettingWindow(this);
 	win->show();
+
 }
 
 void MainWindow::onClickStartBtn() {
@@ -157,8 +159,6 @@ void MainWindow::onClickStartBtn() {
 		return;
 	}
 	this->startbtn->setDisabled(true);
-	//int count = this->table->model()->rowCount();
-	//this->table->model()->removeRows(0, count);
 	if (dispatcher->thread->isRunning()) {
 		return;
 	}
@@ -170,7 +170,6 @@ void MainWindow::onClickPauseBtn() {
 		dispatcher->quit();
 		dispatcher->thread->quit();
 		dispatcher->thread->wait();
-		qDebug() << "退出";
 	}
 	emit this->console->infoSignal("暂停压缩");
 }

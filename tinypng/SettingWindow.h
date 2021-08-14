@@ -21,6 +21,6 @@ public slots:
 	void onShowSizeExplain();
 
 private:
-	Ui::SettingWindow ui;
+	Ui::SettingWindow* ui;
 	QToolTip* tooltip;
 };

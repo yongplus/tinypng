@@ -24,7 +24,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_TableModel_t {
     QByteArrayData data[6];
-    char stringdata0[67];
+    char stringdata0[65];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,15 +34,15 @@ struct qt_meta_stringdata_TableModel_t {
 static const qt_meta_stringdata_TableModel_t qt_meta_stringdata_TableModel = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "TableModel"
-QT_MOC_LITERAL(1, 11, 12), // "addRowSignal"
-QT_MOC_LITERAL(2, 24, 0), // ""
-QT_MOC_LITERAL(3, 25, 13), // "TableModelRow"
-QT_MOC_LITERAL(4, 39, 6), // "addRow"
-QT_MOC_LITERAL(5, 46, 20) // "QList<TableModelRow>"
+QT_MOC_LITERAL(1, 11, 6), // "addRow"
+QT_MOC_LITERAL(2, 18, 0), // ""
+QT_MOC_LITERAL(3, 19, 20), // "QList<TableModelRow>"
+QT_MOC_LITERAL(4, 40, 13), // "TableModelRow"
+QT_MOC_LITERAL(5, 54, 10) // "replaceRow"
 
     },
-    "TableModel\0addRowSignal\0\0TableModelRow\0"
-    "addRow\0QList<TableModelRow>"
+    "TableModel\0addRow\0\0QList<TableModelRow>\0"
+    "TableModelRow\0replaceRow"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,21 +57,17 @@ static const uint qt_meta_data_TableModel[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
-
- // signals: name, argc, parameters, tag, flags
-       1,    1,   29,    2, 0x06 /* Public */,
+       0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   32,    2, 0x0a /* Public */,
-       4,    1,   35,    2, 0x0a /* Public */,
-
- // signals: parameters
-    QMetaType::Void, 0x80000000 | 3,    2,
+       1,    1,   29,    2, 0x0a /* Public */,
+       1,    1,   32,    2, 0x0a /* Public */,
+       5,    2,   35,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 5,    2,
     QMetaType::Void, 0x80000000 | 3,    2,
+    QMetaType::Void, 0x80000000 | 4,    2,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 4,    2,    2,
 
        0        // eod
 };
@@ -82,19 +78,10 @@ void TableModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<TableModel *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->addRowSignal((*reinterpret_cast< TableModelRow(*)>(_a[1]))); break;
-        case 1: _t->addRow((*reinterpret_cast< QList<TableModelRow>(*)>(_a[1]))); break;
-        case 2: _t->addRow((*reinterpret_cast< TableModelRow(*)>(_a[1]))); break;
+        case 0: _t->addRow((*reinterpret_cast< QList<TableModelRow>(*)>(_a[1]))); break;
+        case 1: _t->addRow((*reinterpret_cast< TableModelRow(*)>(_a[1]))); break;
+        case 2: _t->replaceRow((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const TableModelRow(*)>(_a[2]))); break;
         default: ;
-        }
-    } else if (_c == QMetaObject::IndexOfMethod) {
-        int *result = reinterpret_cast<int *>(_a[0]);
-        {
-            using _t = void (TableModel::*)(TableModelRow );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&TableModel::addRowSignal)) {
-                *result = 0;
-                return;
-            }
         }
     }
 }
@@ -137,13 +124,6 @@ int TableModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 3;
     }
     return _id;
-}
-
-// SIGNAL 0
-void TableModel::addRowSignal(TableModelRow _t1)
-{
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

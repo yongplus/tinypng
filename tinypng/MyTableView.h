@@ -22,7 +22,6 @@ public:
 	virtual void resizeEvent(QResizeEvent*) override;
 	void readDir(const QStringList&);
 	void keyPressEvent(QKeyEvent*);
-
 protected:
 	void paintEvent(QPaintEvent*) override;
 private:

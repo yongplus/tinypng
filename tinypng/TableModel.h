@@ -27,16 +27,16 @@ public:
 	void removeRange(int first, int last, const QModelIndex& index = QModelIndex());
 	void removeAll();
 	TableModelRow getRow(int row);
-	void replaceRow(int row, TableModelRow item);
+
 	void updateStatus(int row, int status);
 	QMutex* mutex;
-private:
 
+private:
+	QStringList labels;
 	QList<TableModelRow>* _data;
 
 public slots:
 	void addRow(QList<TableModelRow>);
 	void addRow(TableModelRow);
-signals:
-	void addRowSignal(TableModelRow);
+	void replaceRow(int, const TableModelRow&);
 };

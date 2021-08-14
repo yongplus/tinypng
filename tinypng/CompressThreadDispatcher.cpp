@@ -92,7 +92,7 @@ void CompressThreadDispatcher::nextTask(CompressThread* worker) {
 	qDebug() << "addTask" << item.root << item.path;
 	worker->addTask(offsetRow, item.root, item.path);
 	this->model->updateStatus(offsetRow, 1);
-	this->tableview->update(this->model->index(offsetRow, 3));
+	this->tableview->update(this->model->index(offsetRow, 5));
 	offsetRow += 1;
 
 
@@ -130,7 +130,13 @@ void CompressThreadDispatcher::doneTask(QVariant variant) {
 		row.status = -1;
 	}
 	this->model->replaceRow(result.row, row);
+
+	this->tableview->update(this->model->index(result.row, 4));
 	this->tableview->update(this->model->index(result.row, 3));
+	this->tableview->update(this->model->index(result.row, 5));
+
+
+	//this->tableview->dataChanged(rowLeftIndex, rowRightIndex);
 	CompressThread* worker = (CompressThread*)sender();
 	this->nextTask(worker);
 	this->mutex->unlock();

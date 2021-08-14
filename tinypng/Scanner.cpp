@@ -82,7 +82,7 @@ void Scanner::add(const QString& root, const QString& filepath, int size) {
 	item.path = filepath;
 	item.size = size;
 	item.status = 0;
-	item.thin_size = 0;
+	item.thin_size = -1;
 	model->addRow(item);
 }
 

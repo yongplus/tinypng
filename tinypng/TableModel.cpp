@@ -2,6 +2,8 @@
 #include <QLabel>
 #include <QWidget>
 #include <QDebug>
+#include <QTimer>
+#include <QtConcurrent/QtConcurrentRun>
 
 TableModel::TableModel(QObject* parent)
 	: QAbstractTableModel(parent),
@@ -9,42 +11,81 @@ TableModel::TableModel(QObject* parent)
 {
 	this->mutex = new QMutex();
 	this->_data = new QList<TableModelRow>();
-	connect(this, SIGNAL(addRowSignal(TableModelRow)), this, SLOT(addRowx(TableModelRow)));
+
+	labels << "路径" << "原大小" << "压缩后大小" << "压缩率" << "状态";
+
 }
 
 int TableModel::rowCount(const QModelIndex& parent) const {
+	if (parent.isValid()) return 0;
 	int num = this->_data->count();
 	return num;
 }
 
 
 int TableModel::columnCount(const QModelIndex& parent) const {
-	return 4;
+	if (parent.isValid()) return 0;
+	return labels.length() + 1;
 }
 
 
 QVariant TableModel::data(const QModelIndex& index, int role = Qt::DisplayRole) const {
+	if (!index.isValid()) {
+		return QVariant();
+	}
+	Q_ASSERT(index.model() == this);
+
 	if (role != Qt::DisplayRole) {
-		if (index.column() == 3) {
+		if (index.column() > 1 && role == Qt::TextAlignmentRole) {
+			return Qt::AlignCenter;
+		}
+		else if (index.column() == 5) {
 			TableModelRow item = this->_data->at(index.row());
-			if (role == Qt::ForegroundRole && item.status == 2) {
-				QBrush brush(QColor(23, 168, 26, 255));
-				return QVariant(brush);
+			if (role == Qt::ForegroundRole) {
+
+				if (item.status == 2) {
+					QBrush brush(QColor(23, 168, 26, 255));
+					return QVariant(brush);
+				}
+				else if (item.status == -1) {
+					QBrush brush(QColor(255, 0, 0, 255));
+					return QVariant(brush);
+				}
 			}
+
 		}
 
 		return QVariant();
 	}
 	QString label = this->headerData(index.column(), Qt::Orientation::Horizontal, Qt::DisplayRole).toString();
 	TableModelRow item = this->_data->at(index.row());
-	if (label == "路径") {
+	if (label == labels[0]) {
 		return QVariant(item.path);
 	}
-	else if (label == "大小") {
+	else if (label == labels[1]) {
 		QString size = QLocale(QLocale::English, QLocale::UnitedStates).formattedDataSize(item.size, 2, QLocale::DataSizeTraditionalFormat);
 		return QVariant(size);
 	}
-	else if (label == "状态") {
+	else if (label == labels[2]) {
+		if (item.thin_size == -1) {
+			return QVariant();
+		}
+		else {
+			QString size = QLocale(QLocale::English, QLocale::UnitedStates).formattedDataSize(item.thin_size, 2, QLocale::DataSizeTraditionalFormat);
+			return QVariant(size);
+		}
+	}
+	else if (label == labels[3]) {
+		if (item.thin_size == -1) {
+			return QVariant();
+		}
+		else {
+			QString percent = QString::number(double(item.size - item.thin_size) / double(item.size) * 100, 'f', 2) + "%";
+			return QVariant(percent);
+		}
+
+	}
+	else if (label == labels[4]) {
 		QString status;
 		switch (item.status)
 		{
@@ -58,7 +99,7 @@ QVariant TableModel::data(const QModelIndex& index, int role = Qt::DisplayRole) 
 			status = "压缩中";
 			break;
 		case 2:
-			status = "成功";
+			status = "成 功";
 			break;
 		default:
 			break;
@@ -78,23 +119,12 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
 		return QAbstractTableModel::headerData(section, orientation, role);
 	}
 	QString text;
-	switch (section)
-	{
-	case 1:
-		text = "路径";
-		break;
-	case 2:
-		text = "大小";
-		break;
-	case 3:
-		text = "状态";
-		break;
-	default:
-		return QVariant();
-		break;
+	if (section > 0 && section <= labels.length()) {
+		return QVariant(labels[section - 1]);
 	}
-	return QVariant(text);
-
+	else {
+		return QVariant();
+	}
 }
 
 
@@ -124,6 +154,7 @@ void TableModel::removeAll() {
 	this->_data->clear();
 	this->endRemoveRows();
 	this->mutex->unlock();
+
 }
 
 
@@ -161,7 +192,7 @@ TableModelRow TableModel::getRow(int row) {
 	return this->_data->at(row);
 }
 
-void TableModel::replaceRow(int row, TableModelRow item) {
+void TableModel::replaceRow(int row, const TableModelRow& item) {
 	this->mutex->lock();
 	this->_data->replace(row, item);
 	this->mutex->unlock();
@@ -171,7 +202,9 @@ void TableModel::updateStatus(int row, int status) {
 	TableModelRow rowData = this->_data->at(row);
 	rowData.status = status;
 	this->_data->replace(row, rowData);
+
 }
+
 
 
 
