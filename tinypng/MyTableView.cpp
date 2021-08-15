@@ -7,6 +7,7 @@
 #include <QDesktopServices>
 #include <QApplication>
 #include <QPainter>
+#include <QFileInfo>
 #include "config.h"
 
 MyTableView::MyTableView(QWidget* parent, QAbstractItemModel* model)
@@ -109,6 +110,22 @@ void MyTableView::keyPressEvent(QKeyEvent* event) {
 	}
 }
 
+void MyTableView::openSelectedRowFolder(int flag) {
+	int rowIdx = this->selectionModel()->selectedRows()[0].row();
+	TableModel* model = (TableModel*)this->model();
+	TableModelRow row = model->getRow(rowIdx);
+
+	QString dir = "";
+	if (flag == 1) { //输出目录
+		dir = QFileInfo(row.root + "_tiny" + row.path).absoluteDir().absolutePath();
+	}
+	else { //源目录
+		dir = QFileInfo(row.root + row.path).absoluteDir().absolutePath();
+	}
+
+	QDesktopServices::openUrl(QUrl::fromLocalFile(QString("file:///%1").arg(dir)));
+}
+
 
 void MyTableView::paintEvent(QPaintEvent* event) {
 	QTableView::paintEvent(event); // draw original content
@@ -166,13 +183,33 @@ void MyTableView::onDoubleClickRow(const QModelIndex& index) {
 }
 
 void MyTableView::customContextMenuResposne(const QPoint& pos) {
-	if (this->selectionModel()->selectedRows().length() == 0) {
+	int num = this->selectionModel()->selectedRows().length();
+	if (num == 0) {
 		return;
 	}
 
+	int rowIdx = this->selectionModel()->selectedRows()[0].row();
+	TableModel* model = (TableModel*)this->model();
+	TableModelRow row = model->getRow(rowIdx);
+
 	QMenu* menu = new QMenu(this);
-	QAction* action = new QAction("删 除", menu);
+	menu->setAttribute(Qt::WA_DeleteOnClose);
+	QAction* action = new QAction("删  除", menu);
 	menu->addAction(action);
+	menu->addAction("打开源目录", [&]() {
+		this->openSelectedRowFolder(0);
+		});
+	menu->addAction("打开输出目录", [&]() {
+		this->openSelectedRowFolder(1);
+		});
+	if (num > 1) {
+		menu->actions().at(1)->setDisabled(true);
+		menu->actions().at(2)->setDisabled(true);
+	}
+	else if (row.root.isEmpty() || Config(this).get().outputMode == OutputMode::Replace || row.status != 2) {
+		menu->actions().at(2)->setDisabled(true);
+	}
+
 	menu->popup(this->viewport()->mapToGlobal(pos), NULL);
 	connect(action, SIGNAL(triggered()), this, SLOT(clickDelete()));
 

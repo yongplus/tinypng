@@ -32,7 +32,8 @@ void CompressThreadDispatcher::run() {
 		return;
 	}
 
-	runThreadNum = QThread::idealThreadCount() * 2;
+	runThreadNum = qMin(QThread::idealThreadCount() * 2, 12); //避免官方服务器出问题，最大12个线程
+
 	elapsedTimer->start();
 	qDebug() << "total row:" << totalRowNum << runThreadNum << qMin(runThreadNum, totalRowNum);
 
@@ -164,7 +165,7 @@ void CompressThreadDispatcher::quit() {
 		if (row.status == 1) {
 			row.status = 0;
 			this->model->replaceRow(i, row);
-			this->tableview->update(this->model->index(i, 3));
+			this->tableview->update(this->model->index(i, 5));
 		}
 	}
 	loop->deleteLater();

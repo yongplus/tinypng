@@ -11,6 +11,7 @@ Config::Config(QObject* parent)
 		qset->setValue("mail", QVariant(one.mail));
 		qset->setValue("key", QVariant(one.key));
 		qset->setValue("outputMode", int(OutputMode::Replace));
+		qset->setValue("autostart", true);
 	}
 	qset->endGroup();
 
@@ -24,6 +25,7 @@ void Config::set(configItem item) {
 	qset->setValue("outputMode", int(item.outputMode));
 	qset->setValue("minsize", item.minsize);
 	qset->setValue("tinyReqMode", int(item.tinyReqMode));
+	qset->setValue("autostart", item.autoStart);
 	qset->endGroup();
 }
 
@@ -46,6 +48,7 @@ configItem Config::get() {
 	else {
 		item.tinyReqMode = TinyReqMode::Web;
 	}
+	item.autoStart = qset->value("autostart").toBool();
 	qset->endGroup();
 	return item;
 }

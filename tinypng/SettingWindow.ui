@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>414</width>
-    <height>468</height>
+    <height>512</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -268,7 +268,7 @@
         <number>0</number>
        </property>
        <property name="bottomMargin">
-        <number>10</number>
+        <number>0</number>
        </property>
        <item>
         <widget class="QLabel" name="label_3">
@@ -311,6 +311,48 @@
          </property>
          <property name="placeholderText">
           <string>http://ip:port</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>自动开始:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxAutoStart">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>添加资源后自动启动压缩</string>
          </property>
         </widget>
        </item>
@@ -506,36 +548,46 @@ border:none;</string>
        </widget>
       </widget>
      </item>
-     <item alignment="Qt::AlignHCenter">
-      <widget class="QPushButton" name="savebtn">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <property name="topMargin">
+        <number>5</number>
        </property>
-       <property name="minimumSize">
-        <size>
-         <width>150</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>宋体</family>
-        </font>
-       </property>
-       <property name="text">
-        <string>保 存</string>
-       </property>
-       <property name="icon">
-        <iconset resource="Resource.qrc">
-         <normaloff>:/res/icons/save.png</normaloff>:/res/icons/save.png</iconset>
-       </property>
-       <property name="shortcut">
-        <string notr="true"/>
-       </property>
-      </widget>
+       <item>
+        <widget class="QPushButton" name="savebtn">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>保 存</string>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource.qrc">
+           <normaloff>:/res/icons/save.png</normaloff>:/res/icons/save.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QLabel" name="label_5">
@@ -596,7 +648,7 @@ border:none;</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

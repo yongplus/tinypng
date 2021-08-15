@@ -39,6 +39,7 @@ void SettingWindow::setValues() {
 	else {
 		ui->replaceCheckBox->setChecked(true);
 	}
+	ui->checkBoxAutoStart->setChecked(item.autoStart);
 }
 void SettingWindow::keyPressEvent(QKeyEvent* event) {
 	if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
@@ -62,7 +63,7 @@ void SettingWindow::onClickSaveBtn() {
 	item.proxy = ui->proxyInput->text();
 	item.minsize = ui->sizeInput->text().toInt() * 1024;
 	item.outputMode = ui->newdirCheckBox->isChecked() ? OutputMode::NewDir : OutputMode::Replace;
-
+	item.autoStart = ui->checkBoxAutoStart->isChecked();
 	Config(this).set(item);
 	QMessageBox::information(this, "提  示", "保存成功", QMessageBox::Ok);
 	this->close();

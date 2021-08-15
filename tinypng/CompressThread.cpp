@@ -110,7 +110,8 @@ void CompressThread::run() {
 
 		connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 		connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-		double timeout = 10 + double(binary.length()) * double(16) / double(1048576); //超时时间：起始时间10s + 文件大小 * (预设每byte耗时)
+		//double timeout = 20 + double(binary.length()) * double(20) / double(1048576); //超时时间：起始时间10s + 文件大小 * (预设每byte耗时)
+		int timeout = 60 * 3; //服务器响应太慢了，不适合较短超时时间
 		timer.start(timeout * 1000);
 		loop.exec();
 
@@ -139,7 +140,7 @@ void CompressThread::run() {
 		else {
 			disconnect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
 			reply->abort();
-			this->emitError(QString("请求压缩接口超时"));
+			this->emitError(QString("请求压缩接口超时(%1s)").arg(timeout));
 		}
 		reply->close();
 		delete reply;
@@ -161,8 +162,8 @@ void CompressThread::download(const QByteArray& bytes, const QString& ip) {
 	qDebug() << mainMap["output"].toMap()["url"].toString();
 	QString url = mainMap["output"].toMap()["url"].toString();
 	int size = mainMap["output"].toMap()["size"].toInt();
-	float timeout = 8 + size * double(8) / double(1048576); //超时时间：起始时间7s + 文件大小 * (预设每byte耗时)
-
+	//float timeout = 15 + size * double(10) / double(1048576); //超时时间：起始时间7s + 文件大小 * (预设每byte耗时)
+	float timeout = 60 * 2; //服务器偶尔响应太慢
 	QTimer timer;
 	timer.setSingleShot(true);
 

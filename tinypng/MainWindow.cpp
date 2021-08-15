@@ -210,6 +210,9 @@ void MainWindow::scanDirStateChange() {
 	else {
 		this->startbtn->setToolTip("");
 		this->startbtn->setEnabled(true);
+		if (this->table->model()->rowCount() > 0 && Config(this).get().autoStart) {
+			this->onClickStartBtn();
+		}
 	}
 
 }

@@ -49,6 +49,9 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_3;
     QLineEdit *proxyInput;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *label_9;
+    QCheckBox *checkBoxAutoStart;
     QGroupBox *groupBox;
     QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_2;
@@ -61,17 +64,18 @@ public:
     QHBoxLayout *horizontalLayout;
     QCheckBox *newdirCheckBox;
     QCheckBox *replaceCheckBox;
+    QHBoxLayout *horizontalLayout_10;
     QPushButton *savebtn;
     QLabel *label_5;
-    QButtonGroup *buttonGroup;
     QButtonGroup *buttonGroup_2;
+    QButtonGroup *buttonGroup;
 
     void setupUi(QWidget *SettingWindow)
     {
         if (SettingWindow->objectName().isEmpty())
             SettingWindow->setObjectName(QString::fromUtf8("SettingWindow"));
         SettingWindow->setWindowModality(Qt::ApplicationModal);
-        SettingWindow->resize(414, 468);
+        SettingWindow->resize(414, 512);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -209,7 +213,7 @@ public:
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        horizontalLayout_4->setContentsMargins(-1, -1, 0, 10);
+        horizontalLayout_4->setContentsMargins(-1, -1, 0, 0);
         label_3 = new QLabel(SettingWindow);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setMinimumSize(QSize(90, 0));
@@ -228,6 +232,31 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout_4);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        horizontalLayout_9->setContentsMargins(-1, -1, -1, 5);
+        label_9 = new QLabel(SettingWindow);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label_9->sizePolicy().hasHeightForWidth());
+        label_9->setSizePolicy(sizePolicy3);
+        label_9->setMinimumSize(QSize(90, 0));
+        label_9->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_9->addWidget(label_9);
+
+        checkBoxAutoStart = new QCheckBox(SettingWindow);
+        checkBoxAutoStart->setObjectName(QString::fromUtf8("checkBoxAutoStart"));
+        checkBoxAutoStart->setMinimumSize(QSize(0, 30));
+
+        horizontalLayout_9->addWidget(checkBoxAutoStart);
+
+
+        verticalLayout->addLayout(horizontalLayout_9);
 
         groupBox = new QGroupBox(SettingWindow);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -320,12 +349,17 @@ public:
 
         verticalLayout->addWidget(groupBox);
 
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        horizontalLayout_10->setContentsMargins(-1, 5, -1, -1);
         savebtn = new QPushButton(SettingWindow);
         savebtn->setObjectName(QString::fromUtf8("savebtn"));
         sizePolicy.setHeightForWidth(savebtn->sizePolicy().hasHeightForWidth());
         savebtn->setSizePolicy(sizePolicy);
         savebtn->setMinimumSize(QSize(150, 40));
         savebtn->setFont(font2);
+        savebtn->setLayoutDirection(Qt::LeftToRight);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/res/icons/save.png"), QSize(), QIcon::Normal, QIcon::Off);
         savebtn->setIcon(icon);
@@ -333,7 +367,10 @@ public:
         savebtn->setShortcut(QString::fromUtf8(""));
 #endif // QT_CONFIG(shortcut)
 
-        verticalLayout->addWidget(savebtn, 0, Qt::AlignHCenter);
+        horizontalLayout_10->addWidget(savebtn);
+
+
+        verticalLayout->addLayout(horizontalLayout_10);
 
         label_5 = new QLabel(SettingWindow);
         label_5->setObjectName(QString::fromUtf8("label_5"));
@@ -368,6 +405,8 @@ public:
         label->setText(QCoreApplication::translate("SettingWindow", "Key:", nullptr));
         label_3->setText(QCoreApplication::translate("SettingWindow", "\344\273\243\347\220\206:", nullptr));
         proxyInput->setPlaceholderText(QCoreApplication::translate("SettingWindow", "http://ip:port", nullptr));
+        label_9->setText(QCoreApplication::translate("SettingWindow", "\350\207\252\345\212\250\345\274\200\345\247\213:", nullptr));
+        checkBoxAutoStart->setText(QCoreApplication::translate("SettingWindow", "\346\267\273\345\212\240\350\265\204\346\272\220\345\220\216\350\207\252\345\212\250\345\220\257\345\212\250\345\216\213\347\274\251", nullptr));
         groupBox->setTitle(QCoreApplication::translate("SettingWindow", "\344\273\245\344\270\213\351\205\215\347\275\256\344\273\205\345\257\271\347\233\256\345\275\225\346\234\211\346\225\210", nullptr));
 #if QT_CONFIG(tooltip)
         label_6->setToolTip(QString());

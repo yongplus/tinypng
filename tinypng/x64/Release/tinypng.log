@@ -1,3 +1,11 @@
-﻿  TableModel.cpp
+﻿  moc MyTableView.h
+  CompressThread.cpp
+  CompressThreadDispatcher.cpp
+  MainWindow.cpp
+  MyTableView.cpp
+  main.cpp
+  moc_CompressThreadDispatcher.cpp
+  moc_MainWindow.cpp
+  moc_MyTableView.cpp
   tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Release\tinypng.exe
   ---------------------------
