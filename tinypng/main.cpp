@@ -1,7 +1,5 @@
 ﻿#include "SingleApplication.h"
-#include <QStyleFactory>
 #include <QTranslator>
-#include <QLibraryInfo>
 #include "MainWindow.h"
 
 
@@ -12,6 +10,8 @@ int main(int argc, char* argv[])
 	if (a.isRunning()) {
 		return 0;
 	}
+
+
 	QTranslator qtTranslator;
 
 	QTranslator* pTranslator = new QTranslator();

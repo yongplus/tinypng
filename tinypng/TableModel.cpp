@@ -25,7 +25,7 @@ int TableModel::rowCount(const QModelIndex& parent) const {
 
 int TableModel::columnCount(const QModelIndex& parent) const {
 	if (parent.isValid()) return 0;
-	return labels.length() + 1;
+	return labels.length();
 }
 
 
@@ -36,10 +36,10 @@ QVariant TableModel::data(const QModelIndex& index, int role = Qt::DisplayRole) 
 	Q_ASSERT(index.model() == this);
 
 	if (role != Qt::DisplayRole) {
-		if (index.column() > 1 && role == Qt::TextAlignmentRole) {
+		if (index.column() > 0 && role == Qt::TextAlignmentRole) {
 			return Qt::AlignCenter;
 		}
-		else if (index.column() == 5) {
+		else if (index.column() == 4) {
 			TableModelRow item = this->_data->at(index.row());
 			if (role == Qt::ForegroundRole) {
 
@@ -119,8 +119,8 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
 		return QAbstractTableModel::headerData(section, orientation, role);
 	}
 	QString text;
-	if (section > 0 && section <= labels.length()) {
-		return QVariant(labels[section - 1]);
+	if (section <= labels.length()) {
+		return QVariant(labels[section]);
 	}
 	else {
 		return QVariant();
@@ -149,8 +149,11 @@ void TableModel::removeAll() {
 	if (this->_data->length() == 0) {
 		return;
 	}
-	this->mutex->lock();
+
 	this->beginRemoveRows(QModelIndex(), 0, this->_data->count() - 1);
+
+	// this->beginResetModel();
+	this->mutex->lock();
 	this->_data->clear();
 	this->endRemoveRows();
 	this->mutex->unlock();
@@ -159,8 +162,7 @@ void TableModel::removeAll() {
 
 
 void TableModel::removeRow(int row, const QModelIndex& index) {
-
-	if (row < 0 || (row + 1) > this->_data->length()) {
+	if (row < 0 || (row + 1) >= this->_data->length()) {
 		return;
 	}
 	this->mutex->lock();
@@ -172,7 +174,7 @@ void TableModel::removeRow(int row, const QModelIndex& index) {
 
 void TableModel::removeRange(int first, int last, const QModelIndex& index) {
 
-	if (first < 0 || (last + 1) >= this->_data->length()) {
+	if (first < 0 || (last + 1) > this->_data->length()) {
 		return;
 	}
 	this->mutex->lock();

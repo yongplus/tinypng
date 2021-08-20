@@ -16,7 +16,7 @@ color:#FFFFFF; \
 	font-size:15px;\
 	font-family:\"sans-serif\", \
 }");
-	append("The image compression software is available for png/jpg/jpeg that is developed based on the apis offering by tinypng.png.");
+	append("The image compression software that is available for png/jpg/jpeg is developed based on the apis offered by tinypng.png.");
 	append("Developer: yongplus@foxmail.com ");
 	this->setOpenLinks(false);
 	this->atBottom = true;

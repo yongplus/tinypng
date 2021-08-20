@@ -34,7 +34,7 @@
     <QtBkup_QtInstall
       >5.14.2</QtBkup_QtInstall>
     <QtBkup_QtModules
-      >network;widgets</QtBkup_QtModules>
+      >gui;network;widgets</QtBkup_QtModules>
     <QtBkup_QtPathBinaries
       >bin</QtBkup_QtPathBinaries>
     <QtBkup_QtPathLibraryExecutables

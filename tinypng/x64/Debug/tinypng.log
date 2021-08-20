@@ -1,3 +1,5 @@
-﻿  CompressThreadDispatcher.cpp
+﻿  CompressThread.cpp
+  MainWindow.cpp
   MyTableView.cpp
+  Scanner.cpp
   tinypng.vcxproj -> D:\workspace\qt\tinypng\x64\Debug\tinypng.exe

@@ -33,7 +33,7 @@ void SettingWindow::setValues() {
 	ui->keyInput->setText(item.key);
 	ui->proxyInput->setText(item.proxy);
 	ui->sizeInput->setText(QString("%1").arg(item.minsize / 1024));
-	if (item.outputMode == 0) {
+	if (item.outputMode == OutputMode::NewDir) {
 		ui->newdirCheckBox->setChecked(true);
 	}
 	else {

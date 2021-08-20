@@ -4,6 +4,7 @@
 #include <QResizeEvent>
 #include "Scanner.h"
 #include "MyOverlay.h"
+#include "GridTableHeaderView.h"
 
 class MyTableView : public QTableView
 {
@@ -23,6 +24,8 @@ public:
 	void readDir(const QStringList&);
 	void keyPressEvent(QKeyEvent*);
 	void openSelectedRowFolder(int flag);
+
+	void setGridHeaderview();
 protected:
 	void paintEvent(QPaintEvent*) override;
 private:
@@ -33,5 +36,6 @@ public slots:
 	void clickDelete();
 	void onDoubleClickRow(const QModelIndex& index);
 	void customContextMenuResposne(const QPoint& pos);
+
 
 };

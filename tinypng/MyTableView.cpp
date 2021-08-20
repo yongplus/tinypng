@@ -8,26 +8,52 @@
 #include <QApplication>
 #include <QPainter>
 #include <QFileInfo>
+#include <QStandardItemModel>
+
 #include "config.h"
 
-MyTableView::MyTableView(QWidget* parent, QAbstractItemModel* model)
+MyTableView::MyTableView(QWidget* parent, QAbstractItemModel* model) :QTableView(parent)
 {
+
 	init();
 	this->setModel(model);
+	this->setGridHeaderview();
+	overlay = new MyOverlay(this);
+
 }
 
 void MyTableView::init() {
+
 	setStyleSheet("QTableView { \
 		selection-background-color: #8EDE21;\
-color: black \
-}");
+selection-color: white \
+}QTableView::item:selected{background-color: #8EDE21;}*{outline: none;}QTableView::item{ "
+"border-top:0px solid #D8D8D8; "
+"border-left:1px solid #D8D8D8;"
+"border-right:0px solid #D8D8D8;"
+"border-bottom: 1px solid #D8D8D8;"
+" }"
+"QTableView::item:first{ "
+"border-top:0px solid #D8D8D8; "
+"border-left:0px solid #D8D8D8;"
+"background-color:blue;"
+" }"
+"QTableCornerButton::section{ "
+"border-top:0px solid #D8D8D8;"
+"border-left:0px solid #D8D8D8;"
+"border-right:1px solid #D8D8D8;"
+"border-bottom: 1px solid #D8D8D8;"
+"background-color:white;"
+"}");
 
+	setShowGrid(false);
 	setSelectionBehavior(QAbstractItemView::SelectRows);
-	horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-	setColumnWidth(5, 100);
+
 	setColumnWidth(4, 100);
 	setColumnWidth(3, 100);
 	setColumnWidth(2, 100);
+	setColumnWidth(1, 100);
+	//setFocusPolicy(Qt::NoFocus);
 
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	setColumnHidden(0, true);
@@ -36,9 +62,30 @@ color: black \
 	connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(customContextMenuResposne(const QPoint&)));
 	connect(this, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onDoubleClickRow(QModelIndex)));
 	scanner = new Scanner(this);
-	overlay = new MyOverlay(this);
+	this->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+	this->verticalHeader()->setSelectionBehavior(QAbstractItemView::SelectRows);
+	this->verticalHeader()->setStyleSheet("QHeaderView::section{"
+		"border-top:0px solid #D8D8D8;"
+		"border-left:0px solid #D8D8D8;"
+		"border-right:0px solid #D8D8D8;"
+		"border-bottom:1px solid #D8D8D8;"
+		"background-color:white;"
+		"color:black;"
+		"padding:4px;"
+		"} QHeaderView::section:checked{"
+		"border-top:0px solid #D8D8D8;"
+		"border-left:0px solid #D8D8D8;"
+		"border-right:0px solid #D8D8D8;"
+		"border-bottom:1px solid #D8D8D8;"
+		"background-color:#8EDE21;"
+		"color:white;"
+		"padding:4px;"
+		"}");
 
 }
+
+
+
 
 void MyTableView::setModel(QAbstractItemModel* m) {
 	QTableView::setModel(m);
@@ -95,7 +142,6 @@ void MyTableView::readDir(const QStringList& files) {
 	if (files.count() == 0) {
 		return;
 	}
-
 	int minsize = Config(this).get().minsize;
 	scanner->start(files, minsize);
 }
@@ -124,6 +170,61 @@ void MyTableView::openSelectedRowFolder(int flag) {
 	}
 
 	QDesktopServices::openUrl(QUrl::fromLocalFile(QString("file:///%1").arg(dir)));
+}
+
+void MyTableView::setGridHeaderview() {
+
+
+
+	GridTableHeaderView* header;
+
+	header =
+		new GridTableHeaderView(Qt::Horizontal, 2, model()->columnCount());
+	setHorizontalHeader(header);
+	header->setHighlightSections(true);
+
+	header->setSectionResizeMode(QHeaderView::Fixed);
+
+
+	header->setSpan(0, 0, 2, 0);
+	header->setSpan(0, 1, 1, 2);
+	header->setSpan(0, 3, 2, 0);
+	header->setSpan(0, 4, 2, 0);
+
+
+
+	header->setCellLabel(0, 0, "路径");
+	header->setCellLabel(0, 1, "大小");
+	header->setCellLabel(1, 1, "压缩前");
+	header->setCellLabel(1, 2, "压缩后");
+	header->setCellLabel(0, 3, "压缩率");
+	header->setCellLabel(0, 4, "状态");
+	header->setRowHeight(0, 25);
+	header->setRowHeight(1, 25);
+	if (QSysInfo::windowsVersion() == QSysInfo::WV_WINDOWS10) {
+		this->horizontalHeader()->setStyleSheet(
+			"QHeaderView::section{"
+			"border-top:0px solid #D8D8D8;"
+			"border-left:1px solid #D8D8D8;"
+			"border-right:0px solid #D8D8D8;"
+			"border-bottom: 1px solid #D8D8D8;"
+			"background-color:white;"
+			"padding:4px;"
+			"}"
+			"QHeaderView::section:first{"
+			"border-left:0px solid #D8D8D8;"
+			"}"
+			"QTableCornerButton::section{"
+			"border-top:0px solid #D8D8D8;"
+			"border-left:0px solid #D8D8D8;"
+			"border-right:1px solid #D8D8D8;"
+			"border-bottom: 1px solid #D8D8D8;"
+			"background-color:white;"
+			"}");
+	}
+	//header->setCellBackgroundColor(0, 0, Qt::cyan);
+
+
 }
 
 
@@ -168,8 +269,7 @@ bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {
 }
 void MyTableView::resizeEvent(QResizeEvent* event) {
 	QTableView::resizeEvent(event);
-	this->setColumnWidth(1, event->size().width() - 400);
-	this->setColumnHidden(0, true);
+	this->setColumnWidth(0, event->size().width() - 400);
 
 	QPoint pos = this->mapTo(this, QPoint(0, 0));
 	overlay->setGeometry(pos.x(), pos.y(), this->width(), this->height());
@@ -214,6 +314,9 @@ void MyTableView::customContextMenuResposne(const QPoint& pos) {
 	connect(action, SIGNAL(triggered()), this, SLOT(clickDelete()));
 
 }
+
+
+
 
 void MyTableView::clickDelete() {
 	QModelIndexList selectedRows = this->selectionModel()->selectedRows();

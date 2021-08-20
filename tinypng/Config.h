@@ -3,12 +3,12 @@
 #include <QObject>
 #include <QSettings>
 
-enum OutputMode {
+enum class  OutputMode {
 	NewDir,
 	Replace
 };
 
-enum TinyReqMode {
+enum class TinyReqMode {
 	Web,  //模拟用户操作web
 	Key   //使用api key 
 };

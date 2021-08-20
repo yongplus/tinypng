@@ -18,6 +18,7 @@
 MainWindow::MainWindow(QWidget* parent) :
 	QMainWindow(parent)
 {
+
 	layout = new QVBoxLayout();
 	_buildTopBtns();
 	_buildBody();
@@ -94,6 +95,11 @@ void MainWindow::_buildBody() {
 
 	TableModel* model = new TableModel(this);
 	this->table = new MyTableView(this, model);
+
+
+
+
+
 	this->console = new Console(this);
 
 	QSplitter* splitter = new QSplitter(Qt::Vertical);
@@ -195,9 +201,9 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
 }
 
 void MainWindow::scanDirStateChange() {
+
 	bool state = true;
 	if (table->scanner->isRunning()) {
-
 		if (dispatcher->thread->isRunning()) {
 			dispatcher->quit();
 			dispatcher->thread->quit();

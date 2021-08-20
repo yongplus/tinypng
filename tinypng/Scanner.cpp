@@ -20,6 +20,7 @@ void Scanner::start(const QStringList& files, int ms) {
 		return;
 	}
 	this->stop();
+
 	this->stopped = false;
 	this->files = files;
 	this->minsize = ms;
@@ -65,9 +66,9 @@ void Scanner::run() {
 			break;
 		}
 		QString filepath = it.next();
-
+		QFileInfo fileinfo = it.fileInfo();
 		filepath = filepath.right(filepath.length() - path.length());
-		int filesize = it.fileInfo().size();
+		int filesize = fileinfo.size();
 		if (filesize < this->minsize || filesize>(1024 * 1024 * 5)) {
 			continue;
 		}

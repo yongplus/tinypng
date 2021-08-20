@@ -92,10 +92,10 @@ void CompressThread::run() {
 			req = QNetworkRequest(url);
 			req.setRawHeader("Authorization", "Basic " + QString("%1:%2").arg(config.mail, config.key).toLocal8Bit().toBase64());
 		}
-
+		qDebug() << "--------------------->:" << this->root + this->path;
 		QFile file(this->root + this->path);
 		if (!file.open(QIODevice::ReadOnly)) {
-			this->emitError("打开文件出错");
+			this->emitError("打开文件出错:" + file.errorString());
 			continue;
 		}
 		QByteArray binary = file.readAll();
