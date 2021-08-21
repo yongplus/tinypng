@@ -74,6 +74,7 @@ QModelIndex GridTableHeaderView::indexAt(const QPoint& pos) {
 void GridTableHeaderView::paintSection(QPainter* painter, const QRect& rect,
 	int logicalIndex) const {
 
+
 	const GridTableHeaderModel* tblModel =
 		qobject_cast<GridTableHeaderModel*>(this->model());
 	const int level = (orientation() == Qt::Horizontal) ? tblModel->rowCount()
@@ -165,9 +166,11 @@ void GridTableHeaderView::paintSection(QPainter* painter, const QRect& rect,
 			cellIndex = rowSpanIdx;
 		}
 
+
 		// draw section with style
 		QStyleOptionHeader opt;
 		initStyleOption(&opt);
+
 
 		if (logicalIndex == 0) {
 			opt.position = QStyleOptionHeader::Beginning;
@@ -189,8 +192,6 @@ void GridTableHeaderView::paintSection(QPainter* painter, const QRect& rect,
 				opt.position = QStyleOptionHeader::Middle;
 			}
 		}
-
-
 
 		opt.textAlignment = Qt::AlignCenter;
 		opt.iconAlignment = Qt::AlignVCenter;

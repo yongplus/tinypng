@@ -67,8 +67,8 @@ public:
     QHBoxLayout *horizontalLayout_10;
     QPushButton *savebtn;
     QLabel *label_5;
-    QButtonGroup *buttonGroup_2;
     QButtonGroup *buttonGroup;
+    QButtonGroup *buttonGroup_2;
 
     void setupUi(QWidget *SettingWindow)
     {
@@ -400,7 +400,11 @@ public:
         label_7->setText(QCoreApplication::translate("SettingWindow", "\350\272\253\344\273\275\346\250\241\345\274\217:", nullptr));
         radioButtonWeb->setText(QCoreApplication::translate("SettingWindow", "\345\205\215key", nullptr));
         radioButtonKey->setText(QCoreApplication::translate("SettingWindow", "ApiKey", nullptr));
-        label_8->setText(QCoreApplication::translate("SettingWindow", "<html><head/><body><p>\345\205\215Key\346\250\241\345\274\217\357\274\214\350\275\257\344\273\266\346\250\241\346\213\237\347\224\250\346\210\267\346\223\215\344\275\234Tinypng\347\275\221\347\253\231\357\274\214\346\227\240\351\234\200\347\224\263\350\257\267Api Key</p></body></html>", nullptr));
+        label_8->setText(QCoreApplication::translate("SettingWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'\346\226\260\345\256\213\344\275\223'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\345\205\215Key\346\250\241\345\274\217\357\274\214\350\275\257\344\273\266\346\250\241\346\213\237\347\224\250\346\210\267\346\223\215\344\275\234TinyPNG\347\275\221\347\253\231\357\274\214\346\227\240\351\234\200\347\224\263\350\257\267Api Key</p></body></html>", nullptr));
         label_2->setText(QCoreApplication::translate("SettingWindow", "Mail:", nullptr));
         label->setText(QCoreApplication::translate("SettingWindow", "Key:", nullptr));
         label_3->setText(QCoreApplication::translate("SettingWindow", "\344\273\243\347\220\206:", nullptr));

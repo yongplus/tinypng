@@ -64,6 +64,7 @@ selection-color: white \
 	scanner = new Scanner(this);
 	this->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	this->verticalHeader()->setSelectionBehavior(QAbstractItemView::SelectRows);
+	this->horizontalHeader()->setHighlightSections(true);
 	this->verticalHeader()->setStyleSheet("QHeaderView::section{"
 		"border-top:0px solid #D8D8D8;"
 		"border-left:0px solid #D8D8D8;"
@@ -213,7 +214,7 @@ void MyTableView::setGridHeaderview() {
 			"}"
 			"QHeaderView::section:first{"
 			"border-left:0px solid #D8D8D8;"
-			"}"
+			"}QHeaderView::section:selected{background:blue;}"
 			"QTableCornerButton::section{"
 			"border-top:0px solid #D8D8D8;"
 			"border-left:0px solid #D8D8D8;"
