@@ -1,3 +1,4 @@
-﻿  Console.cpp
+﻿  CompressThreadDispatcher.cpp
+  MyTableView.cpp
   tinypng.vcxproj -> D:\workspace\qt\tinypng\Release\tinypng.exe
   ---------------------------

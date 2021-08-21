@@ -72,7 +72,7 @@ selection-color: white \
 		"background-color:white;"
 		"color:black;"
 		"padding:4px;"
-		"} QHeaderView::section:checked{"
+		"} QHeaderView::section:checked,QHeaderView::section:pressed{"
 		"border-top:0px solid #D8D8D8;"
 		"border-left:0px solid #D8D8D8;"
 		"border-right:0px solid #D8D8D8;"

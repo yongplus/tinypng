@@ -109,7 +109,9 @@ void CompressThreadDispatcher::doneTask(QVariant variant) {
 	qDebug() << "收到结果:" << result.errcode << result.errmsg << result.size << result.path << result.row;
 
 
-
+	if (result.row >= this->model->rowCount()) {
+		return;
+	}
 	TableModelRow row = this->model->getRow(result.row);
 	if (result.path.contains(row.path)) {
 		if (result.errcode == 0) {
