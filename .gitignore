@@ -1,2 +1,4 @@
 .vs
-Deubg
+Debug/
+Release/
+innoscript.iss
