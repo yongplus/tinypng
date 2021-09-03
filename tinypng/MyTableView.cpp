@@ -10,7 +10,7 @@
 #include <QFileInfo>
 #include <QStandardItemModel>
 
-#include "config.h"
+#include "Config.h"
 
 MyTableView::MyTableView(QWidget* parent, QAbstractItemModel* model) :QTableView(parent)
 {

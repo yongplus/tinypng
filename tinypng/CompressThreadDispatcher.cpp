@@ -13,7 +13,7 @@ CompressThreadDispatcher::CompressThreadDispatcher(QThread* td, Console* c, MyTa
 	runThreadNum = 0;
 	this->mutex = new QMutex();
 	workers = QList<CompressThread*>();
-	thread = td;
+    thread = td;
 	elapsedTimer = new QElapsedTimer();
 
 }
