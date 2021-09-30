@@ -119,9 +119,6 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="Console.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtUic Include="SettingWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>

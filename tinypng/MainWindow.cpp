@@ -96,10 +96,6 @@ void MainWindow::_buildBody() {
 	TableModel* model = new TableModel(this);
 	this->table = new MyTableView(this, model);
 
-
-
-
-
 	this->console = new Console(this);
 
 	QSplitter* splitter = new QSplitter(Qt::Vertical);

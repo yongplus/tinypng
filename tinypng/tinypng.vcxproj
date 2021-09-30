@@ -232,7 +232,6 @@
     <ClCompile Include="TableModel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="Console.ui" />
     <QtUic Include="SettingWindow.ui" />
   </ItemGroup>
   <ItemGroup>

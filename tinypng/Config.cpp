@@ -1,5 +1,6 @@
 ﻿#include "Config.h"
 #include <QDateTime>
+#include <qDebug>
 
 Config::Config(QObject* parent)
 	: QObject(parent)
@@ -66,4 +67,5 @@ configItem Config::randDefault() {
 
 Config::~Config()
 {
+	delete qset;
 }

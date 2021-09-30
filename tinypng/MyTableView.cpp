@@ -9,6 +9,7 @@
 #include <QPainter>
 #include <QFileInfo>
 #include <QStandardItemModel>
+#include <QOperatingSystemVersion>
 
 #include "Config.h"
 
@@ -54,7 +55,7 @@ selection-color: white \
 	setColumnWidth(2, 100);
 	setColumnWidth(1, 100);
 	//setFocusPolicy(Qt::NoFocus);
-
+	horizontalHeader()->setHighlightSections(true);
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	setColumnHidden(0, true);
 	setAcceptDrops(true);
@@ -64,7 +65,7 @@ selection-color: white \
 	scanner = new Scanner(this);
 	this->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	this->verticalHeader()->setSelectionBehavior(QAbstractItemView::SelectRows);
-	this->horizontalHeader()->setHighlightSections(true);
+
 	this->verticalHeader()->setStyleSheet("QHeaderView::section{"
 		"border-top:0px solid #D8D8D8;"
 		"border-left:0px solid #D8D8D8;"
@@ -151,8 +152,7 @@ void MyTableView::keyPressEvent(QKeyEvent* event) {
 	if (event->key() == Qt::Key_Delete) {
 		this->clickDelete();
 	}
-	else if (event->key() == Qt::Key_A && QApplication::keyboardModifiers() && Qt::ControlModifier) {
-		TableModel* model = (TableModel*)this->model();
+	else if (event->key() == Qt::Key_A && QApplication::keyboardModifiers()) {
 		this->selectAll();
 	}
 }
@@ -182,7 +182,7 @@ void MyTableView::setGridHeaderview() {
 	header =
 		new GridTableHeaderView(Qt::Horizontal, 2, model()->columnCount());
 	setHorizontalHeader(header);
-	header->setHighlightSections(true);
+
 
 	header->setSectionResizeMode(QHeaderView::Fixed);
 
@@ -202,7 +202,8 @@ void MyTableView::setGridHeaderview() {
 	header->setCellLabel(0, 4, "状态");
 	header->setRowHeight(0, 25);
 	header->setRowHeight(1, 25);
-	if (QSysInfo::windowsVersion() == QSysInfo::WV_WINDOWS10) {
+	header->setHighlightSections(true);
+	if (QSysInfo::windowsVersion() == QSysInfo::WV_WINDOWS10 || true) {
 		this->horizontalHeader()->setStyleSheet(
 			"QHeaderView::section{"
 			"border-top:0px solid #D8D8D8;"

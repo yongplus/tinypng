@@ -22,7 +22,7 @@ public:
 	virtual void dropEvent(QDropEvent*) override;
 	virtual void resizeEvent(QResizeEvent*) override;
 	void readDir(const QStringList&);
-	void keyPressEvent(QKeyEvent*);
+    void keyPressEvent(QKeyEvent*) override;
 	void openSelectedRowFolder(int flag);
 
 	void setGridHeaderview();
