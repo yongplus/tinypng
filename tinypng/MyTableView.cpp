@@ -344,6 +344,7 @@ void MyTableView::clickDelete() {
 			QPersistentModelIndex item = i.next();
 			model->removeRow(item.row());
 		}
+
 		indexs.clear();
 	}
 
