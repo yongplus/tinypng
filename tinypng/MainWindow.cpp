@@ -186,8 +186,8 @@ void MainWindow::showStartBtn() {
 void MainWindow::showPauseBtn() {
 
 	this->startbtn->hide();
-	this->pausebtn->setEnabled(true);
 	this->pausebtn->show();
+	this->pausebtn->setEnabled(true);
 
 }
 
