@@ -10,7 +10,7 @@
 #include <QFileInfo>
 #include <QStandardItemModel>
 #include <QOperatingSystemVersion>
-
+#include "Utility.h"
 #include "Config.h"
 
 MyTableView::MyTableView(QWidget* parent, QAbstractItemModel* model) :QTableView(parent)
@@ -62,7 +62,6 @@ selection-color: white \
 	setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(customContextMenuResposne(const QPoint&)));
 	connect(this, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onDoubleClickRow(QModelIndex)));
-	scanner = new Scanner(this);
 	this->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	this->verticalHeader()->setSelectionBehavior(QAbstractItemView::SelectRows);
 
@@ -91,7 +90,6 @@ selection-color: white \
 
 void MyTableView::setModel(QAbstractItemModel* m) {
 	QTableView::setModel(m);
-	this->scanner->setModel((QStandardItemModel*)m);
 }
 
 
@@ -130,23 +128,16 @@ void MyTableView::dropEvent(QDropEvent* event) {
 	for (int i = 0; i < urls.count(); i++) {
 		QString path = urls.at(i).toLocalFile();
 		QFileInfo file(path);
-		if (file.isFile() && !this->scanner->isCompressible(path)) {
+		if (file.isFile() && !Utility::checkFileFormat(path)) {
 			continue;
 		}
 		files << path;
 	}
 
 	overlay->hide();
-	this->readDir(files);
+	emit readResource(files);
 }
 
-void MyTableView::readDir(const QStringList& files) {
-	if (files.count() == 0) {
-		return;
-	}
-	int minsize = Config(this).get().minsize;
-	scanner->start(files, minsize);
-}
 
 void MyTableView::keyPressEvent(QKeyEvent* event) {
 	if (event->key() == Qt::Key_Delete) {
@@ -259,7 +250,7 @@ bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {
 		if (QDir(path).exists()) {
 			dirNum += 1;
 		}
-		else if (this->scanner->isCompressible(path)) {
+		else if (Utility::checkFileFormat(path)) {
 			fileNum += 1;
 		}
 	}

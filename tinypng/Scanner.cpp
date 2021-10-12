@@ -2,16 +2,14 @@
 #include <QDirIterator>
 #include <QDebug>
 #include <QFileInfo>
+#include "Utility.h"
 
 Scanner::Scanner(QObject* parent) :
 	QThread(parent),
 	minsize(0),
 	model(nullptr)
+	//dispatcher(nullptr)
 {
-	suffiexs = QStringList();
-	suffiexs << "*.jpg";
-	suffiexs << "*.png";
-	suffiexs << "*.jpeg";
 	stopped = false;
 }
 
@@ -19,6 +17,9 @@ void Scanner::start(const QStringList& files, int ms) {
 	if (files.count() == 0) {
 		return;
 	}
+
+
+
 	this->stop();
 
 	this->stopped = false;
@@ -38,15 +39,6 @@ void Scanner::setModel(QStandardItemModel* m) {
 	this->model = (TableModel*)m;
 }
 
-bool Scanner::isCompressible(const QString& name) {
-	QString suffix = name.split(".").last().toLower();
-	if (this->suffiexs.indexOf("*." + suffix) != -1) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
 
 void Scanner::run() {
 	model->removeAll();
@@ -58,7 +50,7 @@ void Scanner::run() {
 	}
 	QString path = files[0];
 
-	QDirIterator it(path, suffiexs, QDir::Files, QDirIterator::Subdirectories);
+	QDirIterator it(path, Utility::getFormatList(), QDir::Files, QDirIterator::Subdirectories);
 	QList<TableModelRow> list;
 	while (it.hasNext()) {
 		if (this->stopped) {
@@ -104,8 +96,11 @@ void Scanner::batch(const QStringList& files) {
 		this->add("", files[i], fileinfo.size());
 	}
 }
-
-
+/*
+void Scanner::setDispatcher(CompressThreadDispatcher* obj) {
+	this->dispatcher = obj;
+}
+*/
 
 Scanner::~Scanner()
 {

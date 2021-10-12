@@ -10,6 +10,7 @@
 #include <qDebug>
 #include <QSplitter>
 #include <QFileDialog>
+#include "Utility.h"
 
 
 
@@ -37,15 +38,16 @@ MainWindow::MainWindow(QWidget* parent) :
 	connect(dispatcherThread, SIGNAL(started()), dispatcher, SLOT(run()));
 	connect(dispatcherThread, SIGNAL(finished()), dispatcher, SLOT(finished()));
 	connect(dispatcherThread, SIGNAL(finished()), this, SLOT(showStartBtn()));
+	connect(this->table, SIGNAL(readResource(QStringList)), this, SLOT(createScannner(QStringList)));
 
 	dispatcher->moveToThread(dispatcherThread);
+	scanner = NULL;
 
 }
 
 void MainWindow::show() {
 	QMainWindow::show();
-	connect(table->scanner, SIGNAL(started()), this, SLOT(scanDirStateChange()));
-	connect(table->scanner, SIGNAL(finished()), this, SLOT(scanDirStateChange()));
+
 }
 
 void MainWindow::_buildTopBtns() {
@@ -106,12 +108,13 @@ void MainWindow::_buildBody() {
 	splitter->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	this->layout->addWidget(splitter, 1);
 
-
 }
 
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-	this->table->scanner->stop();
+	if (scanner != NULL) {
+		scanner->stop();
+	}
 	this->onClickPauseBtn();
 	event->accept();
 }
@@ -126,7 +129,8 @@ void MainWindow::onClickEditBtn() {
 	dlg.setWindowTitle("选择压缩目录");
 	dlg.setOptions(QFileDialog::DontUseNativeDialog | QFileDialog::ReadOnly);
 
-	dlg.setNameFilter("Image (*.jpg *.png *.jpeg)");
+	QString suffix = Utility::getFormatList().join(" ");
+	dlg.setNameFilter("Image (" + suffix + ")");
 	dlg.setLabelText(QFileDialog::Reject, "取 消");
 	dlg.setFileMode(QFileDialog::Directory);
 	dlg.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
@@ -141,7 +145,8 @@ void MainWindow::onClickEditBtn() {
 
 
 	if (dlg.exec() == 1) {
-		this->table->readDir(dlg.selectedFiles());
+		//this->table->readDir(dlg.selectedFiles());
+		createScannner(dlg.selectedFiles());
 	}
 	disconnect(&dlg);
 	dlg.deleteLater();
@@ -168,12 +173,14 @@ void MainWindow::onClickStartBtn() {
 }
 
 void MainWindow::onClickPauseBtn() {
-	if (dispatcher->thread->isRunning()) {
-		dispatcher->quit();
-		dispatcher->thread->quit();
-		dispatcher->thread->wait();
+	if (!dispatcher->thread->isRunning()) {
+		return;
 	}
+	dispatcher->quit();
+	dispatcher->thread->quit();
+	dispatcher->thread->wait();
 	emit this->console->infoSignal("暂停压缩");
+
 }
 
 void MainWindow::showStartBtn() {
@@ -196,28 +203,40 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
 
 }
 
-void MainWindow::scanDirStateChange() {
+void MainWindow::createScannner(const QStringList& files) {
 
-	bool state = true;
-	if (table->scanner->isRunning()) {
-		if (dispatcher->thread->isRunning()) {
-			dispatcher->quit();
-			dispatcher->thread->quit();
-			dispatcher->thread->wait();
-		}
-
-		this->startbtn->setEnabled(false);
-		this->startbtn->setToolTip("目录读取中,请稍等~！");
+	if (files.count() == 0) {
+		return;
 	}
-	else {
+
+	if (scanner != NULL) {
+		scanner->stop();
+		delete scanner;
+		scanner = NULL;
+	}
+
+	//if the compression is doing,firstly stop it.
+	this->onClickPauseBtn();
+
+	scanner = new Scanner(this);
+
+	connect(scanner, &Scanner::finished, this, [&]() {
 		this->startbtn->setToolTip("");
 		this->startbtn->setEnabled(true);
 		if (this->table->model()->rowCount() > 0 && Config(this).get().autoStart) {
 			this->onClickStartBtn();
 		}
-	}
+		});
+	scanner->setModel((QStandardItemModel*)this->table->model());
 
+	int minsize = Config(this).get().minsize;
+	scanner->start(files, minsize);
+
+	this->startbtn->setEnabled(false);
+	this->startbtn->setToolTip("目录读取中,请稍等~！");
 }
+
+
 
 MainWindow::~MainWindow() {
 

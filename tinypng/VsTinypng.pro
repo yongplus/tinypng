@@ -23,6 +23,7 @@ HEADERS = \
    $$PWD/SingleApplication.h \
    $$PWD/TableHeaderItem.h \
    $$PWD/TableModel.h \
+   $$PWD/Utility.h \
 
 SOURCES = \
    $$PWD/CompressThread.cpp \
@@ -40,6 +41,7 @@ SOURCES = \
    $$PWD/SingleApplication.cpp \
    $$PWD/TableHeaderItem.cpp \
    $$PWD/TableModel.cpp \
+   $$PWD/Utility.cpp \
 
 INCLUDEPATH = \
     $$PWD/.
