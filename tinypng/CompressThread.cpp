@@ -161,6 +161,11 @@ void CompressThread::download(const QByteArray& bytes, const QString& ip) {
 	}
 	qDebug() << mainMap["output"].toMap()["url"].toString();
 	QString url = mainMap["output"].toMap()["url"].toString();
+	if (url.isEmpty()) {
+		this->emitError(QString("返回结果错误:%1").arg(QString(bytes)));
+		return;
+	}
+
 	int size = mainMap["output"].toMap()["size"].toInt();
 	//float timeout = 15 + size * double(10) / double(1048576); //超时时间：起始时间7s + 文件大小 * (预设每byte耗时)
 	float timeout = 60 * 2; //服务器偶尔响应太慢
@@ -246,9 +251,7 @@ void CompressThread::emitError(const QString& msg, const int& errcode) {
 
 	QVariant variant;
 	variant.setValue(result);
-	if (state != -1) {
-		emit finished(variant);
-	}
+	emit finished(variant);
 }
 
 

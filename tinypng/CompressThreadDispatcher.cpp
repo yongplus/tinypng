@@ -113,33 +113,32 @@ void CompressThreadDispatcher::doneTask(QVariant variant) {
 		return;
 	}
 	TableModelRow row = this->model->getRow(result.row);
-	if (result.path.contains(row.path)) {
-		if (result.errcode == 0) {
-			row.status = 2;
-			row.thin_size = result.size;
-			this->totalsize += row.size;
-			this->totalLessSize += (row.size - row.thin_size);
-			QBrush brush(QColor(23, 168, 26, 255));
-			QString rate = QString().sprintf("%.2f", (float(row.size) - float(row.thin_size)) / float(row.size) * 100);
-			qDebug() << row.size << row.thin_size << rate;
-			QString size = QLocale(QLocale::English, QLocale::UnitedStates).formattedDataSize(row.thin_size, 2, QLocale::DataSizeTraditionalFormat);
-			QString text = QString("%1/%2压缩成功:%3(%4),%5%").arg(finishNum).arg(totalRowNum).arg(row.path).arg(size).arg(rate);
-			emit this->console->infoSignal(text);
-			this->model->setData(this->model->index(result.row, 3), QVariant(brush), 9);
-		}
-		else {
-			failedNum += 1;
-			QString text = QString("%1/%2压缩失败:%3,%4").arg(finishNum).arg(totalRowNum).arg(row.path).arg(result.errmsg);
-			emit this->console->errorSignal(text);
-			row.status = -1;
-		}
-		this->model->replaceRow(result.row, row);
 
-		this->tableview->update(this->model->index(result.row, 3));
-		this->tableview->update(this->model->index(result.row, 2));
-		this->tableview->update(this->model->index(result.row, 4));
-
+	if (result.errcode == 0) {
+		row.status = 2;
+		row.thin_size = result.size;
+		this->totalsize += row.size;
+		this->totalLessSize += (row.size - row.thin_size);
+		QBrush brush(QColor(23, 168, 26, 255));
+		QString rate = QString().sprintf("%.2f", (float(row.size) - float(row.thin_size)) / float(row.size) * 100);
+		qDebug() << row.size << row.thin_size << rate;
+		QString size = QLocale(QLocale::English, QLocale::UnitedStates).formattedDataSize(row.thin_size, 2, QLocale::DataSizeTraditionalFormat);
+		QString text = QString("%1/%2压缩成功:%3(%4),%5%").arg(finishNum).arg(totalRowNum).arg(row.path).arg(size).arg(rate);
+		emit this->console->infoSignal(text);
+		this->model->setData(this->model->index(result.row, 3), QVariant(brush), 9);
 	}
+	else {
+		failedNum += 1;
+		QString text = QString("%1/%2压缩失败:%3,%4").arg(finishNum).arg(totalRowNum).arg(row.path).arg(result.errmsg);
+		emit this->console->errorSignal(text);
+		row.status = -1;
+	}
+	this->model->replaceRow(result.row, row);
+
+	this->tableview->update(this->model->index(result.row, 3));
+	this->tableview->update(this->model->index(result.row, 2));
+	this->tableview->update(this->model->index(result.row, 4));
+
 	//this->tableview->dataChanged(rowLeftIndex, rowRightIndex);
 	CompressThread* worker = (CompressThread*)sender();
 	this->nextTask(worker);

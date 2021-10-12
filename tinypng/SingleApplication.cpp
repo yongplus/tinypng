@@ -1,7 +1,4 @@
 ﻿#include "SingleApplication.h"
-// Windouw API 依赖头文件
-#include <windows.h>
-#include <winbase.h>
 #include <QLocalSocket>
 #include <QLocalServer>
 #include <QFile>

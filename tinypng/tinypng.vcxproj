@@ -190,6 +190,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="TableHeaderItem.h" />
+    <ClInclude Include="Utility.h" />
     <QtMoc Include="SingleApplication.h" />
     <QtMoc Include="SettingWindow.h" />
     <QtMoc Include="TableModel.h" />
@@ -230,9 +231,9 @@
     <ClCompile Include="SingleApplication.cpp" />
     <ClCompile Include="TableHeaderItem.cpp" />
     <ClCompile Include="TableModel.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="Console.ui" />
     <QtUic Include="SettingWindow.ui" />
   </ItemGroup>
   <ItemGroup>

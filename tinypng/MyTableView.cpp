@@ -9,8 +9,9 @@
 #include <QPainter>
 #include <QFileInfo>
 #include <QStandardItemModel>
-
-#include "config.h"
+#include <QOperatingSystemVersion>
+#include "Utility.h"
+#include "Config.h"
 
 MyTableView::MyTableView(QWidget* parent, QAbstractItemModel* model) :QTableView(parent)
 {
@@ -54,17 +55,16 @@ selection-color: white \
 	setColumnWidth(2, 100);
 	setColumnWidth(1, 100);
 	//setFocusPolicy(Qt::NoFocus);
-
+	horizontalHeader()->setHighlightSections(true);
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	setColumnHidden(0, true);
 	setAcceptDrops(true);
 	setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(customContextMenuResposne(const QPoint&)));
 	connect(this, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onDoubleClickRow(QModelIndex)));
-	scanner = new Scanner(this);
 	this->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	this->verticalHeader()->setSelectionBehavior(QAbstractItemView::SelectRows);
-	this->horizontalHeader()->setHighlightSections(true);
+
 	this->verticalHeader()->setStyleSheet("QHeaderView::section{"
 		"border-top:0px solid #D8D8D8;"
 		"border-left:0px solid #D8D8D8;"
@@ -90,7 +90,6 @@ selection-color: white \
 
 void MyTableView::setModel(QAbstractItemModel* m) {
 	QTableView::setModel(m);
-	this->scanner->setModel((QStandardItemModel*)m);
 }
 
 
@@ -129,30 +128,22 @@ void MyTableView::dropEvent(QDropEvent* event) {
 	for (int i = 0; i < urls.count(); i++) {
 		QString path = urls.at(i).toLocalFile();
 		QFileInfo file(path);
-		if (file.isFile() && !this->scanner->isCompressible(path)) {
+		if (file.isFile() && !Utility::checkFileFormat(path)) {
 			continue;
 		}
 		files << path;
 	}
 
 	overlay->hide();
-	this->readDir(files);
+	emit readResource(files);
 }
 
-void MyTableView::readDir(const QStringList& files) {
-	if (files.count() == 0) {
-		return;
-	}
-	int minsize = Config(this).get().minsize;
-	scanner->start(files, minsize);
-}
 
 void MyTableView::keyPressEvent(QKeyEvent* event) {
 	if (event->key() == Qt::Key_Delete) {
 		this->clickDelete();
 	}
-	else if (event->key() == Qt::Key_A && QApplication::keyboardModifiers() && Qt::ControlModifier) {
-		TableModel* model = (TableModel*)this->model();
+	else if (event->key() == Qt::Key_A && QApplication::keyboardModifiers()) {
 		this->selectAll();
 	}
 }
@@ -182,7 +173,7 @@ void MyTableView::setGridHeaderview() {
 	header =
 		new GridTableHeaderView(Qt::Horizontal, 2, model()->columnCount());
 	setHorizontalHeader(header);
-	header->setHighlightSections(true);
+
 
 	header->setSectionResizeMode(QHeaderView::Fixed);
 
@@ -202,7 +193,8 @@ void MyTableView::setGridHeaderview() {
 	header->setCellLabel(0, 4, "状态");
 	header->setRowHeight(0, 25);
 	header->setRowHeight(1, 25);
-	if (QSysInfo::windowsVersion() == QSysInfo::WV_WINDOWS10) {
+	header->setHighlightSections(true);
+	if (QSysInfo::windowsVersion() == QSysInfo::WV_WINDOWS10 || true) {
 		this->horizontalHeader()->setStyleSheet(
 			"QHeaderView::section{"
 			"border-top:0px solid #D8D8D8;"
@@ -258,7 +250,7 @@ bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {
 		if (QDir(path).exists()) {
 			dirNum += 1;
 		}
-		else if (this->scanner->isCompressible(path)) {
+		else if (Utility::checkFileFormat(path)) {
 			fileNum += 1;
 		}
 	}
@@ -343,6 +335,7 @@ void MyTableView::clickDelete() {
 			QPersistentModelIndex item = i.next();
 			model->removeRow(item.row());
 		}
+
 		indexs.clear();
 	}
 

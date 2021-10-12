@@ -92,7 +92,7 @@
          <item>
           <widget class="QRadioButton" name="radioButtonWeb">
            <property name="text">
-            <string>免key</string>
+            <string>免Key</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">buttonGroup_2</string>
@@ -652,7 +652,7 @@ border:none;</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

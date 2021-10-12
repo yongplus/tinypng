@@ -162,7 +162,7 @@ void TableModel::removeAll() {
 
 
 void TableModel::removeRow(int row, const QModelIndex& index) {
-	if (row < 0 || (row + 1) >= this->_data->length()) {
+	if (row < 0 || (row + 1) > this->_data->length()) {
 		return;
 	}
 	this->mutex->lock();

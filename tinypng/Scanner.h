@@ -12,22 +12,19 @@ class Scanner : public QThread
 public:
 
 	TableModel* model;
-
+	//CompressThreadDispatcher* dispatcher;
 	int minsize;
 	explicit  Scanner(QObject* parent);
 	~Scanner();
 	void start(const QStringList&, int);
 	void stop();
 	void setModel(QStandardItemModel*);
-	bool isCompressible(const QString&); //根据文件名检查是否可压缩
 	void add(const QString&, const QString&, int);
 	void batch(const QStringList&);
-
+	//void setDispatcher(CompressThreadDispatcher*);
 protected:
 	void run();
 private:
 	QStringList files;
 	bool stopped;
-	QStringList suffiexs;
-
 };

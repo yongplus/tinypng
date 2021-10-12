@@ -73,8 +73,6 @@ QModelIndex GridTableHeaderView::indexAt(const QPoint& pos) {
 
 void GridTableHeaderView::paintSection(QPainter* painter, const QRect& rect,
 	int logicalIndex) const {
-
-
 	const GridTableHeaderModel* tblModel =
 		qobject_cast<GridTableHeaderModel*>(this->model());
 	const int level = (orientation() == Qt::Horizontal) ? tblModel->rowCount()
@@ -199,6 +197,7 @@ void GridTableHeaderView::paintSection(QPainter* painter, const QRect& rect,
 		opt.text = cellIndex.data(Qt::DisplayRole).toString();
 		opt.rect = sectionRect;
 
+
 		QVariant bg = cellIndex.data(Qt::BackgroundRole);
 		QVariant fg = cellIndex.data(Qt::ForegroundRole);
 		if (bg.canConvert<QBrush>()) {
@@ -208,10 +207,8 @@ void GridTableHeaderView::paintSection(QPainter* painter, const QRect& rect,
 		if (fg.canConvert<QBrush>()) {
 			opt.palette.setBrush(QPalette::ButtonText, fg.value<QBrush>());
 		}
-
-
 		painter->save();
-
+		//QHeaderView::paintSection(painter, sectionRect, logicalIndex);
 		style()->drawControl(QStyle::CE_Header, &opt, painter, this);
 		//QHeaderView::paintSection(painter, rect, logicalIndex);
 		painter->restore();
