@@ -9,7 +9,7 @@
 
 ##### 下载：
 [Download the installer for Windows>>](https://dd.0f3.com/tinypng/installer.exe)  
-[Download the installer for MacOS>>](https://dd.0f3.com/tinypng/Tinypng-MacOS.zip)
+[Download the installer for MacOS>>](https://dd.0f3.com/tinypng/Tinypng-MacOS.dmg)
 
 ### Screenshots
 ![截图](./assets/Screenshot1.png)  

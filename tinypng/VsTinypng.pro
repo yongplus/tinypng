@@ -49,7 +49,7 @@ FORMS += \
     SettingWindow.ui
 
 RC_ICONS = logo.ico
-
+ICON = icon.icns
 RESOURCES += \
     Resource.qrc
 

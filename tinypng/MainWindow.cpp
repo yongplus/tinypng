@@ -145,7 +145,6 @@ void MainWindow::onClickEditBtn() {
 
 
 	if (dlg.exec() == 1) {
-		//this->table->readDir(dlg.selectedFiles());
 		createScannner(dlg.selectedFiles());
 	}
 	disconnect(&dlg);
