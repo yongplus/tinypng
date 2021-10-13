@@ -12,6 +12,7 @@
 [Download the installer for MacOS>>](https://dd.0f3.com/tinypng/Tinypng-MacOS.dmg)
 
 ### Screenshots
+![截图](./assets/Screenshot3.png)  
 ![截图](./assets/Screenshot1.png)  
 ![截图](./assets/Screenshot2.png)  
 
