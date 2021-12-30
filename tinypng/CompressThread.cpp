@@ -80,7 +80,7 @@ void CompressThread::run() {
 		QString ip;
 		QNetworkRequest req;
 		if (config.tinyReqMode == TinyReqMode::Web) {
-			QUrl url("https://tinify.cn/web/shrink");
+			QUrl url("https://tinify.com/web/shrink");
 			req = QNetworkRequest(url);
 			req.setHeader(QNetworkRequest::UserAgentHeader, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36");
 			req.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
