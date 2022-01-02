@@ -16,6 +16,10 @@
 ![截图](./assets/Screenshot1.png)  
 ![截图](./assets/Screenshot2.png)  
 
+##### MacOS版
+![截图](./assets/mac2.jpeg)  
+![截图](./assets/mac1.jpeg)  
+
 ### 配置
 ~~TinyPNG Key是免费的，为了安装后可以直接用，软件源码中已有2个Key，安装后会随机配置一个作为使用。每个Key每月免费压缩为500次，若不够可以自己多申请几个（申请很简单，填写邮箱和昵称，便会收到邮件，根据邮件中的链接进入创建key即可）；~~  
 由于TinyPNG服务器在国外，国内访问较慢，如果你有国外代理可配置为其加速。  
