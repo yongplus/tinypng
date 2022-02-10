@@ -8,8 +8,8 @@ QT = core gui widgets network
 CONFIG += c++11
 
 HEADERS = \
-   $$PWD/CompressThread.h \
-   $$PWD/CompressThreadDispatcher.h \
+   $$PWD/Compress.h \
+   $$PWD/Dispatcher.h \
    $$PWD/Config.h \
    $$PWD/Console.h \
    $$PWD/GridTableHeaderModel.h \
@@ -26,8 +26,8 @@ HEADERS = \
    $$PWD/Utility.h \
 
 SOURCES = \
-   $$PWD/CompressThread.cpp \
-   $$PWD/CompressThreadDispatcher.cpp \
+   $$PWD/Compress.cpp \
+   $$PWD/Dispatcher.cpp \
    $$PWD/Config.cpp \
    $$PWD/Console.cpp \
    $$PWD/GridTableHeaderModel.cpp \

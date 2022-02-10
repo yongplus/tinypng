@@ -1,4 +1,4 @@
-﻿#include "CompressThread.h"
+﻿#include "Compress.h"
 #include <QFile>
 #include <QObject>
 #include <QEventLoop>
@@ -11,7 +11,7 @@
 #include <QNetworkProxy>
 #include <QRandomGenerator>
 
-CompressThread::CompressThread(QThread* td, const configItem& cfg, QString ort)
+Compress::Compress(QThread* td, const configItem& cfg, QString ort)
 	: QObject(NULL),
 	row(0),
 	root(""),
@@ -38,7 +38,7 @@ CompressThread::CompressThread(QThread* td, const configItem& cfg, QString ort)
 
 }
 
-void CompressThread::addTask(const int r, const QString& rt, QString& ph) {
+void Compress::addTask(const int r, const QString& rt, QString& ph) {
 	row = r;
 	root = rt;
 	path = ph;
@@ -46,13 +46,13 @@ void CompressThread::addTask(const int r, const QString& rt, QString& ph) {
 	this->eventloop->quit();
 }
 
-void CompressThread::quit() {
+void Compress::quit() {
 	state = -1;
 	this->eventloop->quit();
 	this->thread->quit();
 }
 
-void CompressThread::run() {
+void Compress::run() {
 
 
 	while (true) {
@@ -150,7 +150,7 @@ void CompressThread::run() {
 
 }
 
-void CompressThread::download(const QByteArray& bytes, const QString& ip) {
+void Compress::download(const QByteArray& bytes, const QString& ip) {
 
 	QJsonDocument doc = QJsonDocument::fromJson(bytes);
 	QJsonObject jsonobj = doc.object();
@@ -210,7 +210,7 @@ void CompressThread::download(const QByteArray& bytes, const QString& ip) {
 				qDebug() << "wrote:" << file.write(binary);
 				file.close();
 
-				CompressThreadResult result;
+				CompressResult result;
 				result.errcode = 0;
 				result.size = binary.length();
 				result.path = outputPath;
@@ -239,12 +239,12 @@ void CompressThread::download(const QByteArray& bytes, const QString& ip) {
 	delete reply;
 }
 
-void CompressThread::setAuthentication(QNetworkReply* reply, QAuthenticator* authenticator) {
+void Compress::setAuthentication(QNetworkReply* reply, QAuthenticator* authenticator) {
 	qDebug() << "to set auth info";
 }
 
-void CompressThread::emitError(const QString& msg, const int& errcode) {
-	CompressThreadResult result;
+void Compress::emitError(const QString& msg, const int& errcode) {
+	CompressResult result;
 	result.errcode = errcode;
 	result.errmsg = msg;
 	result.row = this->row;
@@ -255,7 +255,7 @@ void CompressThread::emitError(const QString& msg, const int& errcode) {
 }
 
 
-QString CompressThread::generateIp() {
+QString Compress::generateIp() {
 	qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 	QStringList  seg = QStringList();
 	for (int i = 0; i < 4; i++)
@@ -267,7 +267,7 @@ QString CompressThread::generateIp() {
 	return seg.join(".");
 }
 
-CompressThread::~CompressThread()
+Compress::~Compress()
 {
 	delete eventloop;
 	delete mgr;

@@ -8,11 +8,11 @@
 #include "TableModel.h"
 #include "Console.h"
 #include "Config.h"
-#include "CompressThread.h"
+#include "Compress.h"
 #include <QElapsedTimer>
 
 
-class CompressThreadDispatcher : public QObject
+class Dispatcher : public QObject
 {
 	Q_OBJECT
 
@@ -31,14 +31,14 @@ public:
 	QElapsedTimer* elapsedTimer;
 	QEventLoop* loop;
 	QMutex* mutex;
-	QList<CompressThread*> workers;
+	QList<Compress*> workers;
 	QThread* thread;
 
 
-	CompressThreadDispatcher(QThread* thread, Console* console, MyTableView* tableview);
+	Dispatcher(QThread* thread, Console* console, MyTableView* tableview);
 
-	void nextTask(CompressThread* thread);
-	~CompressThreadDispatcher();
+	void nextTask(Compress* thread);
+	~Dispatcher();
 	void quit();
 private:
 	int getUnhandleNum();

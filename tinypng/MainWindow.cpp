@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget* parent) :
 
 	QThread* dispatcherThread = new QThread();
 
-	dispatcher = new CompressThreadDispatcher(dispatcherThread, this->console, this->table);
+	dispatcher = new Dispatcher(dispatcherThread, this->console, this->table);
 	connect(dispatcher, SIGNAL(started()), this, SLOT(showPauseBtn()));
 	connect(dispatcherThread, SIGNAL(started()), dispatcher, SLOT(run()));
 	connect(dispatcherThread, SIGNAL(finished()), dispatcher, SLOT(finished()));

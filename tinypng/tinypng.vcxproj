@@ -189,6 +189,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <QtMoc Include="Compress.h" />
     <ClInclude Include="TableHeaderItem.h" />
     <ClInclude Include="Utility.h" />
     <QtMoc Include="SingleApplication.h" />
@@ -199,18 +200,17 @@
     <QtMoc Include="Scanner.h" />
     <QtMoc Include="MyOverlay.h" />
     <QtMoc Include="Console.h" />
-    <QtMoc Include="CompressThread.h" />
     <QtMoc Include="Config.h" />
-    <QtMoc Include="CompressThreadDispatcher.h" />
+    <QtMoc Include="Dispatcher.h" />
     <QtMoc Include="GridTableHeaderView.h" />
     <QtMoc Include="GridTableHeaderModel.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CompressThread.cpp" />
-    <ClCompile Include="CompressThreadDispatcher.cpp" />
+    <ClCompile Include="Compress.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Dispatcher.cpp" />
     <ClCompile Include="GridTableHeaderModel.cpp" />
     <ClCompile Include="GridTableHeaderView.cpp" />
     <ClCompile Include="Scanner.cpp" />

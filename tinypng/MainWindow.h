@@ -9,7 +9,7 @@
 #include "MyTableView.h"
 #include "MyOverlay.h"
 #include "Console.h"
-#include "CompressThreadDispatcher.h"
+#include "Dispatcher.h"
 #include "Config.h"
 #include "SettingWindow.h"
 #include "Scanner.h"
@@ -37,7 +37,7 @@ public:
 	void show();
 
 private:
-	CompressThreadDispatcher* dispatcher;
+	Dispatcher* dispatcher;
 	Ui::MainWindow* ui;
 
 	void _buildTopBtns();

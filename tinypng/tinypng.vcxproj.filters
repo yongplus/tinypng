@@ -55,13 +55,7 @@
     <ClCompile Include="SettingWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CompressThread.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CompressThreadDispatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SingleApplication.cpp">
@@ -80,6 +74,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Compress.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dispatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -105,13 +105,10 @@
     <QtMoc Include="SettingWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="CompressThread.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Config.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="CompressThreadDispatcher.h">
+    <QtMoc Include="Dispatcher.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="SingleApplication.h">
@@ -121,6 +118,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="GridTableHeaderModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Compress.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

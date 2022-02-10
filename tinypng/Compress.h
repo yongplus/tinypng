@@ -9,7 +9,7 @@
 #include <QEventLoop>
 #include "Config.h"
 
-struct CompressThreadResult {
+struct CompressResult {
 	int errcode;
 	QString errmsg;
 	int size;
@@ -18,9 +18,9 @@ struct CompressThreadResult {
 };
 
 
-Q_DECLARE_METATYPE(CompressThreadResult);
+Q_DECLARE_METATYPE(CompressResult);
 
-class CompressThread : public QObject
+class Compress : public QObject
 {
 	Q_OBJECT
 
@@ -34,8 +34,8 @@ public:
 	int state; // 0 新任务待处理 -1 退出 
 	QEventLoop* eventloop;
 	QNetworkAccessManager* mgr;
-	CompressThread(QThread* thread, const configItem& config, QString);
-	~CompressThread();
+	Compress(QThread* thread, const configItem& config, QString);
+	~Compress();
 
 	void addTask(int row, const QString& root, QString& path);
 	void quit();

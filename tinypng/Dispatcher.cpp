@@ -1,8 +1,8 @@
-﻿#include "CompressThreadDispatcher.h"
+﻿#include "Dispatcher.h"
 #include <QListIterator>
 #include <QTimer>
 
-CompressThreadDispatcher::CompressThreadDispatcher(QThread* td, Console* c, MyTableView* t)
+Dispatcher::Dispatcher(QThread* td, Console* c, MyTableView* t)
 {
 	console = c;
 	tableview = t;
@@ -12,13 +12,13 @@ CompressThreadDispatcher::CompressThreadDispatcher(QThread* td, Console* c, MyTa
 	offsetRow = 0;
 	runThreadNum = 0;
 	this->mutex = new QMutex();
-	workers = QList<CompressThread*>();
+	workers = QList<Compress*>();
 	thread = td;
 	elapsedTimer = new QElapsedTimer();
 
 }
 
-void CompressThreadDispatcher::run() {
+void Dispatcher::run() {
 	config = Config(this).get();
 	offsetRow = 0;
 	finishNum = 0;
@@ -49,7 +49,7 @@ void CompressThreadDispatcher::run() {
 
 		QThread* wokrer_thread = new QThread(this);
 
-		CompressThread* worker = new CompressThread(wokrer_thread, config, outputRoot);
+		Compress* worker = new Compress(wokrer_thread, config, outputRoot);
 		connect(worker, SIGNAL(finished(QVariant)), this, SLOT(doneTask(QVariant)));
 		connect(wokrer_thread, SIGNAL(started()), worker, SLOT(run()));
 		connect(wokrer_thread, SIGNAL(finished()), worker, SLOT(deleteLater()));
@@ -68,7 +68,7 @@ void CompressThreadDispatcher::run() {
 
 }
 
-void CompressThreadDispatcher::nextTask(CompressThread* worker) {
+void Dispatcher::nextTask(Compress* worker) {
 
 	if (this->loop != nullptr && !this->loop->isRunning()) {
 		qDebug() << "-------------------------->the progress was paused~！";
@@ -101,11 +101,11 @@ void CompressThreadDispatcher::nextTask(CompressThread* worker) {
 
 
 
-void CompressThreadDispatcher::doneTask(QVariant variant) {
+void Dispatcher::doneTask(QVariant variant) {
 	this->mutex->lock();
 
 	finishNum++;
-	CompressThreadResult result = variant.value<CompressThreadResult>();
+	CompressResult result = variant.value<CompressResult>();
 	qDebug() << "收到结果:" << result.errcode << result.errmsg << result.size << result.path << result.row;
 
 
@@ -140,21 +140,21 @@ void CompressThreadDispatcher::doneTask(QVariant variant) {
 	this->tableview->update(this->model->index(result.row, 4));
 
 	//this->tableview->dataChanged(rowLeftIndex, rowRightIndex);
-	CompressThread* worker = (CompressThread*)sender();
+	Compress* worker = (Compress*)sender();
 	this->nextTask(worker);
 	this->mutex->unlock();
 
 
 }
 
-void CompressThreadDispatcher::quit() {
+void Dispatcher::quit() {
 	qDebug() << "退出";
 
 
 	loop->quit();
-	QListIterator<CompressThread*> it(workers);
+	QListIterator<Compress*> it(workers);
 	while (it.hasNext()) {
-		CompressThread* worker = it.next();
+		Compress* worker = it.next();
 		if (worker->thread->isRunning()) {
 			disconnect(worker, SIGNAL(finished(QVariant)), this, SLOT(doneTask(QVariant)));
 			worker->quit();
@@ -177,7 +177,7 @@ void CompressThreadDispatcher::quit() {
 	workers.clear();
 }
 
-void CompressThreadDispatcher::finished() {
+void Dispatcher::finished() {
 
 	if (finishNum > 0) {
 		QString spentime = QString().sprintf("%.3f", float(this->elapsedTimer->elapsed()) / 1000);
@@ -190,7 +190,7 @@ void CompressThreadDispatcher::finished() {
 
 }
 
-int CompressThreadDispatcher::getUnhandleNum() {
+int Dispatcher::getUnhandleNum() {
 	int total = this->model->rowCount();
 	int num = 0;
 	for (int i = 0; i < total; i++) {
@@ -202,7 +202,7 @@ int CompressThreadDispatcher::getUnhandleNum() {
 	return num;
 }
 
-CompressThreadDispatcher::~CompressThreadDispatcher()
+Dispatcher::~Dispatcher()
 {
 	delete elapsedTimer;
 
