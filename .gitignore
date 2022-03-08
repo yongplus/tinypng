@@ -6,3 +6,4 @@ build-*
 tinypng/Debug
 tinypng/Release
 tinypng/x64
+.DS_Store
