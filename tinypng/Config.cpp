@@ -11,6 +11,7 @@ Config::Config(QObject* parent)
 		configItem one = this->randDefault();
 		qset->setValue("mail", QVariant(one.mail));
 		qset->setValue("key", QVariant(one.key));
+		qset->setValue("maxsize", 1024 * 1024 * 5);
 		qset->setValue("outputMode", int(OutputMode::Replace));
 		qset->setValue("autostart", true);
 	}
@@ -25,6 +26,8 @@ void Config::set(configItem item) {
 	qset->setValue("proxy", item.proxy);
 	qset->setValue("outputMode", int(item.outputMode));
 	qset->setValue("minsize", item.minsize);
+	qDebug() << "setValue--------------------->" << item.maxsize;
+	qset->setValue("maxsize", item.maxsize);
 	qset->setValue("tinyReqMode", int(item.tinyReqMode));
 	qset->setValue("autostart", item.autoStart);
 	qset->endGroup();
@@ -37,6 +40,7 @@ configItem Config::get() {
 	item.key = qset->value("key").toString();
 	item.proxy = qset->value("proxy").toString();
 	item.minsize = qset->value("minsize").toInt();
+	item.maxsize = qset->value("maxsize").toInt();
 	if (qset->value("outputMode").toInt() != 1) {
 		item.outputMode = OutputMode::NewDir;
 	}

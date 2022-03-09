@@ -24,6 +24,7 @@ struct configItem {
 	TinyReqMode tinyReqMode;
 	bool autoStart; //添加资源后自动开始压缩
 	int minsize;
+	int maxsize;
 };
 
 

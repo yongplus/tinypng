@@ -14,7 +14,8 @@ SettingWindow::SettingWindow(QWidget* parent)
 	this->setFixedSize(this->width(), this->height() - ui->widget->height());
 	connect(ui->savebtn, SIGNAL(clicked()), this, SLOT(onClickSaveBtn()));
 	connect(ui->askbtn, SIGNAL(clicked()), this, SLOT(onShowSizeExplain()));
-	ui->sizeInput->setValidator(new QIntValidator(0, 999999999, this));
+	ui->sizeInput->setValidator(new QIntValidator(0, 200000, this));
+	ui->sizeInput_2->setValidator(new QIntValidator(0, 200000, this));
 	this->setValues();
 
 }
@@ -33,6 +34,7 @@ void SettingWindow::setValues() {
 	ui->keyInput->setText(item.key);
 	ui->proxyInput->setText(item.proxy);
 	ui->sizeInput->setText(QString("%1").arg(item.minsize / 1024));
+	ui->sizeInput_2->setText(QString("%1").arg(item.maxsize / 1024));
 	if (item.outputMode == OutputMode::NewDir) {
 		ui->newdirCheckBox->setChecked(true);
 	}
@@ -62,6 +64,7 @@ void SettingWindow::onClickSaveBtn() {
 	}
 	item.proxy = ui->proxyInput->text();
 	item.minsize = ui->sizeInput->text().toInt() * 1024;
+	item.maxsize = ui->sizeInput_2->text().toInt() * 1024;
 	item.outputMode = ui->newdirCheckBox->isChecked() ? OutputMode::NewDir : OutputMode::Replace;
 	item.autoStart = ui->checkBoxAutoStart->isChecked();
 	Config(this).set(item);
@@ -71,7 +74,7 @@ void SettingWindow::onClickSaveBtn() {
 
 void SettingWindow::onShowSizeExplain() {
 	QPoint pos = ui->askbtn->mapToGlobal(QPoint(0, 0));
-	QToolTip::showText(pos, "小于设定大小的图片将不会被压缩");
+	QToolTip::showText(pos, "仅压缩设定大小范围内的图片");
 }
 
 

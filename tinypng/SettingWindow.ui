@@ -417,7 +417,7 @@ p, li { white-space: pre-wrap; }
               <string/>
              </property>
              <property name="text">
-              <string>最低大小(KB):</string>
+              <string>大小范围(KB):</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -441,7 +441,35 @@ p, li { white-space: pre-wrap; }
               <string/>
              </property>
              <property name="placeholderText">
+              <string>最小</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>-</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="sizeInput_2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>宋体</family>
+              </font>
+             </property>
+             <property name="inputMask">
               <string/>
+             </property>
+             <property name="placeholderText">
+              <string>最大</string>
              </property>
             </widget>
            </item>
@@ -652,7 +680,7 @@ border:none;</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

@@ -17,7 +17,7 @@ color:#FFFFFF; \
 	font-family:\"sans-serif\", \
 }");
 	append("The image compression software that is available for png/jpg/jpeg is developed based on the apis offered by tinypng.png.");
-	append("Developer: yongplus@foxmail.com ");
+	append("GitHub: <a href=\"https://github.com/yongplus/tinypng\" style=\"color:#ffffff\">yongplus/TinyPNG</a>");
 	this->setOpenLinks(false);
 	this->atBottom = true;
 	connect(this, SIGNAL(textChanged()), this, SLOT(textChangedSlot()));

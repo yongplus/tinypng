@@ -229,7 +229,8 @@ void MainWindow::createScannner(const QStringList& files) {
 	scanner->setModel((QStandardItemModel*)this->table->model());
 
 	int minsize = Config(this).get().minsize;
-	scanner->start(files, minsize);
+	int maxsize = Config(this).get().maxsize;
+	scanner->start(files, minsize, maxsize);
 
 	this->startbtn->setEnabled(false);
 	this->startbtn->setToolTip("目录读取中,请稍等~！");

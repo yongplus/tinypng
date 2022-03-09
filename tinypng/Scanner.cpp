@@ -13,18 +13,16 @@ Scanner::Scanner(QObject* parent) :
 	stopped = false;
 }
 
-void Scanner::start(const QStringList& files, int ms) {
+void Scanner::start(const QStringList& files, int minsize, int maxsize) {
 	if (files.count() == 0) {
 		return;
 	}
 
-
-
 	this->stop();
-
 	this->stopped = false;
 	this->files = files;
-	this->minsize = ms;
+	this->minsize = minsize;
+	this->maxsize = maxsize;
 	QThread::start();
 }
 
@@ -61,7 +59,7 @@ void Scanner::run() {
 		QFileInfo fileinfo = it.fileInfo();
 		filepath = filepath.right(filepath.length() - path.length());
 		int filesize = fileinfo.size();
-		if (filesize < this->minsize || filesize>(1024 * 1024 * 5)) {
+		if (filesize < this->minsize || filesize > this->maxsize) {
 			continue;
 		}
 		this->add(path, filepath, it.fileInfo().size());

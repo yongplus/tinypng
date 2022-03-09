@@ -14,9 +14,10 @@ public:
 	TableModel* model;
 	//CompressThreadDispatcher* dispatcher;
 	int minsize;
+	int maxsize;
 	explicit  Scanner(QObject* parent);
 	~Scanner();
-	void start(const QStringList&, int);
+	void start(const QStringList&, int, int);
 	void stop();
 	void setModel(QStandardItemModel*);
 	void add(const QString&, const QString&, int);
