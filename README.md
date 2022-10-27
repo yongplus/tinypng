@@ -43,7 +43,7 @@
 
 ### Comparisons
 以下是对电商项目的商品详情页图片压缩测试数据，无论是页面大小还是访问速度的提升都很显著  
-![截图](http://0f3.com/tinypng/compared.png?v2)  
+![截图](https://github.com/yongplus/tinypng/blob/master/assets/compared.png?raw=true)  
 
 
 
