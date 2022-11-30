@@ -21,6 +21,9 @@ MyTableView::MyTableView(QWidget* parent, QAbstractItemModel* model) :QTableView
 	this->setGridHeaderview();
 	overlay = new MyOverlay(this);
 
+
+
+
 }
 
 void MyTableView::init() {
@@ -54,6 +57,8 @@ selection-color: white \
 	setColumnWidth(3, 100);
 	setColumnWidth(2, 100);
 	setColumnWidth(1, 100);
+	setColumnWidth(0, this->width() - 400);
+
 	//setFocusPolicy(Qt::NoFocus);
 	horizontalHeader()->setHighlightSections(true);
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -171,7 +176,7 @@ void MyTableView::setGridHeaderview() {
 	GridTableHeaderView* header;
 
 	header =
-		new GridTableHeaderView(Qt::Horizontal, 2, model()->columnCount());
+		new GridTableHeaderView(Qt::Horizontal, 2, model()->columnCount(), this);
 	setHorizontalHeader(header);
 
 
@@ -262,7 +267,7 @@ bool MyTableView::checkMimeIsDir(const QMimeData* mimedata) {
 }
 void MyTableView::resizeEvent(QResizeEvent* event) {
 	QTableView::resizeEvent(event);
-	this->setColumnWidth(0, event->size().width() - 400);
+	setColumnWidth(0, event->size().width() - 400);
 
 	QPoint pos = this->mapTo(this, QPoint(0, 0));
 	overlay->setGeometry(pos.x(), pos.y(), this->width(), this->height());

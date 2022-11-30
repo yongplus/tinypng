@@ -12,6 +12,7 @@ int main(int argc, char* argv[])
 	}
 
 
+
 	QTranslator qtTranslator;
 
 	QTranslator* pTranslator = new QTranslator();

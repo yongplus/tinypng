@@ -20,6 +20,10 @@ MainWindow::MainWindow(QWidget* parent) :
 	QMainWindow(parent)
 {
 
+	QFont font("NSimSun");
+	font.setPixelSize(12);
+	QApplication::setFont(font);
+
 	layout = new QVBoxLayout();
 	_buildTopBtns();
 	_buildBody();
@@ -30,6 +34,8 @@ MainWindow::MainWindow(QWidget* parent) :
 	QIcon icon(":/logo.ico");
 	QGuiApplication::setWindowIcon(icon);
 	setWindowTitle("图片压缩");
+
+
 
 	QThread* dispatcherThread = new QThread();
 
@@ -59,6 +65,7 @@ void MainWindow::_buildTopBtns() {
 	startbtn = new QPushButton(QString("开始压缩(S)"), this);
 	startbtn->setFixedSize(100, 45);
 	startbtn->setIcon(QIcon(":/res/icons/compress.png"));
+
 	startbtn->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
 
 	pausebtn = new QPushButton(QString("暂停压缩(P)"), this);
@@ -66,6 +73,8 @@ void MainWindow::_buildTopBtns() {
 	pausebtn->setIcon(QIcon(":/res/icons/pause.png"));
 	pausebtn->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_P));
 	pausebtn->hide();
+
+
 
 
 	QPushButton* config = new QPushButton(QString("配置KEY(C)"), this);
