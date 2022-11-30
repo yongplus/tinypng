@@ -8,8 +8,8 @@
 
 
 ##### 下载：
-[Download the installer for Windows>>](./releases/)  
-[Download the installer for MacOS>>](./releases/)
+[Download the installer for Windows>>](https://github.com/yongplus/tinypng/releases/tag/1.0.1)  
+[Download the installer for MacOS>>](https://github.com/yongplus/tinypng/releases/tag/1.0.1)
 
 ### Screenshots
  
