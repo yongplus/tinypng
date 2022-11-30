@@ -8,8 +8,8 @@
 
 
 ##### 下载：
-[Download the installer for Windows>>](https://dd.0f3.com:444/tinypng/installer.exe)  
-[Download the installer for MacOS>>](https://dd.0f3.com:444/tinypng/Tinypng-MacOS.dmg)
+[Download the installer for Windows>>](/yongplus/tinypng/releases/)  
+[Download the installer for MacOS>>](/yongplus/tinypng/releases/)
 
 ### Screenshots
  
