@@ -18,5 +18,6 @@ QStringList Utility::getFormatList() {
 	suffiexs << "*.jpg";
 	suffiexs << "*.png";
 	suffiexs << "*.jpeg";
+	suffiexs << "*.webp";
 	return suffiexs;
 }

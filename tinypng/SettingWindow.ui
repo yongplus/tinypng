@@ -70,12 +70,6 @@
            <height>0</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>宋体</family>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
          <property name="toolTip">
           <string/>
          </property>
@@ -182,12 +176,6 @@ p, li { white-space: pre-wrap; }
                <height>0</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <family>宋体</family>
-               <pointsize>9</pointsize>
-              </font>
-             </property>
              <property name="text">
               <string>Mail:</string>
              </property>
@@ -203,12 +191,6 @@ p, li { white-space: pre-wrap; }
                <width>0</width>
                <height>30</height>
               </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>宋体</family>
-               <pointsize>9</pointsize>
-              </font>
              </property>
             </widget>
            </item>
@@ -226,12 +208,6 @@ p, li { white-space: pre-wrap; }
                <width>90</width>
                <height>0</height>
               </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>宋体</family>
-               <pointsize>9</pointsize>
-              </font>
              </property>
              <property name="lineWidth">
               <number>1</number>
@@ -251,12 +227,6 @@ p, li { white-space: pre-wrap; }
                <width>0</width>
                <height>30</height>
               </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>宋体</family>
-               <pointsize>9</pointsize>
-              </font>
              </property>
             </widget>
            </item>
@@ -282,17 +252,11 @@ p, li { white-space: pre-wrap; }
            <height>0</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>宋体</family>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
          </property>
          <property name="text">
-          <string>代理:</string>
+          <string notr="true">代理:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -306,12 +270,6 @@ p, li { white-space: pre-wrap; }
            <width>0</width>
            <height>30</height>
           </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>宋体</family>
-           <pointsize>9</pointsize>
-          </font>
          </property>
          <property name="placeholderText">
           <string>http://ip:port</string>
@@ -340,7 +298,7 @@ p, li { white-space: pre-wrap; }
           </size>
          </property>
          <property name="text">
-          <string>自动开始:</string>
+          <string notr="true">自动开始:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -521,12 +479,6 @@ border:none;</string>
                <height>0</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <family>宋体</family>
-               <pointsize>9</pointsize>
-              </font>
-             </property>
              <property name="toolTip">
               <string/>
              </property>
@@ -542,12 +494,6 @@ border:none;</string>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
               <widget class="QCheckBox" name="newdirCheckBox">
-               <property name="font">
-                <font>
-                 <family>宋体</family>
-                 <pointsize>9</pointsize>
-                </font>
-               </property>
                <property name="text">
                 <string>新目录</string>
                </property>
@@ -558,12 +504,6 @@ border:none;</string>
              </item>
              <item>
               <widget class="QCheckBox" name="replaceCheckBox">
-               <property name="font">
-                <font>
-                 <family>宋体</family>
-                 <pointsize>9</pointsize>
-                </font>
-               </property>
                <property name="text">
                 <string>覆盖</string>
                </property>
@@ -601,7 +541,7 @@ border:none;</string>
          </property>
          <property name="font">
           <font>
-           <family>宋体</family>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="layoutDirection">
@@ -613,6 +553,12 @@ border:none;</string>
          <property name="icon">
           <iconset resource="Resource.qrc">
            <normaloff>:/res/icons/save.png</normaloff>:/res/icons/save.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>12</width>
+           <height>12</height>
+          </size>
          </property>
          <property name="shortcut">
           <string notr="true"/>
