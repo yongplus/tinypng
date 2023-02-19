@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget* parent) :
 {
 
 	QFont font("NSimSun");
-	font.setPixelSize(12);
+    font.setPixelSize(10);
 	QApplication::setFont(font);
 
 	layout = new QVBoxLayout();
