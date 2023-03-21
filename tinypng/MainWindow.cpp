@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget* parent) :
 {
 
 	QFont font("NSimSun");
-	font.setPixelSize(12);
+    font.setPixelSize(10);
 	QApplication::setFont(font);
 
 	layout = new QVBoxLayout();
@@ -153,7 +153,7 @@ void MainWindow::onClickEditBtn() {
 		});
 
 
-	if (dlg.exec() == 1) {
+	if (dlg.exec() == 1) {      
 		createScannner(dlg.selectedFiles());
 	}
 	disconnect(&dlg);
@@ -223,6 +223,7 @@ void MainWindow::createScannner(const QStringList& files) {
 		scanner = NULL;
 	}
 
+
 	//if the compression is doing,firstly stop it.
 	this->onClickPauseBtn();
 
@@ -239,6 +240,7 @@ void MainWindow::createScannner(const QStringList& files) {
 
 	int minsize = Config(this).get().minsize;
 	int maxsize = Config(this).get().maxsize;
+
 	scanner->start(files, minsize, maxsize);
 
 	this->startbtn->setEnabled(false);

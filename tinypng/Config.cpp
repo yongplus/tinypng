@@ -41,6 +41,9 @@ configItem Config::get() {
 	item.proxy = qset->value("proxy").toString();
 	item.minsize = qset->value("minsize").toInt();
 	item.maxsize = qset->value("maxsize").toInt();
+    if(item.maxsize == 0) {
+        item.maxsize = 1024 * 1024 * 5;
+    }
 	if (qset->value("outputMode").toInt() != 1) {
 		item.outputMode = OutputMode::NewDir;
 	}
