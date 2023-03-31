@@ -46,8 +46,9 @@
 
 
 ##### 免责声明
-免key模式仅用作个人学习和研究，请勿用作商业用途，如需商业用途请购买![官方服务](https://tinify.com/checkout/web-pro)  或使用Key模式。
+该仓库仅用于学习，如有商业用途，请购买官方的 pro 版：https://tinify.com/checkout/web-pro
 
+This Repo is only for study.
 
 
 
