@@ -4,8 +4,6 @@
 
 日常开发经常会用到[tinypng.org](https://tinypng.org/)图片批量压缩，TinyPNG平均压缩率能达到60%，肉眼能观察到的画质损失微乎其微，对页面加载提速及体验、节省用户流量、缩小程序包有很大帮助。
 
-项目图片过多时，通过官方网站压缩效率低、繁琐，于是最初用Go基于TinyPNG API写了个CLI程序，操作不是太方便，凭借对窗体软件的热爱和本着学习心态决定用C++写个GUI程序。
-
 
 ##### 下载：
 [Download the installer for Windows>>](https://github.com/yongplus/tinypng/releases/tag/1.0.1)  
@@ -30,15 +28,16 @@
 **2021/08/11 新增免key模式，现在可以无需申请key。（原有的KEY模式同时保留）**
 
 ### Usage
- There are two ways to add the files:  
- 1.Click the button on the top-left to choose one or more files or a folder.   
- 2.Recommended way, For more convenient and efficient, The software supports the object can be dragged directly into the area of table in the window.   
- 3.push the button by a shortcut key associated with the button, For example: press Ctrl+O to add object, Ctrl+S to start task.   
- 4.Double-Clicking the any row in the table, the picture associated with row will preview in system image previewer.  
- 5.Either right-Clicking on the any rows or selecting rows and pressing key Del delete the rows.  
+ There are two ways to add files:
 
- Remark: If the object you gave is a folder,the sofeware will list automatically recursively all the image files in that folder.
-
+ 1.Click the button at the top-left to choose one or more files or a folder;  
+ 2.For a more convenient and efficient option, it is recommended to drag and drop the objects directly into the table area of the window;  
+ 3.Use shortcut keys associated with the buttons, for example: press Ctrl+O to add an object, Ctrl+S to start a task;  
+ 4.Double-click any row in the table to preview the picture associated with that row in the system's image previewer;    
+ 5.You can delete rows either by right-clicking on any of them or by selecting the rows and pressing the Del key;    
+  
+ 
+ Remark: If the object you add is a folder, the software will automatically list all the image files contained within that folder recursively.
 
 ### Comparisons
 以下是对电商项目的商品详情页图片压缩测试数据，无论是页面大小还是访问速度的提升都很显著  
